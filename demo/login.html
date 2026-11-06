@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Sign in | DC Flooring demo</title>
+  <link rel="icon" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="demo-banner" role="note">Demo: sample data only</div>
+
+  <header class="site-header">
+    <div class="wrap header-row">
+      <a class="brand" href="index.html" aria-label="DC Flooring trade, home"><img src="assets/logo.png" alt="DC Flooring: carpet, vinyl and more" width="140" height="140"></a>
+      <nav class="main-nav" aria-label="Main"><div id="authNav"></div></nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <div class="auth-wrap">
+      <span class="eyebrow">Trade customers</span>
+      <h1>Sign in</h1>
+      <p class="lede">Demo sign-in: pick a sample customer. A real site would ask for an email and password.</p>
+
+      <form id="loginForm" class="card">
+        <div class="field">
+          <label for="customer">Demo customer</label>
+          <select id="customer" name="customer" required></select>
+        </div>
+        <div class="btn-row" style="margin-top:20px">
+          <button type="submit" class="btn btn-gold">Sign in</button>
+          <a class="btn btn-ghost" href="apply.html">Apply for an account</a>
+        </div>
+      </form>
+
+      <div id="result" role="status" aria-live="polite" tabindex="-1" style="margin-top:20px"></div>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      var D = window.DC_DEMO_DATA, A = window.DCDemo;
+      var select = document.getElementById('customer');
+      var result = document.getElementById('result');
+
+      var groups = [
+        { label: 'Approved', test: function (a) { return a.status === 'approved'; } },
+        { label: 'Pending approval', test: function (a) { return a.status === 'pending'; } },
+        { label: 'Rejected', test: function (a) { return a.status === 'rejected'; } }
+      ];
+      var accounts = A.getAccounts();
+      groups.forEach(function (g) {
+        var list = accounts.filter(g.test);
+        if (g.label === 'Approved') {
+          var order = D.TIERS.map(function (t) { return t.id; });
+          list.sort(function (a, b) { return order.indexOf(a.tier) - order.indexOf(b.tier); });
+        }
+        if (!list.length) return;
+        var og = document.createElement('optgroup');
+        og.label = g.label;
+        list.forEach(function (a) {
+          var o = document.createElement('option');
+          o.value = a.id;
+          o.textContent = a.contactName + ', ' + a.businessName + (a.status === 'approved' ? ' (' + A.tierLabel(a.tier) + ')' : '');
+          og.appendChild(o);
+        });
+        select.appendChild(og);
+      });
+
+      // ?as=<id> preselects a customer (used by the application thank-you page).
+      var wanted = new URLSearchParams(window.location.search).get('as');
+      if (wanted && A.getAccount(wanted)) select.value = wanted;
+
+      var existing = A.currentUser();
+      if (existing) {
+        result.innerHTML = '<p class="form-note">You are signed in as <strong>' + A.esc(existing.contactName) + '</strong> (' + A.esc(existing.businessName) + '). ' +
+          '<a href="pricelist.html">Go to your price list</a>.</p>';
+      }
+
+      document.getElementById('loginForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+        var outcome = A.signIn(select.value);
+        if (outcome.ok) {
+          window.location.href = 'pricelist.html';
+          return;
+        }
+        if (outcome.status === 'pending') {
+          result.innerHTML = '<div class="card" style="border-color:var(--warn)"><h2 style="font-size:1.5rem">Your account is waiting for approval</h2>' +
+            '<p>Thank you for applying, ' + A.esc(outcome.account.contactName) + '. A member of the team is checking your details and we will let you know as soon as ' +
+            A.esc(outcome.account.businessName) + ' is approved.</p>' +
+            '<p class="muted" style="margin:0">Questions? Call us on <span class="placeholder">[PHONE]</span>.</p></div>';
+        } else if (outcome.status === 'rejected') {
+          result.innerHTML = '<div class="card"><h2 style="font-size:1.5rem">We could not open an account just now</h2>' +
+            '<p>Thank you for your interest, ' + A.esc(outcome.account.contactName) + '. We are not able to set up a trade account for ' +
+            A.esc(outcome.account.businessName) + ' at the moment. If you think we have got this wrong, please call us on <span class="placeholder">[PHONE]</span> and we will be happy to take another look.</p>' +
+            '<p style="margin:0"><a class="btn btn-ghost" href="index.html">Back to home</a></p></div>';
+        } else {
+          result.innerHTML = '<p class="form-error">We could not find that customer. Try another.</p>';
+        }
+        result.focus();
+      });
+    })();
+  </script>
+</body>
+</html>

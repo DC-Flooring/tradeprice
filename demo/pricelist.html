@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Your price list | DC Flooring demo</title>
+  <link rel="icon" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+  <script>
+    // Nobody signed in (or the account is no longer approved): back to the sign-in page.
+    if (!window.DCDemo.currentUser()) window.location.replace('login.html');
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="demo-banner" role="note">Demo: sample data only</div>
+
+  <header class="site-header">
+    <div class="wrap header-row">
+      <a class="brand" href="index.html" aria-label="DC Flooring trade, home"><img src="assets/logo.png" alt="DC Flooring: carpet, vinyl and more" width="140" height="140"></a>
+      <nav class="main-nav" aria-label="Main"><div id="authNav"></div></nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="wrap page-head">
+      <div class="card account-card" id="account"></div>
+      <section class="card nudge" id="nudge" aria-labelledby="nudgeTitle"></section>
+    </div>
+
+    <div class="filter-bar" role="search" aria-label="Filter products">
+      <div class="wrap filter-inner">
+        <div class="field">
+          <label for="q">Search products</label>
+          <input type="search" id="q" name="q" placeholder="For example oak, underlay, SMP-005" autocomplete="off">
+        </div>
+        <div class="chips" id="chips" role="group" aria-label="Product category"></div>
+      </div>
+    </div>
+
+    <div class="wrap" style="padding-bottom:72px">
+      <p class="results-meta" id="meta" role="status" aria-live="polite"></p>
+      <div id="results"></div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap small">Sample prices, ex VAT, for demonstration only. <span class="placeholder">[TRADE OFFER WORDING]</span></div>
+  </footer>
+
+  <script>
+    (function () {
+      var D = window.DC_DEMO_DATA, A = window.DCDemo;
+      var user = A.currentUser();
+      if (!user) return; // the head script is already redirecting
+
+      // Header card: name, business, tier
+      document.getElementById('account').innerHTML =
+        '<div><h1>Welcome, ' + A.esc(user.contactName) + '</h1>' +
+        '<div class="account-meta"><span>' + A.esc(user.businessName) + '</span>' + A.tierBadge(user.tier) + '</div></div>' +
+        '<p class="muted" style="margin:0">Prices below are your <strong>' + A.esc(A.tierLabel(user.tier)) + '</strong> prices, ex VAT.</p>';
+
+      // "Your next tier" nudge
+      var next = A.getNextTier(user);
+      var nudge = document.getElementById('nudge');
+      if (next.next) {
+        nudge.innerHTML =
+          '<span class="eyebrow">Your next tier</span>' +
+          '<h2 id="nudgeTitle">Spend ' + A.formatGBP(next.remaining, true) + ' more to unlock ' + A.esc(next.next.label) + '</h2>' +
+          '<p>' + (next.savingPercent > 0 ? next.next.label + ' prices are about ' + next.savingPercent + '% lower on average. ' : '') +
+          'You have spent ' + A.formatGBP(next.spend, true) + ' of the ' + A.formatGBP(next.next.minSpend, true) + ' needed. Sample figures.</p>' +
+          '<div class="meter" role="progressbar" aria-label="Progress to ' + A.esc(next.next.label) + '" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + next.progress + '"><span style="width:' + next.progress + '%"></span></div>' +
+          '<div class="meter-legend"><span>' + A.esc(A.tierLabel(user.tier)) + '</span><span>' + A.esc(next.next.label) + '</span></div>';
+      } else {
+        nudge.innerHTML =
+          '<span class="eyebrow">Your tier</span>' +
+          '<h2 id="nudgeTitle">You are on our top tier</h2>' +
+          '<p style="margin:0">You already get Trade Gold prices. Thank you for your custom.</p>';
+      }
+
+      // List, search and category chips. Only this customer's tier prices are loaded.
+      var products = A.getPricesForTier(user.tier);
+      var state = { q: '', category: 'All' };
+      var q = document.getElementById('q');
+      var chips = document.getElementById('chips');
+      var results = document.getElementById('results');
+      var meta = document.getElementById('meta');
+
+      function matchesQuery(p) {
+        if (!state.q) return true;
+        var hay = (p.name + ' ' + p.sku + ' ' + p.category + ' ' + p.size).toLowerCase();
+        return state.q.toLowerCase().split(/\s+/).every(function (w) { return hay.indexOf(w) > -1; });
+      }
+
+      function render() {
+        var searched = products.filter(matchesQuery);
+        var shown = searched.filter(function (p) { return state.category === 'All' || p.category === state.category; });
+
+        chips.innerHTML = ['All'].concat(D.CATEGORIES).map(function (cat) {
+          var n = cat === 'All' ? searched.length : searched.filter(function (p) { return p.category === cat; }).length;
+          return '<button type="button" class="chip" data-cat="' + A.esc(cat) + '" aria-pressed="' + (state.category === cat) + '">' +
+            A.esc(cat) + '<span class="count">' + n + '</span></button>';
+        }).join('');
+
+        meta.textContent = 'Showing ' + shown.length + ' of ' + products.length + ' products';
+        results.innerHTML = shown.length
+          ? A.productListHTML(shown, { showStock: true, caption: A.tierLabel(user.tier) + ' price list', priceHead: 'Your price (ex VAT)' })
+          : '<div class="card empty"><h2 style="font-size:1.4rem">No products match</h2><p class="muted">Try a different word, or choose All.</p>' +
+            '<button type="button" class="btn btn-ghost" id="clear">Clear search and filters</button></div>';
+        var clear = document.getElementById('clear');
+        if (clear) clear.addEventListener('click', function () { state.q = ''; state.category = 'All'; q.value = ''; render(); q.focus(); });
+      }
+
+      q.addEventListener('input', function () { state.q = q.value.trim(); render(); });
+      chips.addEventListener('click', function (event) {
+        var btn = event.target.closest('.chip');
+        if (!btn) return;
+        state.category = btn.getAttribute('data-cat');
+        render();
+        var again = chips.querySelector('[data-cat="' + state.category + '"]');
+        if (again) again.focus({ preventScroll: true });
+      });
+      render();
+    })();
+  </script>
+</body>
+</html>
