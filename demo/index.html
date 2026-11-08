@@ -9,8 +9,9 @@
   <link rel="icon" href="assets/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script src="assets/data/ranges.js"></script>
   <script src="data.js"></script>
   <script src="app.js"></script>
 </head>
@@ -30,7 +31,7 @@
         </div>
         <div id="authNav">
           <a class="nav-link" href="login.html">Sign in</a>
-          <a class="btn btn-gold btn-sm" href="apply.html">Apply</a>
+          <a class="btn btn-primary btn-sm" href="apply.html">Apply</a>
         </div>
       </nav>
     </div>
@@ -44,7 +45,7 @@
           <h1>Flooring for the trade. <em>Ready when you are.</em></h1>
           <p class="lede">Carpet, vinyl, laminate, underlay and fitting accessories at trade prices. Apply for a free trade account and see the full price list for your tier.</p>
           <div class="btn-row">
-            <a class="btn btn-gold" href="apply.html">Open a trade account</a>
+            <a class="btn btn-primary" href="apply.html">Open a trade account</a>
             <a class="btn btn-ghost" href="login.html">Sign in</a>
           </div>
           <p class="offer-strip placeholder">[TRADE OFFER WORDING]</p>
@@ -58,7 +59,7 @@
         <div class="section-head">
           <span class="eyebrow">What we stock</span>
           <h2 id="cat-title">Everything for the job</h2>
-          <p class="lede">Five ranges, one account. Your trade price applies across all of them.</p>
+          <p class="lede">Six categories, one account. Your trade price applies across all of them.</p>
         </div>
         <ul class="tiles" id="tiles"></ul>
       </div>
@@ -98,10 +99,10 @@
         <div class="section-head">
           <span class="eyebrow">Sample price list</span>
           <h2 id="sample-title">A taste of the list</h2>
-          <p class="lede">Five of our products at entry-level Trade prices, ex VAT. Higher tiers pay a little less. Sample prices only.</p>
+          <p class="lede">Five of our ranges at entry-level Trade prices, ex VAT. Higher tiers pay a little less. Sample prices only.</p>
         </div>
         <div id="sampleList"></div>
-        <p style="margin-top:24px"><a class="btn btn-gold" href="apply.html">Open an account to see the full list</a></p>
+        <p style="margin-top:24px"><a class="btn btn-primary" href="apply.html">Open an account to see the full list</a></p>
       </div>
     </section>
 
@@ -163,32 +164,32 @@
 
   <script>
     (function () {
-      var D = window.DC_DEMO_DATA, A = window.DCDemo;
+      var D = window.DC_DEMO_DATA, R = window.DC_DEMO_RANGES, A = window.DCDemo;
       var blurbs = {
-        Carpet: 'Twists, saxonies and contract loop pile.',
-        Vinyl: 'Cushion, safety and luxury vinyl tiles.',
-        Laminate: 'Oak, grey and herringbone packs.',
+        Carpet: 'Twists and saxonies for homes and rentals.',
+        Vinyl: 'Cushion vinyl in wide rolls.',
+        LVT: 'Luxury vinyl planks and tiles.',
+        Laminate: 'Oak, grey and herringbone.',
         Underlay: 'Foam and acoustic rolls.',
-        Accessories: 'Door bars, gripper and finishing bits.'
+        Accessories: 'Door bars and finishing bits.'
       };
-      var looks = ['', 'ph-b', 'ph-c', 'ph-d', 'ph-e'];
-      document.getElementById('tiles').innerHTML = D.CATEGORIES.map(function (cat, i) {
-        var n = D.PRODUCTS.filter(function (p) { return p.category === cat; }).length;
-        return '<li class="tile"><div class="ph ' + looks[i] + '" role="img" aria-label="Photo placeholder: ' + A.esc(cat) + '"><span>Photo placeholder</span></div>' +
-          '<div class="tile-body"><h3>' + A.esc(cat) + '</h3><p>' + A.esc(blurbs[cat]) + '</p></div></li>';
+      document.getElementById('tiles').innerHTML = R.categories.map(function (cat) {
+        var n = R.ranges.filter(function (r) { return r.category === cat; }).length;
+        return '<li class="tile"><div class="ph" role="img" aria-label="Photo placeholder: ' + A.esc(cat) + '"><span>Photo placeholder</span></div>' +
+          '<div class="tile-body"><h3>' + A.esc(cat) + '</h3><p>' + A.esc(blurbs[cat]) + ' <span class="count">' + n + '</span> ' + (n === 1 ? 'range' : 'ranges') + '.</p></div></li>';
       }).join('');
 
-      // Sample list: first five products at the entry (Trade) tier.
-      var sample = A.getPricesForTier('trade').filter(function (p) {
-        return ['p01', 'p05', 'p08', 'p11', 'p13'].indexOf(p.id) > -1;
+      // Logged-out visitors only ever see Trade level prices here.
+      var sample = A.getPricesForTier('trade').filter(function (r) {
+        return ['harbour-twist', 'sandstone-vinyl', 'oakline-lvt', 'naturals-laminate', 'comfort-underlay'].indexOf(r.id) > -1;
       });
-      document.getElementById('sampleList').innerHTML = A.productListHTML(sample, { caption: 'Sample trade prices', priceHead: 'Trade price (ex VAT)' });
+      document.getElementById('sampleList').innerHTML = A.rangeRowsHTML(sample, { caption: 'Sample trade prices', priceHead: 'Trade price' });
 
       document.getElementById('offerCards').innerHTML = D.OFFERS.map(function (o) {
         return '<li class="offer-card"><span class="ends">Ends ' + A.esc(o.endsLabel) + '</span><h3>' + A.esc(o.title) + '</h3><p>' + A.esc(o.note) + '</p>' +
           '<div class="price-pair"><span class="was"><span class="sr-only">Was </span>' + A.formatGBP(o.was) + '</span>' +
           '<span class="now"><span class="sr-only">Now </span>' + A.formatGBP(o.now) + '</span></div>' +
-          '<p class="small">Ex VAT. Sample offer.</p></li>';
+          '<p class="small">' + A.esc(A.unitLabel(o.unit)) + ' ex VAT. Sample offer.</p></li>';
       }).join('');
 
       document.getElementById('guideCards').innerHTML = D.GUIDES.map(function (g) {

@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Range | DC Flooring demo</title>
+  <link rel="icon" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="assets/data/ranges.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+  <script>
+    // Nobody signed in (or the account is no longer approved): back to the sign-in page.
+    if (!window.DCDemo.currentUser()) window.location.replace('login.html');
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="demo-banner" role="note">Demo: sample data only</div>
+
+  <header class="site-header">
+    <div class="wrap header-row">
+      <a class="brand" href="index.html" aria-label="DC Flooring trade, home"><img src="assets/logo.png" alt="DC Flooring: carpet, vinyl and more" width="140" height="140"></a>
+      <nav class="main-nav" aria-label="Main"><div id="authNav"></div></nav>
+    </div>
+  </header>
+  <div class="demo-switch-bar"><div class="wrap" id="switcher"></div></div>
+
+  <main id="main" class="wrap">
+    <p style="margin:12px 0 4px"><a class="back-link" href="pricelist.html">Back to the list</a></p>
+    <div id="range"></div>
+  </main>
+
+  <script>
+    (function () {
+      var A = window.DCDemo;
+      var user = A.currentUser();
+      if (!user) return; // the head script is already redirecting
+      var id = new URLSearchParams(window.location.search).get('id');
+      var selected = 0;
+      var $ = function (x) { return document.getElementById(x); };
+
+      function render() {
+        var tier = A.getEffectiveTier(user);
+        var r = A.getRange(id, tier);
+        if (!r) {
+          document.title = 'Range not found | DC Flooring demo';
+          $('range').innerHTML = '<div class="card empty"><h1 style="font-size:1.6rem">We could not find that range</h1><p class="muted">It may have been removed from the sample list.</p>' +
+            '<a class="btn btn-primary" href="pricelist.html">Back to the list</a></div>';
+          return;
+        }
+        document.title = r.name + ' | DC Flooring demo';
+        var cw = r.colourways[Math.min(selected, r.colourways.length - 1)];
+        var hero = cw.image || r.heroImage;
+        $('range').innerHTML =
+          '<div class="range-grid">' +
+            '<div class="hero-img" id="hero" style="' + A.swatchStyle({ hex: cw.hex }) + '"><img src="' + A.esc(hero) + '" alt="' + A.esc(r.name + ' in ' + cw.name + ' (placeholder image)') + '" width="800" height="600"></div>' +
+            '<div class="range-detail">' +
+              '<p class="category-label">' + A.esc(r.category) + '</p>' +
+              '<h1>' + A.esc(r.name) + '</h1>' +
+              '<ul class="spec-chips" aria-label="Specification">' + r.specs.map(function (s) { return '<li>' + A.esc(s) + '</li>'; }).join('') + '</ul>' +
+              '<div class="detail-block"><h2><span class="count">' + r.colourways.length + '</span> ' + (r.colourways.length === 1 ? 'colourway' : 'colourways') + '</h2>' +
+                '<p class="colour-name" id="colourName" aria-live="polite">Colour: <strong>' + A.esc(cw.name) + '</strong></p>' +
+                '<ul class="swatches">' + r.colourways.map(function (c, i) {
+                  return '<li><button type="button" class="sw-btn" data-i="' + i + '" style="' + A.swatchStyle(c) + '" aria-pressed="' + (i === selected) + '" aria-label="' + A.esc(c.name) + '" title="' + A.esc(c.name) + '"></button></li>';
+                }).join('') + '</ul></div>' +
+              '<div class="detail-block"><div class="price-row">' + '<span class="price-block price-xl">' +
+                '<span class="price">' + A.formatGBP(r.price) + '</span><span class="price-unit">' + A.esc(A.unitLabel(r.unit)) + ' ex VAT</span></span>' +
+                '<span class="tier-pill">Your price \u00b7 ' + A.esc(A.tierLabel(tier)) + '</span></div>' +
+                '<div class="stock-line">' + A.stockHTML(r.stock) + '</div></div>' +
+            '</div></div>';
+      }
+
+      $('range').addEventListener('click', function (event) {
+        var btn = event.target.closest('.sw-btn'); if (!btn) return;
+        selected = Number(btn.getAttribute('data-i'));
+        render();
+        var again = document.querySelector('.sw-btn[data-i="' + selected + '"]'); if (again) again.focus();
+      });
+      A.renderTierSwitcher($('switcher'), render);
+      render();
+    })();
+  </script>
+</body>
+</html>

@@ -10,10 +10,12 @@
   'use strict';
 
   var D = window.DC_DEMO_DATA;
+  var R = window.DC_DEMO_RANGES;
   var KEYS = {
-    state: 'dcDemo.state.v1',     // { accounts: [...] }
-    session: 'dcDemo.session.v1', // { accountId }
-    staff: 'dcDemo.staff.v1'      // { signedIn: true }
+    state: 'dcDemo.state.v2',     // { accounts: [...] }
+    session: 'dcDemo.session.v2', // { accountId }
+    staff: 'dcDemo.staff.v2',     // { signedIn: true }
+    viewAs: 'dcDemo.viewAs.v2'    // { tier }  demo only, see getEffectiveTier()
   };
   var STAFF_NAME = 'Staff member';
 
@@ -103,48 +105,66 @@
   function signIn(accountId) {
     var account = getAccount(accountId);
     if (!account) return { ok: false, status: 'unknown', account: null };
-    if (account.status === 'approved') write(KEYS.session, { accountId: account.id });
+    if (account.status === 'approved') { write(KEYS.session, { accountId: account.id }); remove(KEYS.viewAs); }
     return { ok: account.status === 'approved', status: account.status, account: account };
   }
 
   // SUPABASE LATER: supabase.auth.signOut()
-  function signOut() { remove(KEYS.session); }
+  function signOut() { remove(KEYS.session); remove(KEYS.viewAs); }
 
   /* ------------------------------------------------------------------
    * Pricing
    * ---------------------------------------------------------------- */
 
-  // SUPABASE LATER: replace with a query (or RPC) that returns only the price
-  // column for the signed-in customer's tier, enforced by row level security so
-  // other tiers' prices never reach the browser. In this demo all three tiers
-  // sit in data.js, but this function only ever hands one tier to the page.
+  // SUPABASE LATER: replace with a query (or RPC) that returns ranges with only the
+  // price column for the signed-in customer's tier, enforced by row level security so
+  // other tiers' prices never reach the browser. In this demo all three tiers sit in
+  // assets/data/ranges.js, but this function only ever hands one tier to the page.
+  function priceRange(range, tier) {
+    return {
+      id: range.id, name: range.name, category: range.category, heroImage: range.heroImage,
+      specs: range.specs, colourways: range.colourways, unit: range.unit, stock: range.stock,
+      price: range.prices[tier]
+    };
+  }
   function getPricesForTier(tier) {
     if (!tierById(tier)) tier = 'trade';
-    return D.PRODUCTS.map(function (p) {
-      return {
-        id: p.id, sku: p.sku, name: p.name, category: p.category, size: p.size,
-        soldBy: p.soldBy, stock: p.stock, price: p.prices[tier]
-      };
-    });
+    return R.ranges.map(function (r) { return priceRange(r, tier); });
+  }
+  // SUPABASE LATER: same query as above, filtered to one range id. Returns null if unknown.
+  function getRange(id, tier) {
+    if (!tierById(tier)) tier = 'trade';
+    for (var i = 0; i < R.ranges.length; i++) if (R.ranges[i].id === id) return priceRange(R.ranges[i], tier);
+    return null;
   }
 
-  // SUPABASE LATER: compute server-side (spend from orders, saving from product_prices).
-  // Returns info for the "Your next tier" nudge, or { next: null } on the top tier.
-  function getNextTier(user) {
-    var index = D.TIERS.map(function (t) { return t.id; }).indexOf(user.tier);
+  // DEMO ONLY: lets a viewer flip between tiers to compare prices ("Demo: view as").
+  // There is no Supabase equivalent. Delete this and use user.tier when the demo becomes real.
+  function getEffectiveTier(user) {
+    var override = read(KEYS.viewAs);
+    return override && tierById(override.tier) ? override.tier : user.tier;
+  }
+  function setViewAsTier(tier) { if (tierById(tier)) write(KEYS.viewAs, { tier: tier }); }
+
+  // SUPABASE LATER: compute server-side (spend from orders, saving from the price tables).
+  // `tier` is the tier being viewed (see getEffectiveTier). Returns info for the
+  // "Your next tier" nudge, or { next: null } on the top tier.
+  function getNextTier(user, tier) {
+    tier = tier || user.tier;
+    var index = D.TIERS.map(function (t) { return t.id; }).indexOf(tier);
     var next = D.TIERS[index + 1];
     if (!next) return { next: null };
     var spend = user.spendYtd || 0;
     var remaining = Math.max(0, next.minSpend - spend);
     var progress = Math.min(100, Math.round((spend / next.minSpend) * 100));
     var saved = 0;
-    D.PRODUCTS.forEach(function (p) { saved += 1 - p.prices[next.id] / p.prices[user.tier]; });
+    R.ranges.forEach(function (r) { saved += 1 - r.prices[next.id] / r.prices[tier]; });
     return {
       next: next,
       spend: spend,
       remaining: remaining,
       progress: progress,
-      savingPercent: Math.round((saved / D.PRODUCTS.length) * 1000) / 10
+      savingPercent: Math.round((saved / R.ranges.length) * 1000) / 10
     };
   }
 
@@ -232,6 +252,7 @@
   function resetDemoData() {
     remove(KEYS.state);
     remove(KEYS.session);
+    remove(KEYS.viewAs);
     loadState();
   }
 
@@ -248,41 +269,71 @@
    * Shared UI helpers
    * ---------------------------------------------------------------- */
 
-  // Product list markup: a table for wide screens and cards for mobile.
-  // CSS shows one and hides the other. `showStock` is on for the logged-in price list.
-  function productListHTML(items, options) {
-    options = options || {};
-    var priceHead = options.priceHead || 'Price (ex VAT)';
-    var rows = items.map(function (p) {
-      return '<tr>' +
-        '<th scope="row"><span class="p-name">' + esc(p.name) + '</span><span class="p-sku">' + esc(p.sku) + '</span></th>' +
-        '<td>' + esc(p.size) + '</td>' +
-        '<td>' + esc(p.soldBy) + '</td>' +
-        '<td class="num"><span class="price">' + formatGBP(p.price) + '</span></td>' +
-        (options.showStock ? '<td>' + stockTag(p.stock) + '</td>' : '') +
-        '</tr>';
-    }).join('');
-    var cards = items.map(function (p) {
-      return '<li class="pcard">' +
-        '<div class="pcard-top"><span class="p-name">' + esc(p.name) + '</span><span class="p-sku">' + esc(p.sku) + '</span></div>' +
-        '<dl class="pcard-meta"><div><dt>Size</dt><dd>' + esc(p.size) + '</dd></div><div><dt>Sold by</dt><dd>' + esc(p.soldBy) + '</dd></div></dl>' +
-        '<div class="pcard-bottom"><span class="price">' + formatGBP(p.price) + '<small> ' + esc(priceHead.indexOf('ex VAT') > -1 ? 'ex VAT' : '') + '</small></span>' +
-        (options.showStock ? stockTag(p.stock) : '') + '</div>' +
-        '</li>';
-    }).join('');
-    return '<div class="table-wrap only-wide"><table class="ptable"><caption class="sr-only">' + esc(options.caption || 'Product prices') + '</caption>' +
-      '<thead><tr><th scope="col">Product</th><th scope="col">Size</th><th scope="col">Sold by</th><th scope="col" class="num">' + esc(priceHead) + '</th>' +
-      (options.showStock ? '<th scope="col">Stock</th>' : '') + '</tr></thead><tbody>' + rows + '</tbody></table></div>' +
-      '<ul class="pcards only-narrow" aria-label="' + esc(options.caption || 'Product prices') + '">' + cards + '</ul>';
+  var UNIT_LABEL = { 'm\u00b2': 'per m\u00b2', roll: 'per roll', each: 'each' };
+
+  // A price with its unit and VAT status, e.g. "£11.40 per m² ex VAT".
+  function priceHTML(price, unit) {
+    return '<span class="price-block"><span class="price">' + formatGBP(price) + '</span> ' +
+      '<span class="price-unit">' + esc(UNIT_LABEL[unit] || unit) + ' ex VAT</span></span>';
   }
 
-  function stockTag(stock) {
-    var map = { in: ['tag-in', 'In stock'], low: ['tag-low', 'Low stock'], order: ['tag-order', 'Order in'] };
-    var t = map[stock] || map.order;
-    return '<span class="tag ' + t[0] + '">' + t[1] + '</span>';
+  function unitLabel(unit) { return UNIT_LABEL[unit] || unit; }
+
+  function stockText(stock) {
+    if (stock.status === 'in_stock') return 'In stock, cut today';
+    if (stock.status === 'order_in') return 'Order in ' + stock.leadDays + (stock.leadDays === 1 ? ' day' : ' days');
+    return 'Out of stock';
   }
+  function stockHTML(stock) {
+    var cls = { in_stock: 'stock-in', order_in: 'stock-order', out_of_stock: 'stock-out' }[stock.status] || 'stock-out';
+    return '<span class="stock ' + cls + '"><span class="dot" aria-hidden="true"></span>' + esc(stockText(stock)) + '</span>';
+  }
+
+  function swatchStyle(colourway) {
+    var style = 'background-color:' + esc(colourway.hex);
+    if (colourway.image) style += ';background-image:url(' + esc(colourway.image) + ');background-size:cover';
+    return style;
+  }
+  function colourCount(n) { return n + (n === 1 ? ' colour' : ' colours'); }
+
+  // Scannable list of ranges: table-style rows with thin borders.
+  // options.link: rows open the range page (signed in). options.priceHead: column heading.
+  function rangeRowsHTML(items, options) {
+    options = options || {};
+    var rows = items.map(function (r) {
+      var inner =
+        '<span class="swatch" style="' + swatchStyle(r.colourways[0]) + '"></span>' +
+        '<span class="range-main"><span class="range-name">' + esc(r.name) + '</span>' +
+        '<span class="range-sub">' + esc(r.category) + ' \u00b7 ' + r.specs.slice(0, 2).map(esc).join(' \u00b7 ') + ' \u00b7 ' + colourCount(r.colourways.length) + '</span></span>' +
+        '<span class="range-price">' + priceHTML(r.price, r.unit) + '</span>' +
+        '<span class="range-stock">' + stockHTML(r.stock) + '</span>';
+      return '<li>' + (options.link
+        ? '<a class="range-row" href="range.html?id=' + encodeURIComponent(r.id) + '">' + inner + '</a>'
+        : '<div class="range-row">' + inner + '</div>') + '</li>';
+    }).join('');
+    return '<div class="range-table"><div class="range-head" aria-hidden="true"><span></span><span>Range</span><span>' +
+      esc(options.priceHead || 'Your price') + '</span><span>Stock</span></div><ul class="range-list" aria-label="' + esc(options.caption || 'Ranges') + '">' + rows + '</ul></div>';
+  }
+
   function tierBadge(id) {
     return '<span class="badge badge-' + esc(id) + '">' + esc(tierLabel(id)) + '</span>';
+  }
+
+  // DEMO ONLY: the "Demo: view as" tier switcher. Renders into `slot`; calls onChange(tierId).
+  function renderTierSwitcher(slot, onChange) {
+    var user = currentUser();
+    if (!slot || !user) return;
+    var current = getEffectiveTier(user);
+    slot.innerHTML = '<div class="demo-switch"><span class="demo-switch-label" id="viewAsLabel">Demo: view as</span>' +
+      '<div class="seg" role="radiogroup" aria-labelledby="viewAsLabel">' +
+      D.TIERS.map(function (t) {
+        return '<label class="seg-opt"><input type="radio" name="viewAs" value="' + t.id + '"' + (t.id === current ? ' checked' : '') + '><span>' + esc(t.label) + '</span></label>';
+      }).join('') + '</div></div>';
+    slot.onchange = function (event) {
+      if (!event.target || event.target.name !== 'viewAs') return;
+      setViewAsTier(event.target.value);
+      onChange(event.target.value);
+    };
   }
 
   function toast(message) {
@@ -308,7 +359,7 @@
     var user = currentUser();
     slot.innerHTML = user
       ? '<a class="nav-link" href="pricelist.html">Price list</a><a class="btn btn-ghost btn-sm" href="index.html" id="navSignOut">Sign out</a>'
-      : '<a class="nav-link" href="login.html">Sign in</a><a class="btn btn-gold btn-sm" href="apply.html">Apply</a>';
+      : '<a class="nav-link" href="login.html">Sign in</a><a class="btn btn-primary btn-sm" href="apply.html">Apply</a>';
     var out = document.getElementById('navSignOut');
     // The link goes to the home page; clear the session first.
     if (out) out.addEventListener('click', function () { signOut(); });
@@ -332,14 +383,16 @@
   window.DCDemo = {
     // logic
     currentUser: currentUser, signIn: signIn, signOut: signOut,
-    getPricesForTier: getPricesForTier, getNextTier: getNextTier,
+    getPricesForTier: getPricesForTier, getRange: getRange, getNextTier: getNextTier,
+    getEffectiveTier: getEffectiveTier, setViewAsTier: setViewAsTier,
     getAccounts: getAccounts, getAccount: getAccount,
     submitApplication: submitApplication, approveApplication: approveApplication,
     rejectApplication: rejectApplication, addWalkIn: addWalkIn, resetDemoData: resetDemoData,
     staffSignIn: staffSignIn, staffSignOut: staffSignOut, isStaffSignedIn: isStaffSignedIn,
     // helpers
     esc: esc, formatGBP: formatGBP, formatDate: formatDate, tierLabel: tierLabel, tierBadge: tierBadge,
-    productListHTML: productListHTML, stockTag: stockTag, toast: toast, renderAuthNav: renderAuthNav,
+    rangeRowsHTML: rangeRowsHTML, unitLabel: unitLabel, priceHTML: priceHTML, stockHTML: stockHTML, stockText: stockText, swatchStyle: swatchStyle,
+    colourCount: colourCount, renderTierSwitcher: renderTierSwitcher, toast: toast, renderAuthNav: renderAuthNav,
     STAFF_NAME: STAFF_NAME
   };
 })();
