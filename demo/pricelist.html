@@ -8,8 +8,9 @@
   <link rel="icon" href="assets/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script src="assets/data/ranges.js"></script>
   <script src="data.js"></script>
   <script src="app.js"></script>
   <script>
@@ -27,6 +28,7 @@
       <nav class="main-nav" aria-label="Main"><div id="authNav"></div></nav>
     </div>
   </header>
+  <div class="demo-switch-bar"><div class="wrap" id="switcher"></div></div>
 
   <main id="main">
     <div class="wrap page-head">
@@ -34,13 +36,13 @@
       <section class="card nudge" id="nudge" aria-labelledby="nudgeTitle"></section>
     </div>
 
-    <div class="filter-bar" role="search" aria-label="Filter products">
+    <div class="filter-bar" role="search" aria-label="Filter ranges">
       <div class="wrap filter-inner">
         <div class="field">
-          <label for="q">Search products</label>
-          <input type="search" id="q" name="q" placeholder="For example oak, underlay, SMP-005" autocomplete="off">
+          <label for="q">Search ranges</label>
+          <input type="search" id="q" name="q" placeholder="For example oak, loop pile, underlay" autocomplete="off">
         </div>
-        <div class="chips" id="chips" role="group" aria-label="Product category"></div>
+        <div class="chips" id="chips" role="group" aria-label="Category"></div>
       </div>
     </div>
 
@@ -56,77 +58,77 @@
 
   <script>
     (function () {
-      var D = window.DC_DEMO_DATA, A = window.DCDemo;
+      var D = window.DC_DEMO_DATA, R = window.DC_DEMO_RANGES, A = window.DCDemo;
       var user = A.currentUser();
       if (!user) return; // the head script is already redirecting
 
-      // Header card: name, business, tier
-      document.getElementById('account').innerHTML =
-        '<div><h1>Welcome, ' + A.esc(user.contactName) + '</h1>' +
-        '<div class="account-meta"><span>' + A.esc(user.businessName) + '</span>' + A.tierBadge(user.tier) + '</div></div>' +
-        '<p class="muted" style="margin:0">Prices below are your <strong>' + A.esc(A.tierLabel(user.tier)) + '</strong> prices, ex VAT.</p>';
+      var state = { q: '', category: 'All' };
+      var $ = function (id) { return document.getElementById(id); };
+
+      function renderAccount(tier) {
+        var viewing = tier !== user.tier;
+        $('account').innerHTML =
+          '<div><h1>Welcome, ' + A.esc(user.contactName) + '</h1>' +
+          '<div class="account-meta"><span>' + A.esc(user.businessName) + '</span>' + A.tierBadge(tier) + '</div></div>' +
+          '<p class="muted" style="margin:0">Prices below are your <strong>' + A.esc(A.tierLabel(tier)) + '</strong> prices, ex VAT.' +
+          (viewing ? ' Demo only: this account is really ' + A.esc(A.tierLabel(user.tier)) + '.' : '') + '</p>';
+      }
 
       // "Your next tier" nudge
-      var next = A.getNextTier(user);
-      var nudge = document.getElementById('nudge');
-      if (next.next) {
-        nudge.innerHTML =
-          '<span class="eyebrow">Your next tier</span>' +
-          '<h2 id="nudgeTitle">Spend ' + A.formatGBP(next.remaining, true) + ' more to unlock ' + A.esc(next.next.label) + '</h2>' +
-          '<p>' + (next.savingPercent > 0 ? next.next.label + ' prices are about ' + next.savingPercent + '% lower on average. ' : '') +
-          'You have spent ' + A.formatGBP(next.spend, true) + ' of the ' + A.formatGBP(next.next.minSpend, true) + ' needed. Sample figures.</p>' +
-          '<div class="meter" role="progressbar" aria-label="Progress to ' + A.esc(next.next.label) + '" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + next.progress + '"><span style="width:' + next.progress + '%"></span></div>' +
-          '<div class="meter-legend"><span>' + A.esc(A.tierLabel(user.tier)) + '</span><span>' + A.esc(next.next.label) + '</span></div>';
-      } else {
-        nudge.innerHTML =
-          '<span class="eyebrow">Your tier</span>' +
-          '<h2 id="nudgeTitle">You are on our top tier</h2>' +
-          '<p style="margin:0">You already get Trade Gold prices. Thank you for your custom.</p>';
+      function renderNudge(tier) {
+        var next = A.getNextTier(user, tier), nudge = $('nudge');
+        if (next.next) {
+          nudge.innerHTML =
+            '<span class="eyebrow">Your next tier</span>' +
+            '<h2 id="nudgeTitle">Spend ' + A.formatGBP(next.remaining, true) + ' more to unlock ' + A.esc(next.next.label) + '</h2>' +
+            '<p>' + (next.savingPercent > 0 ? A.esc(next.next.label) + ' prices are about ' + next.savingPercent + '% lower on average. ' : '') +
+            'You have spent ' + A.formatGBP(next.spend, true) + ' of the ' + A.formatGBP(next.next.minSpend, true) + ' needed. Sample figures.</p>' +
+            '<div class="meter" role="progressbar" aria-label="Progress to ' + A.esc(next.next.label) + '" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + next.progress + '"><span style="width:' + next.progress + '%"></span></div>' +
+            '<div class="meter-legend"><span>' + A.esc(A.tierLabel(tier)) + '</span><span>' + A.esc(next.next.label) + '</span></div>';
+        } else {
+          nudge.innerHTML =
+            '<span class="eyebrow">Your tier</span>' +
+            '<h2 id="nudgeTitle">You are on our top tier</h2>' +
+            '<p style="margin:0">You already get Trade Gold prices. Thank you for your custom.</p>';
+        }
       }
 
-      // List, search and category chips. Only this customer's tier prices are loaded.
-      var products = A.getPricesForTier(user.tier);
-      var state = { q: '', category: 'All' };
-      var q = document.getElementById('q');
-      var chips = document.getElementById('chips');
-      var results = document.getElementById('results');
-      var meta = document.getElementById('meta');
+      function renderList(tier) {
+        var ranges = A.getPricesForTier(tier);   // only this tier's prices are loaded
+        var q = state.q.toLowerCase();
+        var searched = ranges.filter(function (r) { return !q || r.name.toLowerCase().indexOf(q) > -1; });
+        var shown = searched.filter(function (r) { return state.category === 'All' || r.category === state.category; });
 
-      function matchesQuery(p) {
-        if (!state.q) return true;
-        var hay = (p.name + ' ' + p.sku + ' ' + p.category + ' ' + p.size).toLowerCase();
-        return state.q.toLowerCase().split(/\s+/).every(function (w) { return hay.indexOf(w) > -1; });
-      }
-
-      function render() {
-        var searched = products.filter(matchesQuery);
-        var shown = searched.filter(function (p) { return state.category === 'All' || p.category === state.category; });
-
-        chips.innerHTML = ['All'].concat(D.CATEGORIES).map(function (cat) {
-          var n = cat === 'All' ? searched.length : searched.filter(function (p) { return p.category === cat; }).length;
+        $('chips').innerHTML = ['All'].concat(R.categories).map(function (cat) {
+          var n = cat === 'All' ? searched.length : searched.filter(function (r) { return r.category === cat; }).length;
           return '<button type="button" class="chip" data-cat="' + A.esc(cat) + '" aria-pressed="' + (state.category === cat) + '">' +
             A.esc(cat) + '<span class="count">' + n + '</span></button>';
         }).join('');
 
-        meta.textContent = 'Showing ' + shown.length + ' of ' + products.length + ' products';
-        results.innerHTML = shown.length
-          ? A.productListHTML(shown, { showStock: true, caption: A.tierLabel(user.tier) + ' price list', priceHead: 'Your price (ex VAT)' })
-          : '<div class="card empty"><h2 style="font-size:1.4rem">No products match</h2><p class="muted">Try a different word, or choose All.</p>' +
+        $('meta').textContent = 'Showing ' + shown.length + ' of ' + ranges.length + ' ranges';
+        $('results').innerHTML = shown.length
+          ? A.rangeRowsHTML(shown, { link: true, caption: A.tierLabel(tier) + ' price list', priceHead: 'Your price' })
+          : '<div class="card empty"><h2 style="font-size:1.3rem">No ranges match</h2><p class="muted">Try a different word, or choose All.</p>' +
             '<button type="button" class="btn btn-ghost" id="clear">Clear search and filters</button></div>';
-        var clear = document.getElementById('clear');
-        if (clear) clear.addEventListener('click', function () { state.q = ''; state.category = 'All'; q.value = ''; render(); q.focus(); });
+        var clear = $('clear');
+        if (clear) clear.addEventListener('click', function () { state.q = ''; state.category = 'All'; $('q').value = ''; renderAll(); $('q').focus(); });
       }
 
-      q.addEventListener('input', function () { state.q = q.value.trim(); render(); });
-      chips.addEventListener('click', function (event) {
-        var btn = event.target.closest('.chip');
-        if (!btn) return;
+      function renderAll() {
+        var tier = A.getEffectiveTier(user);
+        renderAccount(tier); renderNudge(tier); renderList(tier);
+      }
+
+      $('q').addEventListener('input', function () { state.q = this.value.trim(); renderList(A.getEffectiveTier(user)); });
+      $('chips').addEventListener('click', function (event) {
+        var btn = event.target.closest('.chip'); if (!btn) return;
         state.category = btn.getAttribute('data-cat');
-        render();
-        var again = chips.querySelector('[data-cat="' + state.category + '"]');
+        renderList(A.getEffectiveTier(user));
+        var again = $('chips').querySelector('[data-cat="' + state.category + '"]');
         if (again) again.focus({ preventScroll: true });
       });
-      render();
+      A.renderTierSwitcher($('switcher'), renderAll);
+      renderAll();
     })();
   </script>
 </body>
