@@ -24,10 +24,6 @@
       <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="2" seed="4" result="n"/>
       <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
     </filter>
-    <filter id="stain" x="-10%" y="-10%" width="120%" height="120%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="3" seed="11" result="n"/>
-      <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
-    </filter>
   </svg>
 
   <header class="site-header">
@@ -94,18 +90,6 @@
             <p class="sticker"><span class="sr-only">Cut today</span><span class="sticker__top" aria-hidden="true">Cut</span><span class="script sticker__script" aria-hidden="true">today</span></p>
           </div>
           <div class="measure" aria-hidden="true">
-            <svg class="ill ill--tape" viewBox="0 0 150 110">
-              <g filter="url(#brush)">
-                <path d="M28 22 C50 18 78 19 88 24 C94 40 94 70 90 88 C70 93 40 92 24 88 C19 70 18 40 28 22 Z"/>
-                <path d="M44 21 L46 13 L62 13 L64 21" class="thin"/>
-                <path d="M22 36 C14 42 14 68 22 74" class="thin"/>
-                <path d="M55 41 C64 40 70 48 69 56 C68 65 60 70 52 69 C44 67 40 59 42 51 C44 45 50 41 57 42" class="thin"/>
-                <path d="M88 79 L140 80 M88 88 L140 89" class="g"/>
-                <path d="M100 80 L100 85 M110 80 L110 84 M120 80 L120 86 M130 80 L130 84" class="g thin"/>
-                <path d="M140 75 L146 76 L145 93 L139 93" class="thin"/>
-              </g>
-              <circle cx="55" cy="55" r="4" class="dot-g"/>
-            </svg>
             <div class="dim">
               <svg class="dim__end" viewBox="0 0 14 20"><path d="M2 2 L2 18 M2 10 L12 10 M2 10 L8 6 M2 10 L8 14"/></svg>
               <span class="dim__line"></span><span class="dim__label">5.2 m</span><span class="dim__line"></span>
@@ -122,19 +106,7 @@
     <!-- 2. What it does -->
     <section class="section features" aria-labelledby="features-title">
       <div class="wrap features__grid">
-        <div class="features__head">
-          <h2 id="features-title" class="h2 features__title">Everything for the job. One app.</h2>
-          <svg class="ill spot spot--knife" aria-hidden="true" viewBox="0 0 160 70">
-            <g filter="url(#brush)">
-              <path d="M14 30 L104 26 L106 48 L18 50 C12 46 11 36 14 30 Z"/>
-              <path d="M104 27 L150 30 L136 46 L106 47" class="g"/>
-              <path d="M118 28 L112 47 M130 29 L124 46 M142 30 L136 44" class="g thin"/>
-              <path d="M24 44 L96 41" class="thin"/>
-              <path d="M70 26 L70 21 L84 20 L84 26" class="thin"/>
-            </g>
-            <circle cx="40" cy="38" r="3" class="dot-g"/>
-          </svg>
-        </div>
+        <h2 id="features-title" class="h2 features__title">Everything for the job. One app.</h2>
         <ul class="features__list">
           <li><h3>See your price</h3><p>Your trade price on every range.</p></li>
           <li><h3>Check stock</h3><p>Know it's in before you drive over.</p></li>
@@ -156,18 +128,15 @@
     <section class="section steps" aria-labelledby="steps-title">
       <div class="wrap">
         <div class="section__head steps__head">
-          <div class="steps__title">
-          <svg class="tea-ring" aria-hidden="true" viewBox="0 0 160 160">
-            <g filter="url(#stain)">
-              <circle cx="80" cy="80" r="58" class="ring-a"/>
-              <path d="M30 98 C24 70 40 30 82 24 C118 20 140 46 138 84" class="ring-b"/>
-              <circle cx="146" cy="112" r="3"/>
-            </g>
-          </svg>
           <h2 id="steps-title" class="h2 h2--xl">Quicker than a brew.</h2>
-          </div>
           <p class="section__lede">Three steps. No forms to post. No documents to scan.</p>
         </div>
+        <div class="steps__body">
+        <picture class="photo photo--tea">
+          <source type="image/webp" srcset="assets/img/tea-800.webp 800w, assets/img/tea-928.webp 928w" sizes="(min-width: 960px) 40vw, 100vw">
+          <img src="assets/img/tea-800.jpg" srcset="assets/img/tea-800.jpg 800w, assets/img/tea-928.jpg 928w" sizes="(min-width: 960px) 40vw, 100vw" width="928" height="1152" loading="lazy" decoding="async" alt="A brew on the van dashboard before a job">
+        </picture>
+        <div class="steps__main">
         <ol class="steps__list">
           <li class="step"><span class="num step__n" aria-hidden="true">1</span><div><h3>Tell us who you are</h3><p>Name, business and mobile. That's it.</p></div></li>
           <li class="step"><span class="num step__n" aria-hidden="true">2</span><div><h3>We give you a ring</h3><p>A quick chat to check you're in the trade.</p></div></li>
@@ -191,6 +160,8 @@
           </svg>
           <p class="kettle__line">Kettle on. Account done.</p>
         </div>
+        </div>
+        </div>
       </div>
     </section>
 
@@ -202,24 +173,11 @@
             <h2 id="tiers-title" class="h2">Spend more. Pay less.</h2>
             <p class="section__lede">Everyone starts on Trade. Your prices drop as you move up.</p>
           </div>
-          <div class="stairs-wrap">
-          <svg class="ill spot spot--kicker" aria-hidden="true" viewBox="0 0 170 90">
-            <g filter="url(#brush)">
-              <path d="M16 30 C24 28 34 28 40 30 L40 62 C32 64 22 64 16 62 Z"/>
-              <path d="M15 34 l-7 3 l7 3 l-7 3 l7 3 l-7 3 l7 3 l-7 3 l7 3" class="g thin"/>
-              <path d="M40 40 L128 39 M40 52 L128 53"/>
-              <path d="M90 39 L90 53 M97 39 L97 53" class="g"/>
-              <path d="M58 39 C58 32 66 32 66 39" class="thin"/>
-              <path d="M128 26 C150 22 160 34 158 46 C160 58 150 70 128 66 C124 52 124 40 128 26 Z"/>
-              <path d="M138 30 C142 42 142 54 138 64" class="thin"/>
-            </g>
-          </svg>
           <ol class="stairs" aria-label="Trade account tiers">
             <li class="stair stair--1"><span class="stair__name">Trade</span><span class="stair__who">From day one</span><span class="stair__deal">Trade prices</span></li>
             <li class="stair stair--2"><span class="stair__name">Trade Plus</span><span class="stair__who">For regulars</span><span class="stair__deal">Better prices</span></li>
             <li class="stair stair--3"><span class="stair__name">Trade Gold</span><span class="stair__who">Our biggest customers</span><span class="stair__deal">Best prices</span></li>
           </ol>
-          </div>
         </div>
 
         <aside class="voucher-wrap" aria-labelledby="voucher-title">
@@ -237,6 +195,13 @@
     </section>
 
     <!-- 5. Why DC Flooring -->
+    <figure class="banner">
+      <picture>
+        <source type="image/webp" srcset="assets/img/kicker-800.webp 800w, assets/img/kicker-1376.webp 1376w" sizes="100vw">
+        <img src="assets/img/kicker-800.jpg" srcset="assets/img/kicker-800.jpg 800w, assets/img/kicker-1376.jpg 1376w" sizes="100vw" width="1376" height="768" loading="lazy" decoding="async" alt="Knee kicker resting on a fitted carpet">
+      </picture>
+    </figure>
+
     <section class="section why" aria-labelledby="why-title">
       <div class="wrap">
         <h2 id="why-title" class="h2 h2--xl why__title">A proper local trade counter.</h2>
@@ -248,13 +213,6 @@
         </ul>
 
         <figure class="review">
-          <svg class="ill spot--gripper" aria-hidden="true" viewBox="0 0 200 50">
-            <g filter="url(#brush)">
-              <path d="M8 27 L192 22 L193 34 L9 39 Z"/>
-              <path d="M22 26 l6 -10 M40 26 l6 -10 M58 25 l6 -10 M76 25 l6 -10 M94 24 l6 -10 M112 24 l6 -10 M130 24 l6 -10 M148 23 l6 -10 M166 23 l6 -10" class="g thin"/>
-              <path d="M60 31 l2 0 M140 29 l2 0" />
-            </g>
-          </svg>
           <blockquote class="review__quote"><p>[A real line from a fitter who uses DC. Ask Dave for one.]</p></blockquote>
           <figcaption class="review__by">[Name], [Business], [Town]</figcaption>
         </figure>
@@ -262,18 +220,6 @@
         <div class="visit" id="find-us">
           <div class="visit__photo" role="img" aria-label="Photo placeholder: the counter and the lads"><span>Photo: the counter and the lads</span></div>
           <div class="visit__info">
-            <svg class="ill spot spot--stretcher" aria-hidden="true" viewBox="0 0 220 90">
-              <g filter="url(#brush)">
-                <path d="M14 40 C24 38 36 38 44 40 L44 66 C36 68 24 68 14 66 Z"/>
-                <path d="M16 67 l3 8 l3 -8 l3 8 l3 -8 l3 8 l3 -8 l3 8 l3 -8 l3 8" class="g thin"/>
-                <path d="M44 46 L120 45 M44 58 L120 59"/>
-                <path d="M120 48 L196 47 M120 56 L196 57" class="thin"/>
-                <path d="M196 40 C202 39 206 40 207 41 L207 63 C204 64 200 64 196 63 Z"/>
-                <path d="M46 46 L92 16"/>
-                <path d="M84 20 L100 9" class="g"/>
-                <path d="M150 47 L150 57" class="g thin"/>
-              </g>
-            </svg>
             <h3 class="h3">Come and see us</h3>
             <p>[Address], Middlesbrough<br>Trade from [7:30am], Mon to Sat</p>
             <div class="visit__actions">

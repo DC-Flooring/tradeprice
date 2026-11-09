@@ -34,7 +34,6 @@
   --on-paper-2: #4A443B;   /* 8.5:1 on --paper */
   --ok: #8FD18F;           /* in stock: 10:1 on --raised */
   --pencil: #C9C1B0;       /* hand-written notes: 11:1 on --bg */
-  --tea: #B07A3E;          /* mug ring stain */
   --chat-out: #0F5A45;     /* outgoing bubble: off-white text 7.3:1 */
   --chat-in: #24211D;      /* incoming bubble */
 
@@ -278,24 +277,24 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
 .step h3 { font-size: 1.25rem; font-weight: 600; line-height: 1.3; padding-top: 4px; }
 .step p { margin-top: 2px; color: var(--text-2); }
 
-/* What you get: tiers as a staircase */
+/* What you get: tiers stacked full width on phones, a staircase from 600px */
 .tiers { background: var(--raised); }
 .tiers__grid { display: grid; gap: 48px; }
-.stairs {
-  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3px;
-  align-items: end; min-height: 300px;
-}
+.stairs { display: grid; gap: 3px; }
 .stair {
-  display: flex; flex-direction: column; justify-content: flex-start; gap: 4px;
-  padding: 14px 12px; border-radius: 6px 6px 0 0;
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: 16px; row-gap: 2px;
+  padding: 18px; border-radius: 6px;
 }
-.stair--1 { min-height: 172px; background: #2A2622; }
-.stair--2 { min-height: 232px; background: #4A3D27; }
-.stair--3 { min-height: 300px; background: var(--gold); color: var(--on-gold); }
+.stair__name { grid-column: 1; }
+.stair__who { grid-column: 1; }
+.stair__deal { grid-column: 2; grid-row: 1 / span 2; text-align: right; }
+.stair--1 { background: #2A2622; }
+.stair--2 { background: #4A3D27; }
+.stair--3 { background: var(--gold); color: var(--on-gold); }
 .stair__name { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 1.375rem; line-height: 1; letter-spacing: 0.02em; }
 .stair__who { font-size: 1rem; line-height: 1.35; color: var(--text-3); }
 .stair--3 .stair__who { color: var(--on-gold-2); }
-.stair__deal { margin-top: auto; font-size: 1rem; font-weight: 600; color: var(--text-3); }
+.stair__deal { font-size: 1rem; font-weight: 600; color: var(--text-3); }
 .stair--2 .stair__deal { color: #E2C58A; }
 .stair--3 .stair__deal { color: var(--on-gold); font-weight: 700; }
 
@@ -324,7 +323,7 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
 .voucher__stub .script { color: var(--on-gold); font-size: 2.25rem; transform: rotate(-90deg); white-space: nowrap; }
 
 /* Why DC: four short reasons, set as text on a ruled grid */
-.why { padding-top: 96px; }
+.why { padding-top: 40px; }
 .why__title { max-width: 11ch; margin-bottom: 36px; }
 .why__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 20px; }
 .why__list li { padding-top: 14px; border-top: 2px solid var(--gold); }
@@ -391,7 +390,6 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
 .ill .g { stroke: var(--gold); }
 .ill .fill-g { fill: var(--gold); stroke: none; opacity: 0.85; }
 .ill .dot-g { fill: var(--gold); stroke: none; }
-.spot { position: absolute; }
 
 /* Pencil notes on the offcut, above the price screen */
 .notes { display: flex; align-items: flex-end; gap: 6px; margin: 0 0 34px 4px; padding-right: 96px; }
@@ -401,20 +399,14 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
 .note__arrow { width: 44px; height: 30px; flex: none; transform: translateY(12px); }
 .note__arrow path { fill: none; stroke: var(--pencil); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-/* Tape measure and an architectural dimension line under the screen */
-.measure { display: flex; align-items: center; gap: 8px; margin-top: 18px; }
-.ill--tape { width: 76px; flex: none; transform: rotate(-6deg); }
+/* Architectural dimension line under the screen */
+.measure { display: flex; align-items: center; margin-top: 18px; }
 .dim { display: flex; align-items: center; flex: 1; min-width: 0; color: var(--gold); }
 .dim__end { width: 14px; height: 20px; flex: none; }
 .dim__end path { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .dim__line { flex: 1; height: 1.5px; background: currentColor; margin: 0 -1px; }
 .dim__label { font-family: var(--font-script); font-size: 1.5rem; line-height: 1; letter-spacing: 0.06em; padding: 0 10px; transform: translateY(-3px); }
 .dim--ink { color: var(--on-gold); max-width: 300px; margin: 0 auto 22px; opacity: 0.8; }
-
-/* What it does: utility knife beside the heading */
-.features__head { position: relative; }
-.spot--knife { width: 112px; right: -4px; top: -18px; transform: rotate(-14deg); }
-.features__title { padding-right: 112px; }
 
 /* Ring ahead: a real-looking chat, not a screenshot */
 .chat { display: grid; gap: 6px; margin-top: 14px; max-width: 360px; }
@@ -437,16 +429,7 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
 .msg__ticks { width: 17px; height: 11px; }
 .msg__ticks path { fill: none; stroke: #53BDEB; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 
-/* Quicker than a brew: a mug ring left on the page, and the brew itself */
-.steps__head { position: relative; }
-/* The ring sits just past the end of the heading, never under the words */
-.steps__title { position: relative; display: inline-block; }
-.steps__title .h2 { position: relative; }
-.tea-ring { position: absolute; width: 112px; right: -6px; top: -40px; opacity: 0.18; pointer-events: none; }
-.tea-ring circle, .tea-ring path { fill: none; stroke: var(--tea); stroke-linecap: round; }
-.tea-ring .ring-a { stroke-width: 6; }
-.tea-ring .ring-b { stroke-width: 2.5; }
-.tea-ring circle:last-child { fill: var(--tea); stroke: none; }
+/* Quicker than a brew: the brew itself */
 .kettle { display: flex; align-items: center; gap: 14px; margin-top: 36px; }
 .ill--mug { width: 64px; flex: none; transform: rotate(5deg); }
 .kettle__line { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 1.5rem; line-height: 1.05; color: var(--gold); }
@@ -464,16 +447,23 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
   }
 }
 
-/* Tiers: knee kicker resting above the first step */
-.stairs-wrap { position: relative; }
-.spot--kicker { width: 30%; max-width: 132px; left: 2px; top: 30px; transform: rotate(-9deg); }
+/* ---------- Photography ---------- */
+/* Real photos only, never stock-looking. Inline photos get the page's large radius;
+   full-bleed banners fade into the black page at top and bottom. */
+.photo { margin: 0; border-radius: var(--r-lg); overflow: hidden; background: var(--raised); }
+.photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
-/* Why: a length of gripper rod laid above the review */
-.spot--gripper { width: 200px; margin: 0 0 28px -4px; transform: rotate(-3deg); }
+/* Quicker than a brew: the tea photo sits above the steps on phones, beside them on desktop */
+.steps__body { display: grid; gap: 36px; }
+.photo--tea { aspect-ratio: 4 / 3; }
+.photo--tea img { object-position: 30% 72%; }
 
-/* Find us: carpet stretcher beside the heading */
-.visit__info { position: relative; }
-.spot--stretcher { width: 132px; right: -6px; top: -14px; transform: rotate(-7deg); }
+/* Kicker banner: full width just above the trade counter section */
+.banner { position: relative; margin: 0; aspect-ratio: 4 / 3; overflow: hidden; background: var(--bg); }
+.banner img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 66% 60%; }
+.banner::before, .banner::after { content: ""; position: absolute; left: 0; right: 0; height: 24%; pointer-events: none; }
+.banner::before { top: 0; background: linear-gradient(var(--raised), rgba(23, 21, 18, 0)); }
+.banner::after { bottom: 0; background: linear-gradient(rgba(11, 10, 9, 0), var(--bg)); }
 
 /* ---------- Toast ---------- */
 .toast {
@@ -487,6 +477,15 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
 .toast.is-on { transform: translate(-50%, 0); opacity: 1; transition: transform 260ms var(--ease-out), opacity 200ms ease; }
 @media (prefers-reduced-motion: reduce) { .toast, .toast.is-on { transform: translate(-50%, 0); transition: opacity 200ms ease; } }
 
+@media (min-width: 600px) {
+  .stairs { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: end; min-height: 300px; }
+  .stair { display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 4px; padding: 14px 12px; border-radius: 6px 6px 0 0; }
+  .stair__deal { margin-top: auto; text-align: left; }
+  .stair--1 { min-height: 172px; }
+  .stair--2 { min-height: 232px; }
+  .stair--3 { min-height: 300px; }
+}
+
 /* ---------- Tablet ---------- */
 @media (min-width: 640px) {
   :root { --gutter: 32px; }
@@ -496,6 +495,7 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
   .preview { max-width: 520px; }
   .why__list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .visit { grid-template-columns: 1.1fr 1fr; align-items: center; gap: 32px; }
+  .banner { aspect-ratio: 16 / 9; max-height: 760px; }
   .stairs { min-height: 340px; }
   .stair--1 { min-height: 190px; }
   .stair--2 { min-height: 264px; }
@@ -514,15 +514,18 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
   .section { padding: 112px 0; }
   .features { padding-top: 88px; }
   .features__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px; align-items: start; }
-  .features__head { position: sticky; top: 112px; }
+  .features__title { position: sticky; top: 112px; }
   .features__list li { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: baseline; padding: 24px 0; }
   .features__list h3 { font-size: 1.875rem; }
   .features__list p { margin: 0; font-size: 1.0625rem; }
-  .steps__list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; padding: 0; }
-  .steps__list::before { left: 0; right: 0; top: 46px; bottom: auto; width: auto; height: 1px; background: var(--gold); }
-  .step { grid-template-columns: 1fr; gap: 24px; }
-  .step__n { font-size: 5.5rem; text-align: left; width: max-content; padding: 0 16px 0 0; }
-  .step h3 { font-size: 1.5rem; }
+  .steps__body { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 72px; align-items: center; }
+  .photo--tea { aspect-ratio: 4 / 5; }
+  .photo--tea img { object-position: 50% 50%; }
+  .steps__list { gap: 44px; }
+  .steps__list::before { left: 33px; top: 70px; bottom: 70px; }
+  .step { grid-template-columns: 64px minmax(0, 1fr); gap: 28px; }
+  .step__n { font-size: 4.75rem; }
+  .step h3 { font-size: 1.5rem; padding-top: 10px; }
   .tiers__grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 64px; align-items: end; }
   .stairs { min-height: 280px; }
   .stair--1 { min-height: 160px; }
@@ -532,7 +535,7 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
   .stair__who, .stair__deal { font-size: 1rem; }
   .voucher__title { font-size: 2.125rem; }
   .steps { padding-top: 40px; }
-  .why { padding-top: 160px; }
+  .why { padding-top: 64px; }
   .why .wrap { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: 64px; align-items: start; }
   .why__title { max-width: 9em; margin-bottom: 0; }
   .why__list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 32px; }
@@ -540,15 +543,11 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
   .visit { grid-column: 1 / -1; }
   .visit { gap: 56px; }
   .closer { padding: 112px 0 120px; }
-  .features__title { padding-right: 0; max-width: 12ch; }
-  .spot--knife { position: static; width: 150px; margin: 36px 0 0 8px; }
-  .tea-ring { width: 170px; right: auto; left: calc(100% + 12px); top: -44px; }
+  .features__title { max-width: 12ch; }
   .kettle { margin-top: 56px; }
   .ill--mug { width: 76px; }
   .kettle__line { font-size: 1.875rem; }
   .feature--chat .chat { grid-column: 2; margin-top: 0; }
-  .spot--gripper { width: 240px; }
-  .spot--stretcher { width: 170px; top: -40px; }
   .dim--ink { max-width: 360px; }
 }
 
