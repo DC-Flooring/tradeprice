@@ -9,15 +9,26 @@
   <title>DC Flooring Trade</title>
   <meta name="description" content="Trade prices in your pocket. See your price, check it's in stock and get it cut before you set off. Free trade accounts for fitters, builders and the trade.">
   <link rel="icon" href="assets/logo.png">
-  <link rel="preload" href="assets/fonts/singel-regular.otf" as="font" type="font/otf" crossorigin>
   <link rel="preload" href="assets/fonts/auttera.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600&amp;family=Barlow+Condensed:wght@700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Brush-pen roughening shared by the hand-drawn illustrations -->
+  <svg class="defs" aria-hidden="true" focusable="false" width="0" height="0">
+    <filter id="brush" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="2" seed="4" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="stain" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="3" seed="11" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
 
   <header class="site-header">
     <div class="wrap site-header__row">
@@ -44,6 +55,11 @@
         </div>
 
         <figure class="preview" aria-labelledby="preview-caption">
+          <div class="notes" aria-hidden="true">
+            <span class="note note--a">grey twist?</span>
+            <svg class="note__arrow" viewBox="0 0 60 40"><path d="M4 8 C22 4 40 12 46 30 M38 26 L46 31 L50 22"/></svg>
+            <span class="note note--b">4.0 x 5.2</span>
+          </div>
           <div class="preview__screen">
             <div class="preview__bar">
               <span>Your prices</span>
@@ -77,6 +93,25 @@
             </ul>
             <p class="sticker"><span class="sr-only">Cut today</span><span class="sticker__top" aria-hidden="true">Cut</span><span class="script sticker__script" aria-hidden="true">today</span></p>
           </div>
+          <div class="measure" aria-hidden="true">
+            <svg class="ill ill--tape" viewBox="0 0 150 110">
+              <g filter="url(#brush)">
+                <path d="M28 22 C50 18 78 19 88 24 C94 40 94 70 90 88 C70 93 40 92 24 88 C19 70 18 40 28 22 Z"/>
+                <path d="M44 21 L46 13 L62 13 L64 21" class="thin"/>
+                <path d="M22 36 C14 42 14 68 22 74" class="thin"/>
+                <path d="M55 41 C64 40 70 48 69 56 C68 65 60 70 52 69 C44 67 40 59 42 51 C44 45 50 41 57 42" class="thin"/>
+                <path d="M88 79 L140 80 M88 88 L140 89" class="g"/>
+                <path d="M100 80 L100 85 M110 80 L110 84 M120 80 L120 86 M130 80 L130 84" class="g thin"/>
+                <path d="M140 75 L146 76 L145 93 L139 93" class="thin"/>
+              </g>
+              <circle cx="55" cy="55" r="4" class="dot-g"/>
+            </svg>
+            <div class="dim">
+              <svg class="dim__end" viewBox="0 0 14 20"><path d="M2 2 L2 18 M2 10 L12 10 M2 10 L8 6 M2 10 L8 14"/></svg>
+              <span class="dim__line"></span><span class="dim__label">5.2 m</span><span class="dim__line"></span>
+              <svg class="dim__end dim__end--r" viewBox="0 0 14 20"><path d="M12 2 L12 18 M12 10 L2 10 M12 10 L6 6 M12 10 L6 14"/></svg>
+            </div>
+          </div>
           <figcaption id="preview-caption" class="preview__caption">What you'll see when you sign in. Example prices, ex VAT.</figcaption>
         </figure>
       </div>
@@ -87,11 +122,30 @@
     <!-- 2. What it does -->
     <section class="section features" aria-labelledby="features-title">
       <div class="wrap features__grid">
-        <h2 id="features-title" class="h2 features__title">Everything for the job. One app.</h2>
+        <div class="features__head">
+          <h2 id="features-title" class="h2 features__title">Everything for the job. One app.</h2>
+          <svg class="ill spot spot--knife" aria-hidden="true" viewBox="0 0 160 80">
+            <g filter="url(#brush)">
+              <path d="M20 52 C40 34 80 28 112 30 L122 42 C100 52 60 60 26 62 C20 60 18 56 20 52 Z"/>
+              <path d="M112 30 L148 31 L122 42" class="g"/>
+              <path d="M118 33 L140 33" class="g thin"/>
+              <path d="M30 56 C55 50 85 44 110 40" class="thin"/>
+              <path d="M78 35 l4 6 M86 34 l4 6 M94 33 l4 6" class="thin"/>
+            </g>
+            <circle cx="56" cy="50" r="3.2" class="dot-g"/>
+          </svg>
+        </div>
         <ul class="features__list">
           <li><h3>See your price</h3><p>Your trade price on every range.</p></li>
           <li><h3>Check stock</h3><p>Know it's in before you drive over.</p></li>
-          <li><h3>Ring ahead, we cut it</h3><p>Send sizes. Collect it ready.</p></li>
+          <li class="feature--chat">
+            <h3>Ring ahead, we cut it</h3>
+            <p>Send sizes. Collect it ready.</p>
+            <div class="chat" role="group" aria-label="Example chat with the counter">
+              <p class="msg msg--out"><span class="sr-only">Fitter: </span>Alright mate, <span class="num">4</span>m x <span class="num">5.2</span> of the grey twist for <span class="num">2</span>pm?<span class="msg__meta"><span class="num">11:42</span><svg class="msg__ticks" aria-hidden="true" viewBox="0 0 18 11"><path d="M1 6 L4.5 9.5 L11 2 M7 9.5 L8 9.5 L16 2"/></svg><span class="sr-only"> Read</span></span></p>
+              <p class="msg msg--in"><span class="msg__from">DC Flooring</span>Sorted. Cut and waiting.<span class="msg__meta"><span class="num">11:43</span></span></p>
+            </div>
+          </li>
           <li><h3>Vouchers and offers</h3><p>Member deals, straight to your phone.</p></li>
           <li><h3>Reorder in a tap</h3><p>Your usual underlay and grippers, sorted.</p></li>
         </ul>
@@ -101,7 +155,14 @@
     <!-- 3. Signing up -->
     <section class="section steps" aria-labelledby="steps-title">
       <div class="wrap">
-        <div class="section__head">
+        <div class="section__head steps__head">
+          <svg class="tea-ring" aria-hidden="true" viewBox="0 0 160 160">
+            <g filter="url(#stain)">
+              <circle cx="80" cy="80" r="58" class="ring-a"/>
+              <path d="M30 98 C24 70 40 30 82 24 C118 20 140 46 138 84" class="ring-b"/>
+              <circle cx="146" cy="112" r="3"/>
+            </g>
+          </svg>
           <h2 id="steps-title" class="h2 h2--xl">Quicker than a brew.</h2>
           <p class="section__lede">Three steps. No forms to post. No documents to scan.</p>
         </div>
@@ -110,6 +171,24 @@
           <li class="step"><span class="num step__n" aria-hidden="true">2</span><div><h3>We give you a ring</h3><p>A quick chat to check you're in the trade.</p></div></li>
           <li class="step"><span class="num step__n" aria-hidden="true">3</span><div><h3>Your prices unlock</h3><p>Log in with a text code. No passwords.</p></div></li>
         </ol>
+        <div class="kettle">
+          <svg class="ill ill--mug" aria-hidden="true" viewBox="0 0 120 140">
+            <g class="steam" filter="url(#brush)">
+              <path d="M48 46 C40 36 56 30 48 18" class="thin"/>
+              <path d="M62 44 C54 32 72 26 62 12" class="thin"/>
+              <path d="M76 46 C70 36 84 30 76 20" class="thin"/>
+            </g>
+            <g filter="url(#brush)">
+              <path d="M30 61 C46 57 74 57 90 61 C74 65 46 65 30 61 Z" class="fill-g"/>
+              <path d="M22 60 C40 52 80 52 98 60 C80 68 40 68 22 60 Z"/>
+              <path d="M24 62 C23 100 30 122 60 124 C90 122 97 100 96 62"/>
+              <path d="M96 74 C118 70 120 104 93 106" />
+              <path d="M97 82 C108 82 108 98 94 97" class="thin"/>
+              <path d="M34 100 C40 112 50 116 60 117" class="g thin"/>
+            </g>
+          </svg>
+          <p class="kettle__line">Kettle on. Account done.</p>
+        </div>
       </div>
     </section>
 
@@ -121,11 +200,24 @@
             <h2 id="tiers-title" class="h2">Spend more. Pay less.</h2>
             <p class="section__lede">Everyone starts on Trade. Your prices drop as you move up.</p>
           </div>
+          <div class="stairs-wrap">
+          <svg class="ill spot spot--kicker" aria-hidden="true" viewBox="0 0 170 90">
+            <g filter="url(#brush)">
+              <path d="M16 30 C24 28 34 28 40 30 L40 62 C32 64 22 64 16 62 Z"/>
+              <path d="M15 34 l-7 3 l7 3 l-7 3 l7 3 l-7 3 l7 3 l-7 3 l7 3" class="g thin"/>
+              <path d="M40 40 L128 39 M40 52 L128 53"/>
+              <path d="M90 39 L90 53 M97 39 L97 53" class="g"/>
+              <path d="M58 39 C58 32 66 32 66 39" class="thin"/>
+              <path d="M128 26 C150 22 160 34 158 46 C160 58 150 70 128 66 C124 52 124 40 128 26 Z"/>
+              <path d="M138 30 C142 42 142 54 138 64" class="thin"/>
+            </g>
+          </svg>
           <ol class="stairs" aria-label="Trade account tiers">
             <li class="stair stair--1"><span class="stair__name">Trade</span><span class="stair__who">From day one</span><span class="stair__deal">Trade prices</span></li>
             <li class="stair stair--2"><span class="stair__name">Trade Plus</span><span class="stair__who">For regulars</span><span class="stair__deal">Better prices</span></li>
             <li class="stair stair--3"><span class="stair__name">Trade Gold</span><span class="stair__who">Our biggest customers</span><span class="stair__deal">Best prices</span></li>
           </ol>
+          </div>
         </div>
 
         <aside class="voucher-wrap" aria-labelledby="voucher-title">
@@ -150,10 +242,17 @@
           <li><h3>Local</h3><p>Middlesbrough counter. Fitting across the North East.</p></li>
           <li><h3>On the shelf</h3><p>Big stock. No waiting on deliveries.</p></li>
           <li><h3>Real people</h3><p>Ring or WhatsApp the counter direct.</p></li>
-          <li><h3>Early start</h3><p>Open from [7:30am] for the trade.</p></li>
+          <li><h3>Early start</h3><p>Open from [7:30am]. Before your second can.</p></li>
         </ul>
 
         <figure class="review">
+          <svg class="ill spot--gripper" aria-hidden="true" viewBox="0 0 200 50">
+            <g filter="url(#brush)">
+              <path d="M8 27 L192 22 L193 34 L9 39 Z"/>
+              <path d="M22 26 l6 -10 M40 26 l6 -10 M58 25 l6 -10 M76 25 l6 -10 M94 24 l6 -10 M112 24 l6 -10 M130 24 l6 -10 M148 23 l6 -10 M166 23 l6 -10" class="g thin"/>
+              <path d="M60 31 l2 0 M140 29 l2 0" />
+            </g>
+          </svg>
           <blockquote class="review__quote"><p>[A real line from a fitter who uses DC. Ask Dave for one.]</p></blockquote>
           <figcaption class="review__by">[Name], [Business], [Town]</figcaption>
         </figure>
@@ -161,6 +260,18 @@
         <div class="visit" id="find-us">
           <div class="visit__photo" role="img" aria-label="Photo placeholder: the counter and the lads"><span>Photo: the counter and the lads</span></div>
           <div class="visit__info">
+            <svg class="ill spot spot--stretcher" aria-hidden="true" viewBox="0 0 220 90">
+              <g filter="url(#brush)">
+                <path d="M14 40 C24 38 36 38 44 40 L44 66 C36 68 24 68 14 66 Z"/>
+                <path d="M16 67 l3 8 l3 -8 l3 8 l3 -8 l3 8 l3 -8 l3 8 l3 -8 l3 8" class="g thin"/>
+                <path d="M44 46 L120 45 M44 58 L120 59"/>
+                <path d="M120 48 L196 47 M120 56 L196 57" class="thin"/>
+                <path d="M196 40 C202 39 206 40 207 41 L207 63 C204 64 200 64 196 63 Z"/>
+                <path d="M46 46 L92 16"/>
+                <path d="M84 20 L100 9" class="g"/>
+                <path d="M150 47 L150 57" class="g thin"/>
+              </g>
+            </svg>
             <h3 class="h3">Come and see us</h3>
             <p>[Address], Middlesbrough<br>Trade from [7:30am], Mon to Sat</p>
             <div class="visit__actions">
@@ -179,11 +290,16 @@
     <!-- 6. Closing call to action -->
     <section class="closer" aria-labelledby="closer-title">
       <div class="wrap closer__inner">
+        <div class="dim dim--ink" aria-hidden="true">
+          <svg class="dim__end" viewBox="0 0 14 20"><path d="M2 2 L2 18 M2 10 L12 10 M2 10 L8 6 M2 10 L8 14"/></svg>
+          <span class="dim__line"></span><span class="dim__label">4.0 m</span><span class="dim__line"></span>
+          <svg class="dim__end dim__end--r" viewBox="0 0 14 20"><path d="M12 2 L12 18 M12 10 L2 10 M12 10 L6 6 M12 10 L6 14"/></svg>
+        </div>
         <h2 id="closer-title" class="closer__title">
           <span class="display">Measure. Cut.</span>
           <span class="script closer__script">Collect.</span>
         </h2>
-        <p class="closer__lede">Two minutes now saves you a wasted trip later.</p>
+        <p class="closer__lede">Sorted before kick-off.</p>
         <div class="closer__actions">
           <a class="btn btn--ink btn--lg" href="apply.html">Sign up free</a>
           <a class="closer__signin" href="login.html">Already got an account? <span>Sign in</span></a>

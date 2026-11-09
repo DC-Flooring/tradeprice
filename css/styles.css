@@ -4,19 +4,7 @@
    sign up, price list and staff screens. Page sections follow. */
 
 /* ---------- Fonts ---------- */
-/* Singel: headline letters only. Digits (U+0030-0039) and £ (U+00A3) are
-   left out on purpose, so numbers inside headlines fall through to Barlow.
-   The demo file also swaps most punctuation for a "DEMO" mark, so only the
-   marks it really draws are mapped: space , . : ; ? and curly quotes.
-   Widen this when the licensed font arrives. */
-@font-face {
-  font-family: "Singel";
-  src: url("../assets/fonts/singel-regular.otf") format("opentype");
-  font-weight: 400 900;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+0020, U+002C, U+002E, U+003A-003B, U+003F, U+0041-005A, U+0061-007A, U+2018-2019, U+201C-201D;
-}
+/* Headlines: Barlow Condensed 700, numbers: Barlow, body: Inter (all Google Fonts). */
 /* Auttera: the hand-written accents only. */
 @font-face {
   font-family: "Auttera";
@@ -45,9 +33,13 @@
   --paper-2: #EDE6D8;
   --on-paper-2: #4A443B;   /* 8.5:1 on --paper */
   --ok: #8FD18F;           /* in stock: 10:1 on --raised */
+  --pencil: #C9C1B0;       /* hand-written notes: 11:1 on --bg */
+  --tea: #B07A3E;          /* mug ring stain */
+  --chat-out: #0F5A45;     /* outgoing bubble: off-white text 8:1 */
+  --chat-in: #24211D;      /* incoming bubble */
 
   /* Type */
-  --font-display: "Singel", "Barlow", Georgia, serif;
+  --font-display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
   --font-script: "Auttera", "Segoe Script", "Bradley Hand", cursive;
   --font-num: "Barlow", "Inter", system-ui, sans-serif;
   --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -97,7 +89,7 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
 
 .wrap { width: min(var(--max), 100% - 2 * var(--gutter)); margin-inline: auto; }
 .num { font-family: var(--font-num); font-variant-numeric: tabular-nums lining-nums; }
-.display { font-family: var(--font-display); font-weight: 400; display: block; }
+.display { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; display: block; }
 .script { font-family: var(--font-script); font-weight: 400; display: block; color: var(--gold); }
 .sr-only {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
@@ -112,15 +104,15 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
 
 /* Headings */
 .h2 {
-  font-family: var(--font-display); font-weight: 400;
-  font-size: clamp(2rem, 1.4rem + 2.6vw, 3rem);
-  line-height: 1.02; letter-spacing: -0.02em;
+  font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
+  font-size: clamp(2.25rem, 1.6rem + 2.8vw, 3.5rem);
+  line-height: 0.98; letter-spacing: 0;
   text-wrap: balance;
 }
-.h2--xl { font-size: clamp(2.5rem, 1.6rem + 4vw, 4.25rem); letter-spacing: -0.03em; }
+.h2--xl { font-size: clamp(2.75rem, 1.8rem + 4.2vw, 4.75rem); letter-spacing: -0.005em; }
 .h3 {
-  font-family: var(--font-display); font-weight: 400;
-  font-size: 1.625rem; line-height: 1.1; letter-spacing: -0.02em;
+  font-family: var(--font-display); font-weight: 700; text-transform: uppercase;
+  font-size: 1.75rem; line-height: 1; letter-spacing: 0.005em;
 }
 .fine { margin-top: 12px; font-size: 1rem; color: var(--text-2); }
 
@@ -181,8 +173,8 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
 .hero__grid { display: grid; gap: 44px; }
 .hero__title { margin: 0 0 18px; }
 .hero__title .display {
-  font-size: clamp(3.5rem, 2.2rem + 5.4vw, 6rem);
-  line-height: 0.95; letter-spacing: -0.035em;
+  font-size: clamp(4rem, 2.6rem + 6vw, 6rem);
+  line-height: 0.9; letter-spacing: -0.01em;
 }
 .hero__script {
   margin-top: 4px;
@@ -273,10 +265,10 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
 
 /* What it does: an index, not a card stack */
 .features { padding-top: 48px; }
-.features__title { margin-bottom: 28px; max-width: 12ch; }
+.features__title { margin-bottom: 28px; }
 .features__list li { padding: 18px 0; border-top: 1px solid var(--border); }
 .features__list li:last-child { border-bottom: 1px solid var(--border); }
-.features__list h3 { font-family: var(--font-display); font-weight: 400; font-size: 1.75rem; line-height: 1.1; letter-spacing: -0.02em; }
+.features__list h3 { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 1.625rem; line-height: 1.05; letter-spacing: 0.005em; }
 .features__list p { margin-top: 4px; color: var(--text-2); }
 
 /* Signing up: big numerals hung off one gold line */
@@ -309,7 +301,7 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
 .stair--1 { min-height: 172px; background: #2A2622; }
 .stair--2 { min-height: 232px; background: #4A3D27; }
 .stair--3 { min-height: 300px; background: var(--gold); color: var(--on-gold); }
-.stair__name { font-family: var(--font-display); font-size: 1.375rem; line-height: 1.05; letter-spacing: -0.02em; }
+.stair__name { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 1.375rem; line-height: 1; letter-spacing: 0.005em; }
 .stair__who { font-size: 1rem; line-height: 1.35; color: var(--text-3); }
 .stair--3 .stair__who { color: var(--on-gold-2); }
 .stair__deal { margin-top: auto; font-size: 1rem; font-weight: 600; color: var(--text-3); }
@@ -324,7 +316,7 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
 }
 .voucher__body { padding: 20px; }
 .voucher__title {
-  font-family: var(--font-display); font-weight: 400; font-size: 1.75rem; line-height: 1.05; letter-spacing: -0.02em;
+  font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 1.875rem; line-height: 1; letter-spacing: 0;
   text-wrap: balance;
 }
 .voucher__text { margin-top: 8px; font-size: 1rem; color: var(--on-paper-2); }
@@ -350,8 +342,8 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
 
 .review { margin: 64px 0; }
 .review__quote p {
-  font-family: var(--font-display); font-size: clamp(1.625rem, 1.2rem + 1.8vw, 2.5rem);
-  line-height: 1.2; letter-spacing: -0.02em; text-wrap: balance;
+  font-family: var(--font-display); font-weight: 700; font-size: clamp(1.75rem, 1.3rem + 1.8vw, 2.625rem);
+  line-height: 1.15; letter-spacing: 0; text-wrap: balance;
 }
 .review__quote p::before { content: "\201C"; color: var(--gold); margin-left: -0.45em; }
 .review__quote p::after { content: "\201D"; color: var(--gold); }
@@ -380,9 +372,9 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
 /* Closing call to action: the page ends on a solid band of gold */
 .closer { background: var(--gold); color: var(--on-gold); padding: 64px 0 72px; }
 .closer__inner { text-align: center; }
-.closer__title .display { font-size: clamp(3rem, 2rem + 4.4vw, 5.5rem); line-height: 0.95; letter-spacing: -0.035em; }
+.closer__title .display { font-size: clamp(3.5rem, 2.2rem + 5vw, 6rem); line-height: 0.9; letter-spacing: -0.01em; }
 .closer__script { color: var(--on-gold); font-size: clamp(2.75rem, 2rem + 3.4vw, 4.5rem); line-height: 1.1; transform: rotate(-2deg); }
-.closer__lede { margin: 16px auto 28px; font-size: 1.125rem; max-width: 26ch; }
+.closer__lede { margin: 16px auto 28px; font-size: 1.1875rem; font-weight: 500; max-width: 26ch; }
 .closer__actions { display: grid; justify-items: center; gap: 10px; max-width: 420px; margin-inline: auto; }
 .closer__actions .btn { width: 100%; }
 .closer__signin {
@@ -398,6 +390,97 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
 .site-footer__row { display: grid; justify-items: center; gap: 18px; margin-top: 28px; text-align: center; }
 .site-footer__logo { height: 60px; width: auto; }
 .site-footer__legal { font-size: 1rem; color: var(--text-2); display: grid; gap: 4px; }
+
+/* ---------- Personality: hand-drawn tools, notes and marks ---------- */
+.defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+/* Brush-pen illustrations: off-white ink, gold details, always decorative */
+.ill { display: block; overflow: visible; pointer-events: none; }
+.ill path, .ill circle { fill: none; stroke: var(--text); stroke-width: 3.6; stroke-linecap: round; stroke-linejoin: round; }
+.ill .thin { stroke-width: 2.3; }
+.ill .g { stroke: var(--gold); }
+.ill .fill-g { fill: var(--gold); stroke: none; opacity: 0.85; }
+.ill .dot-g { fill: var(--gold); stroke: none; }
+.spot { position: absolute; }
+
+/* Pencil notes on the offcut, above the price screen */
+.notes { display: flex; align-items: flex-end; gap: 6px; margin: 0 0 22px 4px; padding-right: 96px; }
+.note { font-family: var(--font-script); color: var(--pencil); font-size: 1.625rem; line-height: 1; letter-spacing: 0.06em; white-space: nowrap; }
+.note--a { transform: rotate(-4deg); }
+.note--b { margin-left: auto; transform: rotate(3deg) translateY(-10px); }
+.note__arrow { width: 44px; height: 30px; flex: none; transform: translateY(12px); }
+.note__arrow path { fill: none; stroke: var(--pencil); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Tape measure and an architectural dimension line under the screen */
+.measure { display: flex; align-items: center; gap: 8px; margin-top: 18px; }
+.ill--tape { width: 76px; flex: none; transform: rotate(-6deg); }
+.dim { display: flex; align-items: center; flex: 1; min-width: 0; color: var(--gold); }
+.dim__end { width: 14px; height: 20px; flex: none; }
+.dim__end path { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.dim__line { flex: 1; height: 1.5px; background: currentColor; margin: 0 -1px; }
+.dim__label { font-family: var(--font-script); font-size: 1.5rem; line-height: 1; letter-spacing: 0.06em; padding: 0 10px; transform: translateY(-3px); }
+.dim--ink { color: var(--on-gold); max-width: 300px; margin: 0 auto 22px; opacity: 0.8; }
+
+/* What it does: utility knife beside the heading */
+.features__head { position: relative; }
+.spot--knife { width: 112px; right: -4px; top: -18px; transform: rotate(-14deg); }
+.features__title { padding-right: 112px; }
+
+/* Ring ahead: a real-looking chat, not a screenshot */
+.chat { display: grid; gap: 6px; margin-top: 14px; max-width: 360px; }
+.msg {
+  position: relative; max-width: 88%; padding: 7px 10px 8px 12px; border-radius: 10px;
+  font-size: 1rem; line-height: 1.35; color: var(--text);
+}
+.msg--out { justify-self: end; background: var(--chat-out); border-top-right-radius: 3px; }
+.msg--in { justify-self: start; background: var(--chat-in); border-top-left-radius: 3px; }
+.msg--out::after, .msg--in::after {
+  content: ""; position: absolute; top: 0; width: 8px; height: 10px;
+}
+.msg--out::after { right: -7px; background: var(--chat-out); clip-path: polygon(0 0, 100% 0, 0 100%); }
+.msg--in::after { left: -7px; background: var(--chat-in); clip-path: polygon(0 0, 100% 0, 100% 100%); }
+.msg__from { display: block; font-size: 0.875rem; font-weight: 700; color: var(--gold); margin-bottom: 1px; }
+.msg__meta {
+  display: inline-flex; align-items: center; gap: 3px; float: right;
+  margin: 8px 0 -4px 10px; font-size: 0.75rem; line-height: 1; color: rgba(245, 241, 232, 0.82);
+}
+.msg__ticks { width: 17px; height: 11px; }
+.msg__ticks path { fill: none; stroke: #53BDEB; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Quicker than a brew: a mug ring left on the page, and the brew itself */
+.steps__head { position: relative; }
+.steps__head > :not(.tea-ring) { position: relative; }
+.tea-ring { position: absolute; width: 150px; right: -18px; top: -44px; opacity: 0.18; pointer-events: none; }
+.tea-ring circle, .tea-ring path { fill: none; stroke: var(--tea); stroke-linecap: round; }
+.tea-ring .ring-a { stroke-width: 6; }
+.tea-ring .ring-b { stroke-width: 2.5; }
+.tea-ring circle:last-child { fill: var(--tea); stroke: none; }
+.kettle { display: flex; align-items: center; gap: 14px; margin-top: 36px; }
+.ill--mug { width: 64px; flex: none; transform: rotate(5deg); }
+.kettle__line { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 1.5rem; line-height: 1.05; color: var(--gold); }
+.steam path { transform-box: fill-box; transform-origin: 50% 100%; }
+@media (prefers-reduced-motion: no-preference) {
+  /* Each wisp rises and thins out, then a new one starts: no back-and-forth sway */
+  .steam path { animation: steam 2.4s cubic-bezier(0.25, 0.1, 0.25, 1) infinite; }
+  .steam path:nth-child(2) { animation-delay: -0.8s; }
+  .steam path:nth-child(3) { animation-delay: -1.6s; }
+  .kettle:not(.is-visible) .steam path { animation-play-state: paused; }
+  @keyframes steam {
+    0% { transform: translateY(4px) scaleY(0.9); opacity: 0; }
+    35% { opacity: 0.9; }
+    100% { transform: translateY(-7px) scaleY(1.05); opacity: 0; }
+  }
+}
+
+/* Tiers: knee kicker resting above the first step */
+.stairs-wrap { position: relative; }
+.spot--kicker { width: 30%; max-width: 132px; left: 2px; top: 30px; transform: rotate(-9deg); }
+
+/* Why: a length of gripper rod laid above the review */
+.spot--gripper { width: 200px; margin: 0 0 28px -4px; transform: rotate(-3deg); }
+
+/* Find us: carpet stretcher beside the heading */
+.visit__info { position: relative; }
+.spot--stretcher { width: 132px; right: -6px; top: -14px; transform: rotate(-7deg); }
 
 /* ---------- Toast ---------- */
 .toast {
@@ -440,7 +523,7 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
   .features__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px; align-items: start; }
   .features__title { position: sticky; top: 40px; }
   .features__list li { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: baseline; padding: 24px 0; }
-  .features__list h3 { font-size: 2rem; }
+  .features__list h3 { font-size: 1.875rem; }
   .features__list p { margin: 0; font-size: 1.0625rem; }
   .steps__list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; padding: 0; }
   .steps__list::before { left: 0; right: 0; top: 46px; bottom: auto; width: auto; height: 1px; background: var(--gold); }
@@ -458,12 +541,22 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
   .steps { padding-top: 40px; }
   .why { padding-top: 160px; }
   .why .wrap { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: 64px; align-items: start; }
-  .why__title { max-width: 10ch; margin-bottom: 0; }
+  .why__title { max-width: 9em; margin-bottom: 0; }
   .why__list { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 32px; }
   .review { grid-column: 1 / -1; margin: 120px 0; max-width: 820px; }
   .visit { grid-column: 1 / -1; }
   .visit { gap: 56px; }
   .closer { padding: 112px 0 120px; }
+  .features__title { padding-right: 0; max-width: 12ch; }
+  .spot--knife { position: static; width: 150px; margin: 36px 0 0 8px; }
+  .tea-ring { width: 190px; right: auto; left: 540px; top: -54px; }
+  .kettle { margin-top: 56px; }
+  .ill--mug { width: 76px; }
+  .kettle__line { font-size: 1.875rem; }
+  .feature--chat .chat { grid-column: 2; margin-top: 0; }
+  .spot--gripper { width: 240px; }
+  .spot--stretcher { width: 170px; top: -40px; }
+  .dim--ink { max-width: 360px; }
 }
 
 /* ---------- User preferences ---------- */

@@ -41,6 +41,16 @@
   // Tap the toast to dismiss it straight away.
   if (toast) toast.addEventListener('click', hide);
 
+  // Only let the tea steam while the mug is on screen.
+  var kettle = document.querySelector('.kettle');
+  if (kettle && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      kettle.classList.toggle('is-visible', entries[0].isIntersecting);
+    }).observe(kettle);
+  } else if (kettle) {
+    kettle.classList.add('is-visible');
+  }
+
   document.addEventListener('click', function (event) {
     var link = event.target.closest('[data-todo]');
     if (!link) return;
