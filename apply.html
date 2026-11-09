@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0B0A09">
+  <meta name="color-scheme" content="dark">
+  <title>Sign up | DC Flooring Trade</title>
+  <meta name="description" content="Open a free DC Flooring trade account. Two minutes, no paperwork.">
+  <link rel="icon" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600&amp;family=Barlow+Condensed:wght@700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap site-header__row">
+      <a class="brand" href="index.html" aria-label="DC Flooring trade, home">
+        <img src="assets/logo.png" alt="DC Flooring: carpet, vinyl and more" width="659" height="183">
+      </a>
+      <a class="btn btn--outline btn--sm" href="login.html">Sign in</a>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- Step 1: the application form -->
+    <section class="apply" id="formView" aria-labelledby="apply-title">
+      <div class="narrow">
+        <h1 id="apply-title" class="page-title">Two minutes. No paperwork.</h1>
+        <p class="page-lede">We'll get you approved within <span class="num">2</span> working days, then text you a login.</p>
+
+        <form class="form" id="applyForm" novalidate>
+          <div class="field">
+            <label for="f-name">Your name</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" autocapitalize="words" required aria-describedby="e-name">
+            <p class="field__error" id="e-name" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="f-business">Business or trading name</label>
+            <input id="f-business" name="business" type="text" autocomplete="organization" autocapitalize="words" required aria-describedby="e-business">
+            <p class="field__error" id="e-business" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="f-trade">What do you do?</label>
+            <select id="f-trade" name="trade" required aria-describedby="e-trade">
+              <option value="" selected disabled>Choose one</option>
+              <option>Flooring fitter</option>
+              <option>Flooring contractor</option>
+              <option>Builder or joiner</option>
+              <option>Landlord or property maintenance</option>
+              <option>Interior designer</option>
+              <option>Something else</option>
+            </select>
+            <p class="field__error" id="e-trade" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="f-mobile">Mobile</label>
+            <p class="field__hint" id="h-mobile">Your login code comes here by text</p>
+            <input id="f-mobile" name="mobile" type="tel" inputmode="tel" autocomplete="tel" required aria-describedby="h-mobile e-mobile">
+            <p class="field__error" id="e-mobile" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="f-email">Email</label>
+            <input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" required aria-describedby="e-email">
+            <p class="field__error" id="e-email" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="f-postcode">Business postcode</label>
+            <input id="f-postcode" name="postcode" type="text" autocomplete="postal-code" autocapitalize="characters" spellcheck="false" required aria-describedby="e-postcode">
+            <p class="field__error" id="e-postcode" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="f-company">Company or VAT number <span class="field__optional">(optional)</span></label>
+            <p class="field__hint" id="h-company">Sole trader? Leave it blank</p>
+            <input id="f-company" name="company" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-describedby="h-company e-company">
+            <p class="field__error" id="e-company" hidden></p>
+          </div>
+
+          <fieldset class="checks">
+            <legend class="sr-only">Terms and offers</legend>
+            <div class="check-field">
+              <label class="check">
+                <input type="checkbox" name="terms" id="f-terms" required aria-describedby="e-terms">
+                <span>I agree to the <a href="#applyForm" data-todo="The trade account terms page is still to be added.">[trade account terms]</a></span>
+              </label>
+              <p class="field__error" id="e-terms" hidden></p>
+            </div>
+            <label class="check">
+              <input type="checkbox" name="offersEmail">
+              <span>Email me trade offers</span>
+            </label>
+            <label class="check">
+              <input type="checkbox" name="offersText">
+              <span>Text me trade offers</span>
+            </label>
+          </fieldset>
+
+          <button class="btn btn--gold btn--lg btn--block" type="submit">Send application</button>
+          <p class="form__note">Why we check: trade prices are for the trade.</p>
+        </form>
+      </div>
+    </section>
+
+    <!-- Step 2: received. Nothing is sent or stored in this demo. -->
+    <section class="apply received" id="receivedView" aria-labelledby="received-title" hidden>
+      <div class="narrow">
+        <h1 id="received-title" class="page-title" tabindex="-1">Nice one, <span id="firstName">[first name]</span>.</h1>
+        <p class="page-lede">We'll get you approved within <span class="num">2</span> working days. Verify your ID now and we can do it quicker.</p>
+
+        <div class="verify">
+          <button class="btn btn--gold btn--lg btn--block" type="button" id="verifyBtn" aria-expanded="false" aria-controls="diditPanel">Verify my ID</button>
+          <p class="verify__note"><span class="num">2</span> minutes. Photo ID and a quick selfie. Powered by Didit.</p>
+          <div class="didit" id="diditPanel" hidden>
+            <p>This is where Didit opens to check your licence or passport. Coming soon.</p>
+          </div>
+          <a class="verify__alt" href="#counter">I'll bring ID to the counter instead</a>
+        </div>
+
+        <ol class="tracker" aria-label="Your application">
+          <li class="tracker__step is-done">
+            <span class="tracker__dot" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+            <span class="tracker__label">Applied<span class="sr-only">, done</span></span>
+          </li>
+          <li class="tracker__step">
+            <span class="tracker__dot" aria-hidden="true"></span>
+            <span class="tracker__label">ID checked<span class="sr-only">, to do</span></span>
+          </li>
+          <li class="tracker__step">
+            <span class="tracker__dot" aria-hidden="true"></span>
+            <span class="tracker__label">Approved<span class="sr-only">, to do</span></span>
+          </li>
+        </ol>
+
+        <div class="counter-cta" id="counter">
+          <p class="counter-cta__line">Need something today? Pop into the counter with photo ID.</p>
+          <div class="visit__actions">
+            <a class="action" href="#counter" data-todo="Call the counter on [Phone]">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>Call</a>
+            <a class="action" href="#counter" data-todo="Find us at [Address], Middlesbrough">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>Directions</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="ruler" aria-hidden="true"></div>
+      <div class="site-footer__row">
+        <img class="site-footer__logo" src="assets/logo.png" alt="DC Flooring: carpet, vinyl and more" width="659" height="183" loading="lazy">
+        <div class="site-footer__legal">
+          <p>DC Flooring Ltd · [Company no.] · [VAT no.]</p>
+          <p>Prices shown ex VAT. Trade accounts subject to approval.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="js/main.js" defer></script>
+  <script src="js/apply.js" defer></script>
+</body>
+</html>
