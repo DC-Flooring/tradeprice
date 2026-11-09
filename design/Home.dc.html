@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>DC Flooring trade home</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Barlow:wght@600;700;800&amp;family=Permanent+Marker&amp;display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:'Singel';src:url(/_blob/0d545308ea0b9338c1a618476c41fcb8) format('opentype');font-weight:100 900;font-style:normal;font-display:swap;unicode-range:U+0020-002F,U+003A-007E,U+2018-2019,U+201C-201D}
+@font-face{font-family:'Auttera';src:url(/_blob/b8099e6c3c95be5c7854239afcb4f71e) format('woff2');font-weight:100 900;font-style:normal;font-display:swap}
+body{margin:0}
+a{color:#F5F1E8}a:hover{color:#FFFFFF}
+</style>
+</helmet>
+<div style="width: 390px; min-height: 3330px; box-sizing: border-box; background: #0B0A09; color: #F5F1E8; font-family: Inter, -apple-system, system-ui, sans-serif; font-variant-numeric: tabular-nums">
+
+<header style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px">
+<img src="/_blob/83203476d45427059141f4beac06f8fd" alt="DC Flooring: carpet, vinyl and more" style="height: 46px; width: auto; display: block">
+<a href="Prices.dc.html" style="font-size: 15px; font-weight: 600; text-decoration: none; color: #F5F1E8; border: 1px solid #3A352E; padding: 10px 16px; border-radius: 999px">Sign in</a>
+</header>
+
+<section style="padding: 28px 20px 8px">
+<p style="margin: 0 0 14px; font-size: 13px; font-weight: 600; color: #A8A196">For fitters, builders and the trade</p>
+<h1 style="margin: 0; font-family: 'Singel', 'Barlow', sans-serif; font-weight: 700; font-size: 48px; line-height: 1; letter-spacing: -1.8px; color: #F5F1E8">Trade prices.</h1>
+<p style="margin: 6px 0 18px; font-family: 'Auttera', 'Permanent Marker', cursive; font-size: 40px; line-height: 1.1; color: {{accent}}; transform: rotate(-2deg); transform-origin: left">In your pocket.</p>
+<p style="margin: 0 0 26px; font-size: 18px; line-height: 1.5; color: #D6D0C4">See your price. Check it's in stock. Get it cut before you set off.</p>
+<a href="Apply.dc.html" style="display: flex; align-items: center; justify-content: center; height: 58px; border-radius: 16px; background: {{accent}}; color: #0B0A09; font-size: 18px; font-weight: 700; text-decoration: none">Sign up free</a>
+<div style="display: flex; justify-content: center; gap: 16px; margin-top: 14px; font-size: 14px; color: #A8A196">
+<span style="display: flex; align-items: center; gap: 6px"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"></path></svg>2 minutes</span>
+<span style="display: flex; align-items: center; gap: 6px"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"></path></svg>No paperwork</span>
+<span style="display: flex; align-items: center; gap: 6px"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"></path></svg>Free</span>
+</div>
+</section>
+
+<section style="padding: 32px 20px 0">
+<div style="position: relative; background: #171512; border: 1px solid #2A2622; border-radius: 24px; padding: 18px">
+<div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px">
+<span style="font-size: 13px; font-weight: 600; color: #A8A196">What you'll see</span>
+<span style="font-size: 12px; font-weight: 700; color: #0B0A09; background: {{accent}}; padding: 4px 10px; border-radius: 999px">Your price</span>
+</div>
+<sc-for list="{{preview}}" as="p" hint-placeholder-count="3">
+<div style="display: flex; align-items: center; gap: 12px; padding: 12px 0; border-top: 1px solid #2A2622">
+<div style="width: 48px; height: 48px; border-radius: 12px; flex-shrink: 0; background: {{p.tex}}"></div>
+<div style="flex: 1; min-width: 0">
+<p style="margin: 0; font-size: 16px; font-weight: 600; color: #F5F1E8">{{p.name}}</p>
+<p style="margin: 3px 0 0; font-size: 13px; font-weight: 600; color: #8FD18F">{{p.stock}}</p>
+</div>
+<div style="text-align: right">
+<p style="margin: 0; font-family: 'Singel', 'Barlow', sans-serif; font-size: 22px; font-weight: 700; color: #F5F1E8">{{p.price}}</p>
+<p style="margin: 0; font-size: 12px; color: #A8A196">{{p.unit}}</p>
+</div>
+</div>
+</sc-for>
+<div style="position: absolute; right: -6px; top: -18px; width: 82px; height: 82px; border-radius: 50%; background: #F5F1E8; color: #0B0A09; display: flex; flex-direction: column; align-items: center; justify-content: center; transform: rotate(10deg); text-align: center; line-height: 1">
+<span style="font-size: 10px; font-weight: 800; letter-spacing: 1px">CUT</span>
+<span style="font-family: 'Auttera', 'Permanent Marker', cursive; font-size: 22px; color: #0B0A09">today</span>
+</div>
+</div>
+</section>
+
+<div style="height: 12px; margin: 40px 20px 0; background: {{ruler}}"></div>
+
+<section style="padding: 36px 20px 0">
+<p style="margin: 0 0 8px; font-size: 13px; font-weight: 700; letter-spacing: 1.6px; color: {{accent}}">WHAT IT DOES</p>
+<h2 style="margin: 0 0 20px; font-family: 'Singel', 'Barlow', sans-serif; font-weight: 700; font-size: 32px; line-height: 1.05; letter-spacing: -1px; color: #F5F1E8">Everything for the job. One app.</h2>
+<div style="background: #171512; border: 1px solid #2A2622; border-radius: 20px; overflow: hidden">
+<sc-for list="{{features}}" as="f" hint-placeholder-count="5">
+<div style="display: flex; align-items: center; gap: 14px; padding: 16px; border-top: {{f.divider}}">
+<div style="width: 40px; height: 40px; flex-shrink: 0; border-radius: 11px; background: #2A2520; display: flex; align-items: center; justify-content: center; color: {{accent}}">
+<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="{{f.icon}}"></path></svg>
+</div>
+<div style="flex: 1; min-width: 0">
+<p style="margin: 0; font-size: 17px; font-weight: 600; color: #F5F1E8">{{f.title}}</p>
+<p style="margin: 2px 0 0; font-size: 14px; color: #A8A196">{{f.body}}</p>
+</div>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section style="padding: 48px 20px 0">
+<p style="margin: 0 0 8px; font-size: 13px; font-weight: 700; letter-spacing: 1.6px; color: {{accent}}">SIGNING UP</p>
+<h2 style="margin: 0 0 6px; font-family: 'Singel', 'Barlow', sans-serif; font-weight: 700; font-size: 32px; line-height: 1.05; letter-spacing: -1px; color: #F5F1E8">Quicker than a brew.</h2>
+<p style="margin: 0 0 22px; font-size: 16px; color: #A8A196">Three steps. No forms to post. No documents to scan.</p>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; gap: 16px; align-items: center; background: #171512; border: 1px solid #2A2622; border-radius: 20px; padding: 16px">
+<span style="width: 48px; flex-shrink: 0; font-family: 'Singel', 'Barlow', sans-serif; font-weight: 700; font-size: 40px; line-height: 1; color: {{accent}}">1</span>
+<div><p style="margin: 0; font-size: 17px; font-weight: 600">Tell us who you are</p><p style="margin: 2px 0 0; font-size: 14px; color: #A8A196">Name, business and mobile. That's it.</p></div>
+</div>
+<div style="display: flex; gap: 16px; align-items: center; background: #171512; border: 1px solid #2A2622; border-radius: 20px; padding: 16px">
+<span style="width: 48px; flex-shrink: 0; font-family: 'Singel', 'Barlow', sans-serif; font-weight: 700; font-size: 40px; line-height: 1; color: {{accent}}">2</span>
+<div><p style="margin: 0; font-size: 17px; font-weight: 600">We give you a ring</p><p style="margin: 2px 0 0; font-size: 14px; color: #A8A196">A quick chat to check you're in the trade.</p></div>
+</div>
+<div style="display: flex; gap: 16px; align-items: center; background: #171512; border: 1px solid #2A2622; border-radius: 20px; padding: 16px">
+<span style="width: 48px; flex-shrink: 0; font-family: 'Singel', 'Barlow', sans-serif; font-weight: 700; font-size: 40px; line-height: 1; color: {{accent}}">3</span>
+<div><p style="margin: 0; font-size: 17px; font-weight: 600">Your prices unlock</p><p style="margin: 2px 0 0; font-size: 14px; color: #A8A196">Log in with a text code. No passwords.</p></div>
+</div>
+</div>
+</section>
+
+<section style="padding: 48px 20px 0">
+<p style="margin: 0 0 8px; font-size: 13px; font-weight: 700; letter-spacing: 1.6px; color: {{accent}}">WHAT YOU GET</p>
+<h2 style="margin: 0 0 6px; font-family: 'Singel', 'Barlow', sans-serif; font-weight: 700; font-size: 32px; line-height: 1.05; letter-spacing: -1px; color: #F5F1E8">Spend more. Pay less.</h2>
+<p style="margin: 0 0 22px; font-size: 16px; color: #A8A196">Everyone starts on Trade. Your prices drop as you move up.</p>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; align-items: center; justify-content: space-between; background: #171512; border: 1px solid #2A2622; border-radius: 20px; padding: 18px">
+<div><p style="margin: 0; font-family: 'Singel', 'Barlow', sans-serif; font-weight: 700; font-size: 22px">Trade</p><p style="margin: 3px 0 0; font-size: 14px; color: #A8A196">From day one</p></div>
+<span style="font-size: 13px; font-weight: 600; color: #D6D0C4; border: 1px solid #3A352E; padding: 6px 12px; border-radius: 999px">Trade prices</span>
+</div>
+<div style="display: flex; align-items: center; justify-content: space-between; background: #171512; border: 1px solid {{accent}}; border-radius: 20px; padding: 18px">
+<div><p style="margin: 0; font-family: 'Singel', 'Barlow', sans-serif; font-weight: 700; font-size: 22px">Trade Plus</p><p style="margin: 3px 0 0; font-size: 14px; color: #A8A196">For regulars</p></div>
+<span style="font-size: 13px; font-weight: 600; color: {{accent}}; border: 1px solid {{accent}}; padding: 6px 12px; border-radius: 999px">Better prices</span>
+</div>
+<div style="display: flex; align-items: center; justify-content: space-between; background: {{accent}}; border-radius: 20px; padding: 18px; color: #0B0A09">
+<div><p style="margin: 0; font-family: 'Singel', 'Barlow', sans-serif; font-weight: 700; font-size: 22px; color: #0B0A09">Trade Gold</p><p style="margin: 3px 0 0; font-size: 14px; color: #2A2520">Our biggest customers</p></div>
+<span style="font-size: 13px; font-weight: 700; color: {{accent}}; background: #0B0A09; padding: 6px 12px; border-radius: 999px">Best prices</span>
+</div>
+</div>
+
+<div style="margin-top: 16px; display: flex; align-items: stretch; background: #F5F1E8; color: #0B0A09; border-radius: 20px; overflow: hidden">
+<div style="flex: 1; padding: 18px">
+<p style="margin: 0 0 4px; font-size: 12px; font-weight: 700; letter-spacing: 1.4px; color: #6B5A33">MEMBER OFFERS</p>
+<p style="margin: 0; font-family: 'Singel', 'Barlow', sans-serif; font-weight: 700; font-size: 24px; line-height: 1.1; color: #0B0A09">£50 off when you spend £500</p>
+<p style="margin: 6px 0 0; font-size: 13px; color: #4A443B">Vouchers land in your app. Just show it at the counter.</p>
+</div>
+<div style="width: 18px; background: radial-gradient(circle at 18px 50%, #0B0A09 9px, transparent 10px); border-left: 2px dashed #C9C1B0"></div>
+<div style="width: 72px; display: flex; align-items: center; justify-content: center; background: #EDE6D8">
+<span style="font-family: 'Auttera', 'Permanent Marker', cursive; font-size: 30px; color: #0B0A09; transform: rotate(-90deg); white-space: nowrap">£50</span>
+</div>
+</div>
+<p style="margin: 10px 0 0; font-size: 12px; color: #7D776C">Example offer. Offers change.</p>
+</section>
+
+<section style="padding: 48px 20px 0">
+<p style="margin: 0 0 8px; font-size: 13px; font-weight: 700; letter-spacing: 1.6px; color: {{accent}}">WHY DC FLOORING</p>
+<h2 style="margin: 0 0 22px; font-family: 'Singel', 'Barlow', sans-serif; font-weight: 700; font-size: 32px; line-height: 1.05; letter-spacing: -1px; color: #F5F1E8">A proper local trade counter.</h2>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<sc-for list="{{whys}}" as="w" hint-placeholder-count="4">
+<div style="background: #171512; border: 1px solid #2A2622; border-radius: 20px; padding: 16px; min-height: 120px; box-sizing: border-box">
+<div style="color: {{accent}}">
+<svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="{{w.icon}}"></path></svg>
+</div>
+<p style="margin: 12px 0 0; font-size: 16px; font-weight: 700; line-height: 1.2; color: #F5F1E8">{{w.title}}</p>
+<p style="margin: 4px 0 0; font-size: 13px; line-height: 1.4; color: #A8A196">{{w.body}}</p>
+</div>
+</sc-for>
+</div>
+
+<div style="margin-top: 16px; background: #171512; border: 1px solid #2A2622; border-radius: 20px; padding: 20px">
+<div style="display: flex; gap: 2px; color: {{accent}}; margin-bottom: 10px">
+<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.5 7L12 17.6 5.7 21.1l1.5-7L2 9.3l7-.8z"></path></svg>
+<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.5 7L12 17.6 5.7 21.1l1.5-7L2 9.3l7-.8z"></path></svg>
+<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.5 7L12 17.6 5.7 21.1l1.5-7L2 9.3l7-.8z"></path></svg>
+<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.5 7L12 17.6 5.7 21.1l1.5-7L2 9.3l7-.8z"></path></svg>
+<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.5 7L12 17.6 5.7 21.1l1.5-7L2 9.3l7-.8z"></path></svg>
+</div>
+<p style="margin: 0; font-size: 18px; line-height: 1.45; color: #F5F1E8">[A real line from a fitter who uses DC. Ask Dave for one.]</p>
+<p style="margin: 10px 0 0; font-size: 14px; color: #A8A196">[Name], [Business], [Town]</p>
+</div>
+
+<div style="margin-top: 16px; background: #171512; border: 1px solid #2A2622; border-radius: 20px; overflow: hidden">
+<div style="height: 150px; background: #2A2520; display: flex; align-items: center; justify-content: center; color: #A8A196; font-size: 14px; font-weight: 600">Photo: the counter and the lads</div>
+<div style="padding: 18px">
+<p style="margin: 0; font-family: 'Singel', 'Barlow', sans-serif; font-weight: 700; font-size: 22px">Come and see us</p>
+<p style="margin: 6px 0 0; font-size: 15px; color: #A8A196">[Address], Middlesbrough</p>
+<p style="margin: 2px 0 16px; font-size: 15px; color: #A8A196">Trade from [7:30am], Mon to Sat</p>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+<a href="#" style="display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 14px 0; background: #2A2520; border-radius: 14px; text-decoration: none; font-size: 13px; font-weight: 600; color: #F5F1E8">
+<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"></path></svg>Call</a>
+<a href="#" style="display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 14px 0; background: #2A2520; border-radius: 14px; text-decoration: none; font-size: 13px; font-weight: 600; color: #F5F1E8">
+<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20l1.3-3.9A9 9 0 1 1 7.9 19.7L3 20"></path></svg>WhatsApp</a>
+<a href="#" style="display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 14px 0; background: #2A2520; border-radius: 14px; text-decoration: none; font-size: 13px; font-weight: 600; color: #F5F1E8">
+<svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg>Directions</a>
+</div>
+</div>
+</div>
+</section>
+
+<section style="margin: 48px 20px 0; padding: 30px 22px; border-radius: 28px; background: #171512; border: 1px solid {{accent}}; text-align: center">
+<p style="margin: 0; font-family: 'Singel', 'Barlow', sans-serif; font-weight: 700; font-size: 34px; line-height: 1; letter-spacing: -1px; color: #F5F1E8">Measure. Cut.</p>
+<p style="margin: 4px 0 14px; font-family: 'Auttera', 'Permanent Marker', cursive; font-size: 40px; line-height: 1.1; color: {{accent}}">Collect.</p>
+<p style="margin: 0 0 22px; font-size: 16px; color: #D6D0C4">Two minutes now saves you a wasted trip later.</p>
+<a href="Apply.dc.html" style="display: flex; align-items: center; justify-content: center; height: 58px; border-radius: 16px; background: {{accent}}; color: #0B0A09; font-size: 18px; font-weight: 700; text-decoration: none">Sign up free</a>
+<a href="Prices.dc.html" style="display: inline-block; margin-top: 14px; padding: 8px; font-size: 15px; color: #D6D0C4">Already got an account? <span style="color: {{accent}}; font-weight: 600">Sign in</span></a>
+</section>
+
+<footer style="padding: 36px 20px 40px; text-align: center">
+<div style="height: 12px; margin-bottom: 24px; background: {{ruler}}"></div>
+<img src="/_blob/83203476d45427059141f4beac06f8fd" alt="DC Flooring" style="height: 64px; width: auto; display: block; margin: 0 auto 20px">
+<p style="margin: 0; font-size: 12px; color: #7D776C">DC Flooring Ltd · [Company no.] · [VAT no.]</p>
+<p style="margin: 6px 0 0; font-size: 12px; color: #7D776C">Prices shown ex VAT. Trade accounts subject to approval.</p>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#B8924A","options":["#B8924A","#D4AF61","#9C7A36"]},"$preview":{"width":390,"height":3330}}'>
+class Component extends DCLogic {
+renderVals() {
+const accent = this.props.accent ?? '#B8924A';
+const ruler = 'repeating-linear-gradient(90deg,' + accent + ' 0 2px,transparent 2px 50px) left bottom/100% 12px no-repeat, repeating-linear-gradient(90deg,' + accent + ' 0 1px,transparent 1px 10px) left bottom/100% 6px no-repeat, linear-gradient(' + accent + ',' + accent + ') left bottom/100% 1px no-repeat';
+const carpet = (c) => 'repeating-linear-gradient(45deg,rgba(255,255,255,0.10) 0 2px,transparent 2px 5px), repeating-linear-gradient(-45deg,rgba(0,0,0,0.12) 0 2px,transparent 2px 5px), ' + c;
+const planks = (c, d) => 'repeating-linear-gradient(90deg,transparent 0 14px,' + d + ' 14px 16px), repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,0.07) 3px 5px), ' + c;
+const tiles = (c, d) => 'repeating-linear-gradient(0deg,transparent 0 14px,' + d + ' 14px 16px), repeating-linear-gradient(90deg,transparent 0 14px,' + d + ' 14px 16px), ' + c;
+const preview = [
+{ name: 'Twist pile carpet', stock: 'In stock · cut today', price: '£11.40', unit: 'per m²', tex: carpet('#B9AE9C') },
+{ name: 'Click LVT, oak', stock: 'In stock', price: '£19.80', unit: 'per m²', tex: planks('#A88A6A', '#7A5F44') },
+{ name: 'Cushion vinyl', stock: 'In stock · cut today', price: '£8.95', unit: 'per m²', tex: tiles('#B9B4AA', '#9C978D') }
+];
+const icons = {
+tag: 'M3 12V4h8l10 10-8 8L3 12zM7.5 7.5h.01',
+box: 'M12 3l8 4.5v9L12 21l-8-4.5v-9zM4 7.5l8 4.5 8-4.5M12 12v9',
+cut: 'M6 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM6 15a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM8.6 8.6L20 20M8.6 15.4L20 4',
+gift: 'M3 8h18v4H3zM5 12v9h14v-9M12 8v13M12 8S10 3 7.5 4.5 9 8 12 8zM12 8s2-5 4.5-3.5S15 8 12 8z',
+repeat: 'M4 12a8 8 0 0 1 14-5.3L20 9M20 4v5h-5M20 12a8 8 0 0 1-14 5.3L4 15M4 20v-5h5',
+pin: 'M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12zM12 6.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z',
+people: 'M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM2 21v-1a7 7 0 0 1 14 0v1M16 3.5a4 4 0 0 1 0 7.5M22 21v-1a7 7 0 0 0-4-6.3',
+clock: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3 2'
+};
+const featureList = [
+{ title: 'See your price', body: 'Your trade price on every range.', icon: icons.tag },
+{ title: 'Check stock', body: 'Know it’s in before you drive over.', icon: icons.box },
+{ title: 'Ring ahead, we cut it', body: 'Send sizes. Collect it ready.', icon: icons.cut },
+{ title: 'Vouchers and offers', body: 'Member deals, straight to your phone.', icon: icons.gift },
+{ title: 'Reorder in a tap', body: 'Your usual underlay and grippers, sorted.', icon: icons.repeat }
+];
+const features = featureList.map((f, i) => ({ ...f, divider: i === 0 ? '0' : '1px solid #2A2622' }));
+const whys = [
+{ title: 'Local', body: 'Middlesbrough counter. Fitting across the North East.', icon: icons.pin },
+{ title: 'On the shelf', body: 'Big stock. No waiting on deliveries.', icon: icons.box },
+{ title: 'Real people', body: 'Ring or WhatsApp the counter direct.', icon: icons.people },
+{ title: 'Early start', body: 'Open from [7:30am] for the trade.', icon: icons.clock }
+];
+return { accent, ruler, preview, features, whys };
+}
+}
+</script>
+</body>
+</html>
