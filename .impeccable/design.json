@@ -1,0 +1,649 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-09T20:57:54+00:00",
+  "title": "Design System: DC Flooring Trade",
+  "extensions": {
+    "colorMeta": {
+      "van-cab-black": {
+        "role": "neutral",
+        "displayName": "Van-cab Black",
+        "canonical": "#0B0A09",
+        "oklch": "oklch(14.6% 0.003 69)",
+        "tonalRamp": [
+          "#0C0B0A",
+          "#262524",
+          "#434241",
+          "#626160",
+          "#838281",
+          "#A6A5A3",
+          "#CAC9C8",
+          "#EFEEED"
+        ],
+        "cssVar": "--bg"
+      },
+      "raised": {
+        "role": "neutral",
+        "displayName": "Raised",
+        "canonical": "#171512",
+        "oklch": "oklch(19.7% 0.007 78)",
+        "tonalRamp": [
+          "#0C0B0A",
+          "#262523",
+          "#43423F",
+          "#63615D",
+          "#84827E",
+          "#A7A5A1",
+          "#CBC9C6",
+          "#F0EEEC"
+        ],
+        "cssVar": "--raised"
+      },
+      "raised-press": {
+        "role": "neutral",
+        "displayName": "Raised Press",
+        "canonical": "#211E1A",
+        "oklch": "oklch(23.7% 0.009 75)",
+        "tonalRamp": [
+          "#0C0B09",
+          "#272522",
+          "#44413E",
+          "#64615C",
+          "#85827D",
+          "#A8A4A0",
+          "#CBC9C5",
+          "#F0EEEB"
+        ],
+        "cssVar": "--raised-2"
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "#2A2622",
+        "oklch": "oklch(27.2% 0.009 67)",
+        "tonalRamp": [
+          "#0C0B09",
+          "#272522",
+          "#45413E",
+          "#65605C",
+          "#86817D",
+          "#A8A4A0",
+          "#CCC8C5",
+          "#F1EEEB"
+        ],
+        "cssVar": "--border"
+      },
+      "outline": {
+        "role": "neutral",
+        "displayName": "Outline",
+        "canonical": "#3A352E",
+        "oklch": "oklch(33.2% 0.014 76)",
+        "tonalRamp": [
+          "#0D0B08",
+          "#282520",
+          "#45413C",
+          "#656059",
+          "#87817A",
+          "#A9A49E",
+          "#CCC8C3",
+          "#F1EEE9"
+        ],
+        "cssVar": "--border-strong"
+      },
+      "off-white": {
+        "role": "neutral",
+        "displayName": "Off-white",
+        "canonical": "#F5F1E8",
+        "oklch": "oklch(95.9% 0.013 87)",
+        "tonalRamp": [
+          "#0C0B08",
+          "#272521",
+          "#44423C",
+          "#64615A",
+          "#85827B",
+          "#A8A59E",
+          "#CBC9C3",
+          "#F0EEEA"
+        ],
+        "cssVar": "--text"
+      },
+      "text-secondary": {
+        "role": "neutral",
+        "displayName": "Text Secondary",
+        "canonical": "#A8A196",
+        "oklch": "oklch(71.2% 0.018 79)",
+        "tonalRamp": [
+          "#0D0B07",
+          "#28251F",
+          "#46413A",
+          "#666057",
+          "#888178",
+          "#AAA49C",
+          "#CDC8C1",
+          "#F2EEE8"
+        ],
+        "cssVar": "--text-2"
+      },
+      "text-lede": {
+        "role": "neutral",
+        "displayName": "Text Lede",
+        "canonical": "#D6D0C4",
+        "oklch": "oklch(85.9% 0.018 85)",
+        "tonalRamp": [
+          "#0D0B07",
+          "#28251F",
+          "#45423A",
+          "#666157",
+          "#878278",
+          "#A9A49C",
+          "#CCC9C1",
+          "#F1EEE8"
+        ],
+        "cssVar": "--text-3"
+      },
+      "dc-gold": {
+        "role": "primary",
+        "displayName": "DC Gold",
+        "canonical": "#B8924A",
+        "oklch": "oklch(68.1% 0.101 82)",
+        "tonalRamp": [
+          "#150800",
+          "#342100",
+          "#573D00",
+          "#7C5B13",
+          "#9F7C3B",
+          "#BEA06B",
+          "#DFC69A",
+          "#FFECCA"
+        ],
+        "cssVar": "--gold"
+      },
+      "gold-press": {
+        "role": "primary",
+        "displayName": "Gold Press",
+        "canonical": "#A8833D",
+        "oklch": "oklch(63.1% 0.099 81)",
+        "tonalRamp": [
+          "#150800",
+          "#342100",
+          "#573D01",
+          "#7C5B17",
+          "#9E7C3D",
+          "#BEA06C",
+          "#DEC69B",
+          "#FFECCA"
+        ],
+        "cssVar": "--gold-press"
+      },
+      "on-gold-secondary": {
+        "role": "primary",
+        "displayName": "On-gold Secondary",
+        "canonical": "#2A2520",
+        "oklch": "oklch(26.8% 0.012 67)",
+        "tonalRamp": [
+          "#0D0B09",
+          "#282421",
+          "#45413D",
+          "#66605B",
+          "#87817C",
+          "#A9A49F",
+          "#CCC8C4",
+          "#F1EEEA"
+        ],
+        "cssVar": "--on-gold-2"
+      },
+      "paper": {
+        "role": "secondary",
+        "displayName": "Warm Paper",
+        "canonical": "#F5F1E8",
+        "oklch": "oklch(95.9% 0.013 87)",
+        "tonalRamp": [
+          "#0C0B08",
+          "#272521",
+          "#44423C",
+          "#64615A",
+          "#85827B",
+          "#A8A59E",
+          "#CBC9C3",
+          "#F0EEEA"
+        ],
+        "cssVar": "--paper"
+      },
+      "paper-stub": {
+        "role": "secondary",
+        "displayName": "Paper Stub",
+        "canonical": "#EDE6D8",
+        "oklch": "oklch(92.7% 0.020 85)",
+        "tonalRamp": [
+          "#0D0B07",
+          "#28251E",
+          "#464139",
+          "#666155",
+          "#888276",
+          "#AAA49A",
+          "#CDC9C0",
+          "#F1EEE7"
+        ],
+        "cssVar": "--paper-2"
+      },
+      "on-paper-secondary": {
+        "role": "secondary",
+        "displayName": "On-paper Secondary",
+        "canonical": "#4A443B",
+        "oklch": "oklch(39.0% 0.017 78)",
+        "tonalRamp": [
+          "#0D0B07",
+          "#28241F",
+          "#46413A",
+          "#666057",
+          "#888178",
+          "#AAA49C",
+          "#CDC8C2",
+          "#F2EEE8"
+        ],
+        "cssVar": "--on-paper-2"
+      },
+      "brass-ink": {
+        "role": "secondary",
+        "displayName": "Brass Ink",
+        "canonical": "#6B5A33",
+        "oklch": "oklch(47.5% 0.060 87)",
+        "tonalRamp": [
+          "#110A00",
+          "#2D240E",
+          "#4D4024",
+          "#6F5F3B",
+          "#91805C",
+          "#B2A484",
+          "#D4C8AE",
+          "#F7EED9"
+        ],
+        "note": "Hard-coded in css/styles.css; no custom property yet."
+      },
+      "in-stock-green": {
+        "role": "tertiary",
+        "displayName": "In-stock Green",
+        "canonical": "#8FD18F",
+        "oklch": "oklch(79.9% 0.114 144)",
+        "tonalRamp": [
+          "#001100",
+          "#082E0B",
+          "#1F4E21",
+          "#377039",
+          "#589359",
+          "#82B482",
+          "#ADD6AC",
+          "#D9F9D8"
+        ],
+        "cssVar": "--ok"
+      },
+      "pencil": {
+        "role": "neutral",
+        "displayName": "Pencil",
+        "canonical": "#C9C1B0",
+        "oklch": "oklch(81.3% 0.025 86)",
+        "tonalRamp": [
+          "#0D0B06",
+          "#28251C",
+          "#474136",
+          "#676153",
+          "#898273",
+          "#AAA498",
+          "#CEC9BE",
+          "#F2EEE5"
+        ],
+        "cssVar": "--pencil"
+      },
+      "chat-out": {
+        "role": "tertiary",
+        "displayName": "Chat Out",
+        "canonical": "#0F5A45",
+        "oklch": "oklch(41.8% 0.078 169)",
+        "tonalRamp": [
+          "#001008",
+          "#042D21",
+          "#1A4C3C",
+          "#316E5A",
+          "#54917B",
+          "#7FB29E",
+          "#AAD4C3",
+          "#D7F7EA"
+        ],
+        "cssVar": "--chat-out"
+      },
+      "chat-in": {
+        "role": "tertiary",
+        "displayName": "Chat In",
+        "canonical": "#24211D",
+        "oklch": "oklch(25.0% 0.009 75)",
+        "tonalRamp": [
+          "#0C0B09",
+          "#272522",
+          "#44413E",
+          "#64615C",
+          "#85827D",
+          "#A7A4A0",
+          "#CBC9C5",
+          "#F0EEEB"
+        ],
+        "cssVar": "--chat-in"
+      },
+      "tier-plus": {
+        "role": "tertiary",
+        "displayName": "Tier Plus",
+        "canonical": "#4A3D27",
+        "oklch": "oklch(36.8% 0.039 80)",
+        "tonalRamp": [
+          "#0F0A03",
+          "#2B2417",
+          "#4B4030",
+          "#6C5F4A",
+          "#8E806A",
+          "#AFA390",
+          "#D2C8B7",
+          "#F5EDE0"
+        ],
+        "note": "Hard-coded in css/styles.css; no custom property yet."
+      },
+      "tier-plus-deal": {
+        "role": "tertiary",
+        "displayName": "Tier Plus Deal",
+        "canonical": "#E2C58A",
+        "oklch": "oklch(83.5% 0.083 85)",
+        "tonalRamp": [
+          "#130900",
+          "#312201",
+          "#523F13",
+          "#765D29",
+          "#987F4A",
+          "#B8A276",
+          "#D9C7A3",
+          "#FBEDD0"
+        ],
+        "note": "Hard-coded in css/styles.css; no custom property yet."
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero and closer headlines; capitals."
+      },
+      "headline-xl": {
+        "displayName": "Headline XL",
+        "purpose": "Section headlines that carry a section alone; capitals."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Standard section headlines; capitals, balanced wrap."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Small headings such as Come and see us; capitals."
+      },
+      "title-index": {
+        "displayName": "Index Title",
+        "purpose": "Feature index rows and tier names; capitals."
+      },
+      "script": {
+        "displayName": "Script",
+        "purpose": "Auttera second line of a display headline, rotated -2deg."
+      },
+      "script-note": {
+        "displayName": "Script Note",
+        "purpose": "Pencil notes and dimension labels."
+      },
+      "numeral": {
+        "displayName": "Numeral",
+        "purpose": "Gold step numbers."
+      },
+      "price": {
+        "displayName": "Price",
+        "purpose": "Prices, tabular lining figures."
+      },
+      "lede": {
+        "displayName": "Lede",
+        "purpose": "Hero lede, 30ch to 34ch."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All running text; 16px floor."
+      },
+      "body-strong": {
+        "displayName": "Body Strong",
+        "purpose": "Product names."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Price screen bar, unit lines, voucher label."
+      },
+      "button": {
+        "displayName": "Button",
+        "purpose": "Button labels."
+      }
+    },
+    "shadows": [
+      {
+        "name": "screen",
+        "value": "0 24px 60px -24px rgba(0,0,0,0.9), 0 2px 0 rgba(255,255,255,0.03) inset",
+        "purpose": "The price screen."
+      },
+      {
+        "name": "ticket",
+        "value": "0 20px 40px -20px rgba(0,0,0,0.8)",
+        "purpose": "The voucher."
+      },
+      {
+        "name": "sticker",
+        "value": "0 10px 24px -8px rgba(0,0,0,0.7)",
+        "purpose": "The rotated sticker."
+      },
+      {
+        "name": "swatch-edge",
+        "value": "inset 0 0 0 1px rgba(255,255,255,0.08)",
+        "purpose": "Faint inner edge on product swatches."
+      },
+      {
+        "name": "header-glass",
+        "value": "background: rgba(11,10,9,0.72); backdrop-filter: blur(18px) saturate(160%)",
+        "purpose": "Sticky header; solid under reduced transparency or higher contrast."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.23, 1, 0.32, 1)",
+        "purpose": "Anything entering or responding to a press."
+      },
+      {
+        "name": "press",
+        "value": "160ms",
+        "purpose": "Press release; 100ms on the way down, scale 0.97."
+      },
+      {
+        "name": "colour-change",
+        "value": "200ms ease",
+        "purpose": "Background, border and colour transitions."
+      },
+      {
+        "name": "toast-in",
+        "value": "260ms ease-out transform, 200ms opacity",
+        "purpose": "Toast entering; 180ms out. Opacity only under reduced motion."
+      },
+      {
+        "name": "steam",
+        "value": "2.4s cubic-bezier(0.25, 0.1, 0.25, 1) infinite, staggered 0.8s",
+        "purpose": "The only loop; off under reduced motion and paused off screen."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "stairs",
+        "value": "600px"
+      },
+      {
+        "name": "tablet",
+        "value": "640px"
+      },
+      {
+        "name": "desktop",
+        "value": "960px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Gold Button",
+      "kind": "button",
+      "refersTo": "button-gold-lg",
+      "description": "The one primary action per screen; full width on phones.",
+      "html": "<a class=\"ds-btn ds-btn-gold\" href=\"#\">Sign up free</a>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:58px;padding:0 28px;border-radius:16px;border:1px solid transparent;font:700 1.125rem/1 \"Inter\",system-ui,sans-serif;text-decoration:none;cursor:pointer;transition:transform 160ms cubic-bezier(0.23,1,0.32,1),background-color 200ms ease,border-color 200ms ease}.ds-btn:active{transform:scale(0.97);transition-duration:100ms}.ds-btn:focus-visible{outline:2px solid var(--gold,#B8924A);outline-offset:3px}.ds-btn-gold{background:var(--gold,#B8924A);color:var(--on-gold,#0B0A09)}.ds-btn-gold:hover,.ds-btn-gold:active{background:var(--gold-press,#A8833D)}"
+    },
+    {
+      "name": "Outline Pill Button",
+      "kind": "button",
+      "refersTo": "button-outline-sm",
+      "description": "Secondary action in the header (Sign in).",
+      "html": "<a class=\"ds-btn-outline\" href=\"#\">Sign in</a>",
+      "css": ".ds-btn-outline{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--border-strong,#3A352E);background:transparent;color:var(--text,#F5F1E8);font:600 1rem/1 \"Inter\",system-ui,sans-serif;text-decoration:none;transition:transform 160ms cubic-bezier(0.23,1,0.32,1),background-color 200ms ease,border-color 200ms ease}.ds-btn-outline:hover{border-color:var(--text-2,#A8A196);background:var(--raised,#171512)}.ds-btn-outline:active{transform:scale(0.97);background:var(--raised,#171512);transition-duration:100ms}.ds-btn-outline:focus-visible{outline:2px solid var(--gold,#B8924A);outline-offset:3px}"
+    },
+    {
+      "name": "Ink Button",
+      "kind": "button",
+      "refersTo": "button-ink",
+      "description": "The only button allowed on the gold closing band.",
+      "html": "<div class=\"ds-band\"><a class=\"ds-btn-ink\" href=\"#\">Sign up free</a></div>",
+      "css": ".ds-band{background:var(--gold,#B8924A);padding:32px;display:grid;justify-items:center}.ds-btn-ink{display:inline-flex;align-items:center;justify-content:center;min-height:58px;width:100%;max-width:420px;padding:0 28px;border-radius:16px;background:var(--on-gold,#0B0A09);color:var(--gold,#B8924A);font:700 1.125rem/1 \"Inter\",system-ui,sans-serif;text-decoration:none;transition:transform 160ms cubic-bezier(0.23,1,0.32,1),background-color 200ms ease}.ds-btn-ink:hover{background:#1C1915}.ds-btn-ink:active{transform:scale(0.97);transition-duration:100ms}.ds-btn-ink:focus-visible{outline:2px solid var(--on-gold,#0B0A09);outline-offset:3px}"
+    },
+    {
+      "name": "Header",
+      "kind": "nav",
+      "refersTo": "header",
+      "description": "Sticky translucent bar with logo and Sign in, soft fade edge.",
+      "html": "<header class=\"ds-header\"><span class=\"ds-logo\">DC FLOORING</span><a class=\"ds-pill\" href=\"#\">Sign in</a></header>",
+      "css": ".ds-header{position:relative;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:68px;padding:0 20px;background:rgba(11,10,9,0.72);backdrop-filter:blur(18px) saturate(160%)}.ds-header::after{content:\"\";position:absolute;left:0;right:0;top:100%;height:16px;background:linear-gradient(rgba(11,10,9,0.55),rgba(11,10,9,0));pointer-events:none}.ds-logo{font:700 1.5rem/1 \"Barlow Condensed\",sans-serif;color:var(--text,#F5F1E8)}.ds-pill{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;border:1px solid var(--border-strong,#3A352E);color:var(--text,#F5F1E8);font:600 1rem/1 \"Inter\",sans-serif;text-decoration:none}.ds-pill:hover{background:var(--raised,#171512)}.ds-pill:focus-visible{outline:2px solid var(--gold,#B8924A);outline-offset:3px}"
+    },
+    {
+      "name": "Ruler",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Gold tape-measure divider; the signature rule.",
+      "html": "<div class=\"ds-ruler\" aria-hidden=\"true\"></div>",
+      "css": ".ds-ruler{height:14px;opacity:0.85;background:repeating-linear-gradient(90deg,var(--gold,#B8924A) 0 2px,transparent 2px 50px) left bottom/100% 14px no-repeat,repeating-linear-gradient(90deg,var(--gold,#B8924A) 0 1px,transparent 1px 10px) left bottom/100% 6px no-repeat,linear-gradient(var(--gold,#B8924A),var(--gold,#B8924A)) left bottom/100% 1px no-repeat}"
+    },
+    {
+      "name": "Price Screen",
+      "kind": "card",
+      "refersTo": "price-screen",
+      "description": "The framed price list object with product rows and tier pill.",
+      "html": "<div class=\"ds-screen\"><div class=\"ds-bar\"><span>Your prices</span><span class=\"ds-tier\">Trade</span></div><div class=\"ds-row\"><span class=\"ds-sw\"></span><span class=\"ds-main\"><span class=\"ds-name\">Twist pile carpet</span><span class=\"ds-stock\">In stock · cut today</span></span><span class=\"ds-pr\"><span class=\"ds-price\">£11.40</span><span class=\"ds-unit\">per m²</span></span></div></div>",
+      "css": ".ds-screen{max-width:420px;background:var(--raised,#171512);border:1px solid var(--border,#2A2622);border-radius:24px;padding:18px 18px 6px;color:var(--text,#F5F1E8);font-family:\"Inter\",sans-serif;box-shadow:0 24px 60px -24px rgba(0,0,0,0.9),0 2px 0 rgba(255,255,255,0.03) inset}.ds-bar{display:flex;justify-content:space-between;align-items:center;padding-bottom:14px;font-size:0.9375rem;font-weight:600;color:var(--text-2,#A8A196)}.ds-tier{font-size:0.8125rem;font-weight:700;color:var(--on-gold,#0B0A09);background:var(--gold,#B8924A);padding:3px 10px;border-radius:999px}.ds-row{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:14px;align-items:center;padding:14px 0;border-top:1px solid var(--border,#2A2622)}.ds-sw{width:52px;height:52px;border-radius:12px;background:#B9AE9C;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.08)}.ds-main{display:grid;gap:2px}.ds-name{font-weight:600;font-size:1.0625rem;line-height:1.3}.ds-stock{font-weight:500;color:var(--ok,#8FD18F)}.ds-pr{display:grid;justify-items:end;line-height:1.15}.ds-price{font:600 1.5rem \"Barlow\",\"Inter\",sans-serif;letter-spacing:-0.01em;font-variant-numeric:tabular-nums lining-nums}.ds-unit{font-size:0.9375rem;color:var(--text-2,#A8A196)}"
+    },
+    {
+      "name": "Chat Bubbles",
+      "kind": "custom",
+      "refersTo": "chat-out",
+      "description": "Real-looking ring-ahead exchange.",
+      "html": "<div class=\"ds-chat\"><p class=\"ds-msg ds-out\">4m x 5.2 of the grey twist for 2pm?</p><p class=\"ds-msg ds-in\"><span class=\"ds-from\">DC Flooring</span>Sorted. Cut and waiting.</p></div>",
+      "css": ".ds-chat{display:grid;gap:6px;max-width:360px;font-family:\"Inter\",sans-serif}.ds-msg{position:relative;margin:0;max-width:88%;padding:7px 10px 8px 12px;border-radius:10px;font-size:1rem;line-height:1.35;color:var(--text,#F5F1E8)}.ds-out{justify-self:end;background:var(--chat-out,#0F5A45);border-top-right-radius:3px}.ds-in{justify-self:start;background:var(--chat-in,#24211D);border-top-left-radius:3px}.ds-out::after,.ds-in::after{content:\"\";position:absolute;top:0;width:8px;height:10px}.ds-out::after{right:-7px;background:var(--chat-out,#0F5A45);clip-path:polygon(0 0,100% 0,0 100%)}.ds-in::after{left:-7px;background:var(--chat-in,#24211D);clip-path:polygon(0 0,100% 0,100% 100%)}.ds-from{display:block;font-size:0.875rem;font-weight:700;color:var(--gold,#B8924A)}"
+    },
+    {
+      "name": "Tier Staircase",
+      "kind": "custom",
+      "refersTo": "tier-gold",
+      "description": "Three tiers, stacked under 600px, a staircase from 600px.",
+      "html": "<ol class=\"ds-stairs\"><li class=\"ds-st ds-s1\"><b>Trade</b><span>From day one</span><i>Trade prices</i></li><li class=\"ds-st ds-s2\"><b>Trade Plus</b><span>For regulars</span><i>Better prices</i></li><li class=\"ds-st ds-s3\"><b>Trade Gold</b><span>Our biggest customers</span><i>Best prices</i></li></ol>",
+      "css": ".ds-stairs{list-style:none;margin:0;padding:0;display:grid;gap:3px;font-family:\"Inter\",sans-serif;color:var(--text,#F5F1E8)}.ds-st{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:16px;row-gap:2px;align-items:center;padding:18px;border-radius:6px}.ds-st b{grid-column:1;font:700 1.375rem/1 \"Barlow Condensed\",sans-serif;text-transform:uppercase;letter-spacing:0.02em}.ds-st span{grid-column:1;color:var(--text-3,#D6D0C4)}.ds-st i{grid-column:2;grid-row:1/span 2;font-style:normal;font-weight:600;color:var(--text-3,#D6D0C4)}.ds-s1{background:#2A2622}.ds-s2{background:#4A3D27}.ds-s2 i{color:#E2C58A}.ds-s3{background:var(--gold,#B8924A);color:var(--on-gold,#0B0A09)}.ds-s3 span{color:var(--on-gold-2,#2A2520)}.ds-s3 i{color:var(--on-gold,#0B0A09);font-weight:700}@media (min-width:600px){.ds-stairs{grid-template-columns:repeat(3,minmax(0,1fr));align-items:end}.ds-st{display:flex;flex-direction:column;align-items:flex-start;gap:4px;border-radius:6px 6px 0 0}.ds-st i{margin-top:auto}.ds-s1{min-height:172px}.ds-s2{min-height:232px}.ds-s3{min-height:300px}}"
+    },
+    {
+      "name": "Voucher",
+      "kind": "card",
+      "refersTo": "voucher",
+      "description": "Paper tear-off ticket with a notched stub.",
+      "html": "<div class=\"ds-v\"><div class=\"ds-vb\"><h3>£50 off when you spend £500</h3><p>Vouchers land in your app. Just show it at the counter.</p><p class=\"ds-vl\">Member offers</p></div><div class=\"ds-vs\"><span>£50</span></div></div>",
+      "css": ".ds-v{display:grid;grid-template-columns:minmax(0,1fr) 76px;max-width:420px;background:var(--paper,#F5F1E8);color:var(--on-gold,#0B0A09);border-radius:20px;overflow:hidden;box-shadow:0 20px 40px -20px rgba(0,0,0,0.8);font-family:\"Inter\",sans-serif}.ds-vb{padding:20px}.ds-vb h3{margin:0;font:700 1.875rem/1 \"Barlow Condensed\",sans-serif;text-transform:uppercase}.ds-vb p{margin:8px 0 0;color:var(--on-paper-2,#4A443B)}.ds-vb .ds-vl{margin-top:14px;font-size:0.9375rem;font-weight:700;color:#6B5A33}.ds-vs{position:relative;display:grid;place-items:center;background:var(--paper-2,#EDE6D8);border-left:2px dashed #C9C1B0}.ds-vs::before,.ds-vs::after{content:\"\";position:absolute;left:-11px;width:20px;height:20px;border-radius:50%;background:var(--raised,#171512)}.ds-vs::before{top:-10px}.ds-vs::after{bottom:-10px}.ds-vs span{font:400 2.25rem \"Auttera\",cursive;transform:rotate(-90deg);white-space:nowrap}"
+    },
+    {
+      "name": "Toast",
+      "kind": "custom",
+      "refersTo": "toast",
+      "description": "Paper status slip at the bottom; slides up, opacity only under reduced motion.",
+      "html": "<div class=\"ds-toast\" role=\"status\">Call the counter on [Phone]</div>",
+      "css": ".ds-toast{width:min(440px,calc(100% - 32px));padding:14px 18px;border-radius:16px;background:var(--paper,#F5F1E8);color:var(--on-gold,#0B0A09);font:500 1rem/1.4 \"Inter\",sans-serif;text-align:center;animation:ds-toast-in 260ms cubic-bezier(0.23,1,0.32,1)}@keyframes ds-toast-in{from{transform:translateY(calc(100% + 40px));opacity:0}to{transform:none;opacity:1}}@media (prefers-reduced-motion:reduce){.ds-toast{animation:ds-toast-fade 200ms ease}@keyframes ds-toast-fade{from{opacity:0}to{opacity:1}}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Counter in Your Pocket",
+    "overview": "The system is a trade counter seen from the van cab: a near-black ground, warm off-white type, and DC gold used the way a tape measure uses it, as rulings, ticks, numerals and dimension lines. Big Barlow Condensed capitals do the shouting, Barlow carries every number a fitter compares, Inter does the plain talking, and Auttera adds the odd pencil mark, as if someone at the counter jotted sizes on an offcut.\n\nLayout is open and ruled, not boxed. Sections sit straight on the dark ground and are separated by hairlines, gold top rules and the tape-measure ruler. The only framed things are things that are objects in real life: the price screen, the voucher, the sticker, the chat bubbles and the photos. The page ends on one solid band of gold. Density is generous on phones (designed at 390px) and opens into asymmetric two-column grids on desktop.\n\nMotion is almost absent. Controls give a small press response, the toast slides in, and the steam off the mug is the only thing that moves on its own.",
+    "keyCharacteristics": [
+      "Near-black van-cab ground (`van-cab-black`) with warm off-white text; dark colour scheme only.",
+      "DC gold as lines, ticks and numerals; solid gold reserved for the main action, the tier pill, the Trade Gold tier and the closing band.",
+      "Barlow Condensed 700 capitals for headlines; Barlow 600 tabular lining figures for prices and numerals; Inter for body; Auttera for short hand-written accents.",
+      "Hairlines instead of cards; frames only for real-world objects.",
+      "Real trade photos, rounded inline or full-bleed with fades.",
+      "Press feedback only; the steam is the only loop."
+    ],
+    "rules": [
+      {
+        "name": "The Tape-Measure Rule",
+        "body": "Gold is a line, a tick or a numeral first. Solid gold fills are limited to the main action, the tier pill, the top tier, text selection and the one closing band.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Band Rule",
+        "body": "A page ends on a single solid gold band holding its call to action. There is never a second gold band.",
+        "section": "colors"
+      },
+      {
+        "name": "The AA Floor Rule",
+        "body": "Every text pairing measures at least 4.5:1. The lowest shipped text pairing is 5.2:1 (secondary text on gold). New pairings get measured before they ship.",
+        "section": "colors"
+      },
+      {
+        "name": "The Capitals Rule",
+        "body": "Barlow Condensed is only ever 700, only ever in capitals, only ever a headline or a name.",
+        "section": "typography"
+      },
+      {
+        "name": "The Figures Rule",
+        "body": "Any number someone compares (prices, quantities, step numbers, minutes) is set in Barlow with tabular lining figures.",
+        "section": "typography"
+      },
+      {
+        "name": "The Pencil Rule",
+        "body": "Auttera is for short hand-written accents of one to three words: a script headline line, pencil notes, dimension labels, the voucher stub, the sticker. Never body text, never a button, never the only carrier of information a fitter needs.",
+        "section": "typography"
+      },
+      {
+        "name": "The 16px Floor Rule",
+        "body": "Body and supporting text is at least 1rem (16px).",
+        "section": "typography"
+      },
+      {
+        "name": "The Real Object Rule",
+        "body": "Only things that exist as objects in life get a frame, radius and shadow: screens, vouchers, stickers, chat bubbles, photos. Everything else sits flat on hairlines.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep every tap target at least 44px tall (the `tap` spacing token), including text links.",
+      "Do keep body and supporting text at 16px or more and every text pairing at WCAG AA (4.5:1) or better, measured.",
+      "Do use one gold primary button per screen, and end the page on one gold band with an Ink button.",
+      "Do separate content with hairlines, gold top rules, the ruler or a change of ground.",
+      "Do set every comparable number in Barlow 600 with tabular lining figures.",
+      "Do limit press feedback to scale 0.97 and a colour change, and gate hover styles to fine pointers.",
+      "Do ship photos as WebP plus JPG at 800px and full size, lazy-loaded, with width and height set.",
+      "Do write in British English, in short sentences, with no em dashes. Unknown facts stay as visible [square bracket] placeholders, such as [Phone] or [7:30am].",
+      "Do honour reduced motion, reduced transparency and higher contrast as described above."
+    ],
+    "donts": [
+      "Don't wrap sections or lists in rounded cards. Frames, radius and shadow belong only to real-world objects.",
+      "Don't add eyebrow labels or small kicker text above headlines.",
+      "Don't set Barlow Condensed in lower case or at any weight but 700.",
+      "Don't use Auttera for body copy, buttons or anything a fitter needs to read to act.",
+      "Don't animate anything except the tea steam.",
+      "Don't use stock photos, real manufacturer names, logos or club badges.",
+      "Don't add a second solid gold band or fill large areas with gold.",
+      "Don't invent quotes, reviews, prices or stock figures; show sample data as examples."
+    ]
+  }
+}

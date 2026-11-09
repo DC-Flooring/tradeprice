@@ -244,7 +244,7 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
   transform: rotate(10deg);
   box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.7);
 }
-.sticker__top { font-size: 0.6875rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
+.sticker__top { font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
 .sticker__script { color: var(--on-gold); font-size: 1.5rem; margin-top: 2px; }
 
 
