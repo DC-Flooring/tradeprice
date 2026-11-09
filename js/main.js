@@ -9,13 +9,37 @@
   var toast = document.getElementById('toast');
   var timer;
 
+  var remaining = 0;
+  var startedAt = 0;
+
+  function hide() { toast.classList.remove('is-on'); }
+  function startTimer(ms) {
+    clearTimeout(timer);
+    remaining = ms;
+    startedAt = Date.now();
+    timer = setTimeout(hide, ms);
+  }
+
   function show(message) {
     if (!toast) return;
     toast.textContent = message;
     toast.classList.add('is-on');
-    clearTimeout(timer);
-    timer = setTimeout(function () { toast.classList.remove('is-on'); }, 3200);
+    startTimer(3200);
   }
+
+  // Pause the toast while the tab is hidden, so it is still there when the fitter comes back.
+  document.addEventListener('visibilitychange', function () {
+    if (!toast || !toast.classList.contains('is-on')) return;
+    if (document.hidden) {
+      clearTimeout(timer);
+      remaining = Math.max(0, remaining - (Date.now() - startedAt));
+    } else {
+      startTimer(Math.max(remaining, 1200));
+    }
+  });
+
+  // Tap the toast to dismiss it straight away.
+  if (toast) toast.addEventListener('click', hide);
 
   document.addEventListener('click', function (event) {
     var link = event.target.closest('[data-todo]');
