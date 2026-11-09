@@ -10,13 +10,15 @@ Mobile web first. Most use happens on a phone; the desktop layout must still wor
 
 ## Users
 
-**Primary:** flooring fitters and small builders, on their phone before or between jobs. They want to check their own trade price and whether a product is in stock, and get a roll cut so it is ready to collect from DC Flooring's trade counter in Middlesbrough.
+**Primary:** flooring fitters, builders and other trades across the North East (Middlesbrough, Stockton, Hartlepool, Darlington). Mostly men aged from their late 20s to their mid 50s, using a phone in the van or on site. They want speed: their price, whether it is in stock, and whether it can be cut ready. They want plain, simple language and short lines, with no jargon or marketing fluff.
 
 **Secondary:** DC Flooring counter staff. They review trade account applications, approve accounts, set a customer's tier and add walk-in customers (`demo/staff.html`).
 
 ## Product Purpose
 
-This is a trade price site and app for DC Flooring, an independent flooring supplier serving the trade. A signed-in trade customer sees prices for their tier across carpet, vinyl, LVT, laminate, underlay and accessories, checks stock, and arranges collection.
+This is the DC Flooring trade site (trade.dcflooring.co.uk), a mobile-first web app for trade customers of DC Flooring, a trade counter and showroom in Middlesbrough selling carpet, vinyl, LVT, laminate, underlay and accessories. It shows each fitter their trade price for their tier, stock, ring-ahead cutting, member vouchers and quick reorder.
+
+**Home page goals:** first, get new fitters to sign up for a free trade account. Second, let existing customers sign in.
 
 Success means a fitter can find out "what does it cost me, is it in, can it be cut today" in seconds, from the van, without phoning or making a wasted trip.
 
@@ -39,15 +41,19 @@ The design reference sums this up as "Trade prices. In your pocket." and "Measur
 
 - **Current state:** a clickable static demo in `demo/` (HTML, CSS, vanilla JS, localStorage). All data is invented, every page has `noindex`, and every page shows a "Demo: sample data only" banner.
 - **Planned backend:** Supabase for accounts, ranges, colourways and tier prices, plus a Lightspeed sync for stock and prices. Pages read prices only through `getPricesForTier()` and `getRange()` (`demo/app.js`, marked `SUPABASE LATER`). Tier prices must never leak across tiers.
+- **Sign up:** takes about 2 minutes. Staff then phone the applicant to approve the account before prices unlock.
 - **Login:** customers sign in with a code sent by text message. There are no passwords.
-- **Account checks: undecided.** The demo has staff review and approve applications. The design reference says "we give you a ring", but whether every account is checked by phone is not confirmed.
 - **Fonts:** Singel and Auttera are Fontspring demo fonts. They need web licences before launch.
 - **Tap targets** are at least 44px, and there is no horizontal scroll at 390px. `demo/tests/journey.js` enforces both.
 
 ## Brand Commitments
 
-- **Name:** DC Flooring (company name DC Flooring Ltd). The logo is at `design/dc-logo.png` and `demo/assets/logo.png`.
-- **Voice:** plain, direct, local trade-counter talk in UK English. Examples from the approved reference: "Quicker than a brew.", "A proper local trade counter.", "Two minutes now saves you a wasted trip later."
+- **Name:** DC Flooring (company name DC Flooring Ltd). The logo is white brush lettering with "Carpet, vinyl & more" in gold, at `design/dc-logo.png` and `demo/assets/logo.png`.
+- **Colour (binding):** black background `#0B0A09` with DC gold `#B8924A`.
+- **Type (binding):** headlines in Singel, hand-written accents in Auttera (used sparingly), numbers and prices in Barlow, body text in Inter.
+- **Feel (binding):** a confident local trade business, not a generic template. Easy to scan, generous space, one clear action per screen. No boxes around everything and no repetitive section layouts.
+- **Writing rules:** British English, no em dashes, short sentences.
+- **Voice:** plain, direct, local trade-counter talk. Examples from the approved reference: "Quicker than a brew.", "A proper local trade counter.", "Two minutes now saves you a wasted trip later."
 - **Approved home screen reference:** `design/Home.dc.html`, with a render at `design/home-screenshot.png`. It is the agreed basis for the home screen rebuild.
 
 ## Evidence on Hand
