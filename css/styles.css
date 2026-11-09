@@ -35,7 +35,7 @@
   --ok: #8FD18F;           /* in stock: 10:1 on --raised */
   --pencil: #C9C1B0;       /* hand-written notes: 11:1 on --bg */
   --tea: #B07A3E;          /* mug ring stain */
-  --chat-out: #0F5A45;     /* outgoing bubble: off-white text 8:1 */
+  --chat-out: #0F5A45;     /* outgoing bubble: off-white text 7.3:1 */
   --chat-in: #24211D;      /* incoming bubble */
 
   /* Type */
@@ -248,15 +248,6 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
 .sticker__top { font-size: 0.6875rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
 .sticker__script { color: var(--on-gold); font-size: 1.5rem; margin-top: 2px; }
 
-/* One authored moment: the sticker is stamped on. It starts visible and only settles. */
-@media (prefers-reduced-motion: no-preference) {
-  .sticker { animation: stamp 420ms linear 250ms backwards; }
-  @keyframes stamp {
-    0% { transform: rotate(-4deg) scale(1.3); animation-timing-function: cubic-bezier(0.32, 0.72, 0, 1); }
-    45% { transform: rotate(11deg) scale(0.97); animation-timing-function: var(--ease-out); }
-    100% { transform: rotate(10deg) scale(1); }
-  }
-}
 
 /* ---------- Sections ---------- */
 .section { padding: 64px 0; }
@@ -268,7 +259,7 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
 .features__title { margin-bottom: 28px; }
 .features__list li { padding: 18px 0; border-top: 1px solid var(--border); }
 .features__list li:last-child { border-bottom: 1px solid var(--border); }
-.features__list h3 { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 1.625rem; line-height: 1.05; letter-spacing: 0.005em; }
+.features__list h3 { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 1.625rem; line-height: 1.05; letter-spacing: 0.02em; }
 .features__list p { margin-top: 4px; color: var(--text-2); }
 
 /* Signing up: big numerals hung off one gold line */
@@ -301,7 +292,7 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
 .stair--1 { min-height: 172px; background: #2A2622; }
 .stair--2 { min-height: 232px; background: #4A3D27; }
 .stair--3 { min-height: 300px; background: var(--gold); color: var(--on-gold); }
-.stair__name { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 1.375rem; line-height: 1; letter-spacing: 0.005em; }
+.stair__name { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 1.375rem; line-height: 1; letter-spacing: 0.02em; }
 .stair__who { font-size: 1rem; line-height: 1.35; color: var(--text-3); }
 .stair--3 .stair__who { color: var(--on-gold-2); }
 .stair__deal { margin-top: auto; font-size: 1rem; font-weight: 600; color: var(--text-3); }
@@ -395,16 +386,16 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
 .defs { position: absolute; width: 0; height: 0; overflow: hidden; }
 /* Brush-pen illustrations: off-white ink, gold details, always decorative */
 .ill { display: block; overflow: visible; pointer-events: none; }
-.ill path, .ill circle { fill: none; stroke: var(--text); stroke-width: 3.6; stroke-linecap: round; stroke-linejoin: round; }
-.ill .thin { stroke-width: 2.3; }
+.ill path, .ill circle { fill: none; stroke: var(--text); stroke-width: 2.4px; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
+.ill .thin { stroke-width: 1.6px; }
 .ill .g { stroke: var(--gold); }
 .ill .fill-g { fill: var(--gold); stroke: none; opacity: 0.85; }
 .ill .dot-g { fill: var(--gold); stroke: none; }
 .spot { position: absolute; }
 
 /* Pencil notes on the offcut, above the price screen */
-.notes { display: flex; align-items: flex-end; gap: 6px; margin: 0 0 22px 4px; padding-right: 96px; }
-.note { font-family: var(--font-script); color: var(--pencil); font-size: 1.625rem; line-height: 1; letter-spacing: 0.06em; white-space: nowrap; }
+.notes { display: flex; align-items: flex-end; gap: 6px; margin: 0 0 34px 4px; padding-right: 96px; }
+.note { font-family: var(--font-script); color: var(--pencil); font-size: 1.5rem; line-height: 1; letter-spacing: 0.06em; white-space: nowrap; }
 .note--a { transform: rotate(-4deg); }
 .note--b { margin-left: auto; transform: rotate(3deg) translateY(-10px); }
 .note__arrow { width: 44px; height: 30px; flex: none; transform: translateY(12px); }
@@ -427,7 +418,7 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
 
 /* Ring ahead: a real-looking chat, not a screenshot */
 .chat { display: grid; gap: 6px; margin-top: 14px; max-width: 360px; }
-.msg {
+.chat .msg {
   position: relative; max-width: 88%; padding: 7px 10px 8px 12px; border-radius: 10px;
   font-size: 1rem; line-height: 1.35; color: var(--text);
 }
@@ -448,8 +439,10 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
 
 /* Quicker than a brew: a mug ring left on the page, and the brew itself */
 .steps__head { position: relative; }
-.steps__head > :not(.tea-ring) { position: relative; }
-.tea-ring { position: absolute; width: 150px; right: -18px; top: -44px; opacity: 0.18; pointer-events: none; }
+/* The ring sits just past the end of the heading, never under the words */
+.steps__title { position: relative; display: inline-block; }
+.steps__title .h2 { position: relative; }
+.tea-ring { position: absolute; width: 112px; right: -6px; top: -40px; opacity: 0.18; pointer-events: none; }
 .tea-ring circle, .tea-ring path { fill: none; stroke: var(--tea); stroke-linecap: round; }
 .tea-ring .ring-a { stroke-width: 6; }
 .tea-ring .ring-b { stroke-width: 2.5; }
@@ -521,7 +514,7 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
   .section { padding: 112px 0; }
   .features { padding-top: 88px; }
   .features__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px; align-items: start; }
-  .features__title { position: sticky; top: 40px; }
+  .features__head { position: sticky; top: 112px; }
   .features__list li { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: baseline; padding: 24px 0; }
   .features__list h3 { font-size: 1.875rem; }
   .features__list p { margin: 0; font-size: 1.0625rem; }
@@ -549,7 +542,7 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
   .closer { padding: 112px 0 120px; }
   .features__title { padding-right: 0; max-width: 12ch; }
   .spot--knife { position: static; width: 150px; margin: 36px 0 0 8px; }
-  .tea-ring { width: 190px; right: auto; left: 540px; top: -54px; }
+  .tea-ring { width: 170px; right: auto; left: calc(100% + 12px); top: -44px; }
   .kettle { margin-top: 56px; }
   .ill--mug { width: 76px; }
   .kettle__line { font-size: 1.875rem; }

@@ -50,7 +50,8 @@ The design reference sums this up as "Trade prices. In your pocket." and "Measur
 
 - **Name:** DC Flooring (company name DC Flooring Ltd). The logo is white brush lettering with "Carpet, vinyl & more" in gold, at `design/dc-logo.png` and `demo/assets/logo.png`.
 - **Colour (binding):** black background `#0B0A09` with DC gold `#B8924A`.
-- **Type (binding):** headlines in Singel, hand-written accents in Auttera (used sparingly), numbers and prices in Barlow, body text in Inter.
+- **Type (binding):** headlines in Barlow Condensed 700, set in capitals; hand-written accents in Auttera; numbers and prices in Barlow; body text in Inter. (Singel was dropped in November 2026.)
+- **Personality (binding):** restrained, trade-specific touches for fitters (football, tea, the van): hand-drawn tools, pencil measurements, a tea ring. No real brand names, logos or club badges. Nothing animated except the tea steam, which respects reduced motion.
 - **Feel (binding):** a confident local trade business, not a generic template. Easy to scan, generous space, one clear action per screen. No boxes around everything and no repetitive section layouts.
 - **Writing rules:** British English, no em dashes, short sentences.
 - **Voice:** plain, direct, local trade-counter talk. Examples from the approved reference: "Quicker than a brew.", "A proper local trade counter.", "Two minutes now saves you a wasted trip later."
