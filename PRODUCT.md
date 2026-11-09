@@ -6,13 +6,13 @@
 
 web
 
-Mobile web first. Most use happens on a phone; the desktop layout must still work (the demo is checked at 390px and 1280px).
+Mobile web first. Most use happens on a phone; the desktop layout must still work (pages are checked at 390px and 1280px).
 
 ## Users
 
 **Primary:** flooring fitters, builders and other trades across the North East (Middlesbrough, Stockton, Hartlepool, Darlington). Mostly men aged from their late 20s to their mid 50s, using a phone in the van or on site. They want speed: their price, whether it is in stock, and whether it can be cut ready. They want plain, simple language and short lines, with no jargon or marketing fluff.
 
-**Secondary:** DC Flooring counter staff. They review trade account applications, approve accounts, set a customer's tier and add walk-in customers (`demo/staff.html`).
+**Secondary:** DC Flooring counter staff. They review trade account applications, approve accounts, set a customer's tier and add walk-in customers. The staff screens are still to be rebuilt (the v1 demo version is kept in the `v1-archive` tag).
 
 ## Product Purpose
 
@@ -33,25 +33,25 @@ The design reference sums this up as "Trade prices. In your pocket." and "Measur
 
 - Customers use it on a phone, often in a van or on site, sometimes with poor signal, and often with their mind on a job.
 - Customers collect from a physical trade counter in Middlesbrough. Walk-in customers exist and staff can add them.
-- Tiers are Trade, Trade Plus and Trade Gold. Everyone starts on Trade. Staff grant the higher tiers, and prices drop as customers move up. The spend thresholds are still to be agreed (the demo uses sample figures).
+- Tiers are Trade, Trade Plus and Trade Gold. Everyone starts on Trade. Staff grant the higher tiers, and prices drop as customers move up. The spend thresholds are still to be agreed (the v1 demo used sample figures).
 - Prices are shown ex VAT, per unit (m², roll or each). Logged-out visitors only ever see Trade-level sample prices.
 - Products are organised by range (with colourways), not by SKU.
 
 ## Capabilities and Constraints
 
-- **Current state:** a clickable static demo in `demo/` (HTML, CSS, vanilla JS, localStorage). All data is invented, every page has `noindex`, and every page shows a "Demo: sample data only" banner.
-- **Planned backend:** Supabase for accounts, ranges, colourways and tier prices, plus a Lightspeed sync for stock and prices. Pages read prices only through `getPricesForTier()` and `getRange()` (`demo/app.js`, marked `SUPABASE LATER`). Tier prices must never leak across tiers.
+- **Current state:** the home page is rebuilt as plain HTML, CSS and JS at the repo root (`index.html`, `css/styles.css`, `js/main.js`), with `noindex`. Sign up (`apply.html`), sign in (`login.html`), the price list and the staff screens are still to be built; the earlier clickable demo is kept in the `v1-archive` tag.
+- **Planned backend:** Supabase for accounts, ranges, colourways and tier prices, plus a Lightspeed sync for stock and prices. Pages read prices only through `getPricesForTier()` and `getRange()` (in the v1 demo's `app.js`, marked `SUPABASE LATER`; carry the same rule into the rebuild). Tier prices must never leak across tiers.
 - **Sign up:** takes about 2 minutes. Staff then phone the applicant to approve the account before prices unlock.
 - **Login:** customers sign in with a code sent by text message. There are no passwords.
-- **Fonts:** Singel and Auttera are Fontspring demo fonts. They need web licences before launch.
-- **Tap targets** are at least 44px, and there is no horizontal scroll at 390px. `demo/tests/journey.js` enforces both.
+- **Fonts:** Auttera is a Fontspring demo font and needs a web licence before launch. Barlow, Barlow Condensed and Inter come from Google Fonts.
+- **Tap targets** are at least 44px, and there is no horizontal scroll at 390px. The v1 demo's `tests/journey.js` enforced both; the rebuild needs its own checks.
 
 ## Brand Commitments
 
-- **Name:** DC Flooring (company name DC Flooring Ltd). The logo is white brush lettering with "Carpet, vinyl & more" in gold, at `design/dc-logo.png` and `demo/assets/logo.png`.
+- **Name:** DC Flooring (company name DC Flooring Ltd). The logo is white brush lettering with "Carpet, vinyl & more" in gold, at `design/dc-logo.png` and `assets/logo.png`.
 - **Colour (binding):** black background `#0B0A09` with DC gold `#B8924A`.
 - **Type (binding):** headlines in Barlow Condensed 700, set in capitals; hand-written accents in Auttera; numbers and prices in Barlow; body text in Inter. (Singel was dropped in November 2026.)
-- **Personality (binding):** restrained, trade-specific touches for fitters (football, tea, the van): hand-drawn tools, pencil measurements, a tea ring. No real brand names, logos or club badges. Nothing animated except the tea steam, which respects reduced motion.
+- **Personality (binding):** restrained, trade-specific touches for fitters (football, tea, the van): real photos from the trade (a knee kicker on carpet, a brew on the van dashboard), a hand-drawn mug, pencil measurements and dimension lines in Auttera, and a WhatsApp-style chat. No hand-drawn tool doodles. No real brand names, logos or club badges. Nothing animated except the tea steam, which respects reduced motion.
 - **Feel (binding):** a confident local trade business, not a generic template. Easy to scan, generous space, one clear action per screen. No boxes around everything and no repetitive section layouts.
 - **Writing rules:** British English, no em dashes, short sentences.
 - **Voice:** plain, direct, local trade-counter talk. Examples from the approved reference: "Quicker than a brew.", "A proper local trade counter.", "Two minutes now saves you a wasted trip later."
@@ -59,8 +59,9 @@ The design reference sums this up as "Trade prices. In your pocket." and "Measur
 
 ## Evidence on Hand
 
-- **Sample data only.** All ranges, prices, customers, offers and guides in `demo/data.js` and `demo/assets/data/ranges.js` are invented, and no real manufacturer is named.
-- **Placeholders still to be supplied:** address, phone, opening hours, company and VAT numbers, offer wording and dates, the approval turnaround time, and real product photos (the range heroes in `demo/assets/ranges/` are placeholder SVGs). A photo of the counter and staff is also needed.
+- **Sample data only.** The prices, products and offer shown on the home page are examples, labelled as such, and no real manufacturer is named.
+- **Placeholders still to be supplied:** address, phone, opening hours, company and VAT numbers, offer wording and dates, the approval turnaround time, and real product photos (the price-preview swatches are CSS stand-ins until then). A photo of the counter and staff is also needed.
+- **Photos on hand:** `assets/img/kicker-*` (knee kicker on a fitted carpet) and `assets/img/tea-*` (a brew on the van dashboard), supplied by the business.
 - **No testimonial yet.** The reference has a slot for "a real line from a fitter". Never invent a quote, customer, review or stock figure.
 
 ## Product Principles
@@ -73,4 +74,4 @@ The design reference sums this up as "Trade prices. In your pocket." and "Measur
 
 ## Accessibility & Inclusion
 
-Customers use this outdoors on a phone, in bright light, sometimes in gloves, and in a hurry. Keep tap targets at least 44px, keep contrast strong, make prices and stock status readable at a glance, and support keyboard and screen reader use (the demo already has a skip link and ARIA). Aim for WCAG 2.1 AA.
+Customers use this outdoors on a phone, in bright light, sometimes in gloves, and in a hurry. Keep tap targets at least 44px, keep contrast strong, make prices and stock status readable at a glance, and support keyboard and screen reader use (the home page has a skip link and ARIA labels). Aim for WCAG 2.1 AA.

@@ -460,7 +460,7 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
 
 /* Kicker banner: full width just above the trade counter section */
 .banner { position: relative; margin: 0; aspect-ratio: 4 / 3; overflow: hidden; background: var(--bg); }
-.banner img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 66% 60%; }
+.banner img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 66% 60%; filter: sepia(0.16) saturate(1.05); }
 .banner::before, .banner::after { content: ""; position: absolute; left: 0; right: 0; height: 24%; pointer-events: none; }
 .banner::before { top: 0; background: linear-gradient(var(--raised), rgba(23, 21, 18, 0)); }
 .banner::after { bottom: 0; background: linear-gradient(rgba(11, 10, 9, 0), var(--bg)); }
@@ -475,7 +475,10 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
 }
 .toast:not(.is-on) { pointer-events: none; }
 .toast.is-on { transform: translate(-50%, 0); opacity: 1; transition: transform 260ms var(--ease-out), opacity 200ms ease; }
-@media (prefers-reduced-motion: reduce) { .toast, .toast.is-on { transform: translate(-50%, 0); transition: opacity 200ms ease; } }
+@media (prefers-reduced-motion: reduce) {
+  .toast, .toast.is-on { transform: translate(-50%, 0); transition: opacity 200ms ease; }
+  .btn:active, .brand:active, .action:active { transform: none; }
+}
 
 @media (min-width: 600px) {
   .stairs { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: end; min-height: 300px; }
@@ -495,7 +498,7 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
   .preview { max-width: 520px; }
   .why__list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .visit { grid-template-columns: 1.1fr 1fr; align-items: center; gap: 32px; }
-  .banner { aspect-ratio: 16 / 9; max-height: 760px; }
+  .banner { aspect-ratio: 16 / 9; }
   .stairs { min-height: 340px; }
   .stair--1 { min-height: 190px; }
   .stair--2 { min-height: 264px; }
