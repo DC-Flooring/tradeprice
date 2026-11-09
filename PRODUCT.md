@@ -41,7 +41,9 @@ The design reference sums this up as "Trade prices. In your pocket." and "Measur
 
 - **Current state:** the home page is rebuilt as plain HTML, CSS and JS at the repo root (`index.html`, `css/styles.css`, `js/main.js`), with `noindex`. Sign up (`apply.html`), sign in (`login.html`), the price list and the staff screens are still to be built; the earlier clickable demo is kept in the `v1-archive` tag.
 - **Planned backend:** Supabase for accounts, ranges, colourways and tier prices, plus a Lightspeed sync for stock and prices. Pages read prices only through `getPricesForTier()` and `getRange()` (in the v1 demo's `app.js`, marked `SUPABASE LATER`; carry the same rule into the rebuild). Tier prices must never leak across tiers.
-- **Sign up:** takes about 2 minutes. Staff then phone the applicant to approve the account before prices unlock.
+- **Sign up:** takes about 2 minutes (`apply.html`). Accounts are approved within 2 working days, then the customer is texted a login. Staff phone the applicant to check they are in the trade before prices unlock.
+- **ID check (planned):** applicants can verify photo ID and a selfie with Didit to be approved quicker, or bring photo ID to the counter instead. In the demo the Didit step is a placeholder.
+- **Consent:** the trade account terms are required; email offers and text offers are separate opt-ins, unticked by default.
 - **Login:** customers sign in with a code sent by text message. There are no passwords.
 - **Fonts:** Auttera is a Fontspring demo font and needs a web licence before launch. Barlow, Barlow Condensed and Inter come from Google Fonts.
 - **Tap targets** are at least 44px, and there is no horizontal scroll at 390px. The v1 demo's `tests/journey.js` enforced both; the rebuild needs its own checks.
@@ -60,7 +62,7 @@ The design reference sums this up as "Trade prices. In your pocket." and "Measur
 ## Evidence on Hand
 
 - **Sample data only.** The prices, products and offer shown on the home page are examples, labelled as such, and no real manufacturer is named.
-- **Placeholders still to be supplied:** address, phone, opening hours, company and VAT numbers, offer wording and dates, the approval turnaround time, and real product photos (the price-preview swatches are CSS stand-ins until then). A photo of the counter and staff is also needed.
+- **Placeholders still to be supplied:** address, phone, opening hours, company and VAT numbers, offer wording and dates, the trade account terms page, and real product photos (the price-preview swatches are CSS stand-ins until then). A photo of the counter and staff is also needed.
 - **Photos on hand:** `assets/img/kicker-*` (knee kicker on a fitted carpet) and `assets/img/tea-*` (a brew on the van dashboard), supplied by the business.
 - **No testimonial yet.** The reference has a slot for "a real line from a fitter". Never invent a quote, customer, review or stock figure.
 

@@ -23,6 +23,8 @@ colors:
   chat-in: "#24211D"
   tier-plus: "#4A3D27"
   tier-plus-deal: "#E2C58A"
+  error: "#F2836F"
+  field-edge: "#6B6459"
 typography:
   display:
     fontFamily: "Barlow Condensed, Arial Narrow, Roboto Condensed, sans-serif"
@@ -411,6 +413,15 @@ Opens with the ruler, then a centred column: the logo at 60px and the legal line
 
 ### Toast
 A paper slip fixed at the bottom centre, up to 440px wide, 16px radius, black Inter 500 text, a polite live region. Slides up from below in 260ms with the strong ease-out and fades in over 200ms; leaves in 180ms. Stays for 3.2 seconds, pauses while the tab is hidden, and dismisses on tap. Reduced motion: no slide, opacity only.
+
+### Forms (sign up, sign in, account screens)
+- **Layout:** one narrow column, max 600px, one field per row. Page title in Barlow Condensed capitals (clamp 2.75 to 4.25rem), a lede in `text-lede`, then the form with 24px between fields.
+- **Fields:** label in Inter 600 at 1.0625rem; optional hint in secondary text above the input; input or select 56px tall, `raised` fill, 1px `field-edge` border (3.1:1, so the edge is visible), 12px radius, 17px text so phones never zoom on focus. Focus: gold border plus a soft gold ring. Selects use a gold chevron.
+- **Keyboards and autofill:** `type="tel"` with `inputmode="tel"` for mobiles, `type="email"` for email, and the matching `autocomplete` value on every field (name, organization, tel, email, postal-code).
+- **Errors:** validate on submit, show the message under the field in `error` (#F2836F, 7.2:1 on raised) with a small round "!" mark, set `aria-invalid`, link the message with `aria-describedby`, focus the first problem, and clear each message as soon as the person edits that field. Messages say what to do, with an example where it helps ("Enter a UK mobile number, like 07700 900123").
+- **Checkboxes:** 26px box with a 6px radius and a `field-edge` border, gold with a black tick when checked; the whole row is the 48px target. Consent boxes are always separate and unticked by default.
+- **Submit:** the large gold button, full width, with a short note under it in secondary text.
+- **Received screen:** swaps in on the same page (fade and 10px rise over 280ms; fade only with reduced motion), focus moves to its heading. A three-step tracker (32px dots joined by a 2px line, gold and ticked when done) shows where the application is. Placeholder panels for services not built yet are `paper` slips that open straight down from their button.
 
 ### Photography
 - Real photos from the trade only, supplied by the business. No stock imagery.
