@@ -1,0 +1,4 @@
+# Impeccable: personal hook settings and the platform-specific engine binary
+# (reinstall with: npx impeccable install --project)
+.claude/settings.local.json
+.claude/skills/impeccable/scripts/bin/
