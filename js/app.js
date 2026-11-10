@@ -25,16 +25,7 @@
   }
 
   A.loadProducts().then(function (products) {
-    index = products.map(function (p) {
-      var optionValues = [];
-      Object.keys(p.options || {}).forEach(function (k) { optionValues = optionValues.concat(p.options[k]); });
-      return {
-        p: p,
-        name: p.name.toLowerCase(),
-        hay: [p.name, p.brand, p.category, p.subcategory, optionValues.join(' '), (p.skus || []).join(' ')].join(' ').toLowerCase(),
-        colours: (p.options && (p.options.Colour || p.options.Single)) || []
-      };
-    });
+    index = A.searchIndex(products);
     var rc = document.querySelector('[data-range-count]');
     if (rc) rc.textContent = products.length;
     if (input.value) run();
@@ -46,14 +37,7 @@
     var q = input.value.trim().toLowerCase();
     if (q.length < 2) { list.innerHTML = ''; count.textContent = ''; return; }
     var tokens = q.split(/\s+/);
-    var hits = index.filter(function (r) {
-      return tokens.every(function (t) { return r.hay.indexOf(t) > -1; });
-    });
-    hits.sort(function (a, b) {
-      var as = a.name.indexOf(q) === 0 ? 0 : a.name.indexOf(q) > -1 ? 1 : 2;
-      var bs = b.name.indexOf(q) === 0 ? 0 : b.name.indexOf(q) > -1 ? 1 : 2;
-      return as - bs;
-    });
+    var hits = A.search(index, q);
     var shown = hits.slice(0, 8);
     count.textContent = hits.length
       ? (hits.length === 1 ? '1 match' : hits.length + ' matches') + (hits.length > shown.length ? ', showing the first ' + shown.length : '')
@@ -70,7 +54,7 @@
       return '<li><a class="result" href="pricelist.html?range=' + encodeURIComponent(p.handle) + '">' +
         '<span class="result__main"><span class="result__name">' + esc(p.name) + '</span>' +
         '<span class="result__meta">' + esc(meta) + (colour ? ' · <span class="result__colour">' + esc(colour) + '</span>' : '') + '</span>' +
-        '<span class="result__stock' + (p.stock_status === 'in_stock' ? ' is-in' : '') + '">' + A.stockLabel(p.stock_status) + '</span></span>' +
+        '<span class="result__stock' + (A.inStock(p) ? ' is-in' : '') + '">' + A.stockLabel(p) + '</span></span>' +
         '<span class="result__price"><span class="num">' + (p.price_from ? '<small>from </small>' : '') + A.money(A.priceOf(p)) + '</span>' +
         '<span class="result__unit">' + esc(A.unitLabel(p.unit)) + '</span></span></a></li>';
     }).join('');

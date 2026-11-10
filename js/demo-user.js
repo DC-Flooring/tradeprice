@@ -47,9 +47,53 @@
     priceOf: function (product) { return product[this.tier().priceKey]; },
     unitLabel: function (unit) { return UNITS[unit] || unit; },
     money: function (n) { return '£' + Number(n).toFixed(2); },
-    // Lightspeed stock figures for the trade counter are not reliable yet,
-    // so the app only shows a simple status, never a number.
-    stockLabel: function (status) { return status === 'in_stock' ? 'In stock' : 'Ring to check'; },
+    // Stock: only ever "In stock" or "Ring to check", never a number.
+    // In stock means the trade counter figure is above zero; zero or a
+    // negative figure (common in the Lightspeed export) means ring to check.
+    inStock: function (product) { return Number(product.stock_trade_counter) > 0; },
+    stockLabel: function (product) { return this.inStock(product) ? 'In stock' : 'Ring to check'; },
+
+    // The counter's numbers live here, once. Swap the placeholders for the real numbers.
+    counter: {
+      phone: '[Phone]',
+      whatsapp: '[WhatsApp]',
+      telHref: function () { return 'tel:' + this.phone; },
+      whatsappHref: function (message) {
+        return 'https://wa.me/' + this.whatsapp + (message ? '?text=' + encodeURIComponent(message) : '');
+      }
+    },
+
+    // Search: one shared matcher for every signed-in page. Matches every word
+    // typed against name, category, brand, colours, sizes and product codes.
+    searchIndex: function (products) {
+      return products.map(function (p) {
+        var opts = [];
+        Object.keys(p.options || {}).forEach(function (k) { opts = opts.concat(p.options[k]); });
+        return {
+          p: p,
+          name: p.name.toLowerCase(),
+          hay: [p.name, p.category, p.subcategory, p.brand, opts.join(' '), (p.skus || []).join(' ')].join(' ').toLowerCase(),
+          colours: (p.options && (p.options.Colour || p.options.Single)) || []
+        };
+      });
+    },
+    search: function (index, query, category) {
+      var q = (query || '').trim().toLowerCase();
+      var tokens = q ? q.split(/\s+/) : [];
+      var hits = index.filter(function (r) {
+        if (category && r.p.category !== category) return false;
+        for (var i = 0; i < tokens.length; i++) if (r.hay.indexOf(tokens[i]) === -1) return false;
+        return true;
+      });
+      if (q) {
+        // Names that start with, then contain, the search come first; otherwise keep list order
+        var rank = function (r) { var at = r.name.indexOf(q); return at === 0 ? 0 : at > 0 ? 1 : 2; };
+        hits = hits.map(function (r, i) { return { r: r, k: rank(r), i: i }; })
+          .sort(function (a, b) { return a.k - b.k || a.i - b.i; })
+          .map(function (x) { return x.r; });
+      }
+      return hits;
+    },
     loadProducts: function () {
       if (!this._products) {
         this._products = fetch('data/products.json', { cache: 'no-cache' }).then(function (r) {

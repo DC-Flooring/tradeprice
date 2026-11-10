@@ -442,6 +442,15 @@ A paper slip fixed at the bottom centre, up to 440px wide, 16px radius, black In
 - **Trade card:** a full-screen sheet that slides up (420ms iOS sheet curve), closes with the Close button, Escape, or a swipe down that follows the finger, resists upward and closes on a flick. Reduced motion: a fade. The card is page black with a soft warm gradient, a 1px gold edge at 60%, and a 24px radius: logo, name in Barlow Condensed capitals, business, the account number very large in Barlow, a solid gold tier badge, then a Code 128 barcode on a `barcode-white` panel with at least 32px of white either side for the scanner's quiet zone, "Show this at the counter", and the gold ruler. The screen is kept awake while it is open where the browser allows.
 - **Home screen prompt:** a raised slip shown once, with platform-specific steps, an Add button where the browser supports it, and a 44px dismiss that is remembered.
 
+### Price list (pricelist.html)
+- **Job:** answer "what is my price on X, and is it in stock?" in under 10 seconds, one-handed.
+- **Head:** "Price list" in Barlow Condensed capitals, with the tier line ("Trade Plus prices · ex VAT") in gold beside or under it.
+- **Sticky tools:** pinned under the header with a solid black ground and a soft fade below. Search first (56px, with a 44px clear button), then a single row of category chips that scrolls sideways with a fade at the right edge. Chips are 44px pills with a match count; one is active (solid gold); tapping the active chip goes back to All. Search and chip combine, and counts follow the search.
+- **Rows:** hairline-ruled, 72px minimum, the whole row is the button. Left: name (Inter 600) and a stock word with a dot: "In stock" in green with a solid dot, "Ring to check" in secondary text with a hollow dot. Right: the account's tier price in Barlow 600 at 1.625rem, with "per m² · ex VAT" in small secondary text. "from" sits in front of the price when the range has a lowest price.
+- **Expanded row:** opens in place on `raised` (200ms grid-row reveal, closes in 160ms; instant with reduced motion). Only one open at a time; the tapped row stays still on screen when another closes. Facts as a hairline-ruled two-column list (only fields the data has), then Call and WhatsApp (WhatsApp pre-fills the range name), then a "Spec sheet" link only when the range has one.
+- **Paging:** 50 rows at a time with a full-width outline "Show more (n left)". Search and chips always filter the whole list first.
+- **States:** loading shows static placeholder rows (no shimmer); nothing found says what was searched, "Can't see it? Ring us." and gives Call and WhatsApp; a failed load says "Prices didn't load." with Try again.
+
 ### Photography
 - Real photos from the trade only, supplied by the business. No stock imagery.
 - Served as WebP with a JPG fallback inside `picture`, at 800px wide plus the full-size original, with `srcset`, `sizes`, explicit width and height, `loading="lazy"` and `decoding="async"`.
