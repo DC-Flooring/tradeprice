@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0B0A09">
+  <meta name="color-scheme" content="dark">
+  <title>Approvals | DC Staff</title>
+  <link rel="icon" href="../assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600&amp;family=Barlow+Condensed:wght@700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css?v=8">
+  <link rel="stylesheet" href="staff.css?v=2">
+</head>
+<body class="staff">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="st-bar">
+    <div class="st-bar__brand">
+      <img src="../assets/logo.png" alt="DC Flooring" width="659" height="183">
+      <span class="st-bar__area">Staff</span>
+    </div>
+    <div class="st-bar__user" id="userBar" hidden>
+      <span class="st-bar__who" id="whoAmI">Signed in</span>
+      <button class="btn btn--outline btn--sm" type="button" data-sign-out>Log out</button>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- 1. Staff log in: the same mobile + code flow as fitters (js/login-flow.js) -->
+    <section class="st-login" id="loginView" hidden>
+      <div class="narrow">
+        <h1 id="login-title" class="page-title" tabindex="-1">Staff log in</h1>
+        <p class="page-lede">Use the email and password the office set up for you.</p>
+        <p class="coming-soon" id="loginNote" hidden></p>
+        <form class="form" id="loginForm" novalidate aria-labelledby="login-title">
+          <div class="field">
+            <label for="f-email">Email</label>
+            <input id="f-email" name="email" type="email" inputmode="email" autocomplete="username" autocapitalize="off" spellcheck="false" required aria-describedby="e-email">
+            <p class="field__error" id="e-email" hidden></p>
+          </div>
+          <div class="field">
+            <label for="f-password">Password</label>
+            <div class="st-password">
+              <input id="f-password" name="password" type="password" autocomplete="current-password" required aria-describedby="e-password">
+              <button class="btn btn--outline st-password__toggle" type="button" id="showPassword" aria-controls="f-password" aria-pressed="false">Show</button>
+            </div>
+            <p class="field__error" id="e-password" hidden></p>
+          </div>
+          <p class="field__error" id="e-login" role="alert" hidden></p>
+          <button class="btn btn--gold btn--lg btn--block" type="submit" id="loginBtn">Log in</button>
+          <p class="st-login__help">Forgotten your password? Ask the office to reset it.</p>
+        </form>
+      </div>
+    </section>
+
+    <!-- 2. Signed in, but not in the staff table -->
+    <section class="st-login" id="notStaffView" hidden aria-labelledby="notstaff-title">
+      <div class="narrow">
+        <h1 class="page-title" id="notstaff-title">This area is for DC staff.</h1>
+        <p class="page-lede">You're signed in, but not as staff.</p>
+        <div class="status-actions">
+          <button class="btn btn--outline btn--lg btn--block" type="button" data-sign-out>Log out</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Could not check -->
+    <section class="st-login" id="errorView" hidden>
+      <div class="narrow">
+        <h1 class="page-title">Couldn't load.</h1>
+        <p class="page-lede" id="errorText">Check your connection and try again.</p>
+        <div class="status-actions">
+          <button class="btn btn--gold btn--lg btn--block" type="button" id="reloadBtn">Try again</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Approvals -->
+    <div class="st-app" id="appView" hidden>
+      <aside class="st-list" aria-label="Accounts">
+        <div class="st-list__head">
+          <h1 class="st-title">Approvals</h1>
+          <div class="st-filters" role="group" aria-label="Show">
+            <button class="st-filter is-on" type="button" data-filter="pending" aria-pressed="true">Pending <span class="st-count" id="pendingCount">0</span></button>
+            <button class="st-filter" type="button" data-filter="approved" aria-pressed="false">Approved</button>
+            <button class="st-filter" type="button" data-filter="rejected" aria-pressed="false">Rejected</button>
+            <button class="st-filter" type="button" data-filter="suspended" aria-pressed="false">Suspended</button>
+            <button class="st-filter" type="button" data-filter="all" aria-pressed="false">All</button>
+          </div>
+          <label class="sr-only" for="stSearch">Search accounts</label>
+          <input class="st-search" id="stSearch" type="search" placeholder="Search name, company, mobile or code" autocomplete="off" spellcheck="false">
+          <p class="st-list__count" id="listCount" role="status" aria-live="polite"></p>
+        </div>
+        <ul class="st-rows" id="rows"></ul>
+      </aside>
+
+      <section class="st-panel" id="panel" aria-label="Account details" tabindex="-1">
+        <p class="st-empty" id="panelEmpty">Pick an account on the left to see its details.</p>
+
+        <div id="panelBody" hidden>
+          <div class="st-panel__head">
+            <div>
+              <h2 class="st-name" id="pName"></h2>
+              <p class="st-company" id="pCompany"></p>
+            </div>
+            <span class="st-tag" id="pStatus"></span>
+          </div>
+
+          <dl class="st-facts">
+            <div><dt>Mobile</dt><dd class="num" id="pMobile"></dd></div>
+            <div><dt>Email</dt><dd id="pEmail"></dd></div>
+            <div><dt>Signed up</dt><dd id="pCreated"></dd></div>
+            <div><dt>Marketing</dt><dd id="pMarketing"></dd></div>
+            <div id="pApprovedRow"><dt>Approved</dt><dd id="pApproved"></dd></div>
+          </dl>
+
+          <form class="st-form" id="editForm" novalidate>
+            <div class="st-grid">
+              <div class="field">
+                <label for="ed-tier">Tier</label>
+                <select id="ed-tier" name="tier">
+                  <option value="trade">Trade</option>
+                  <option value="trade_plus">Trade Plus</option>
+                  <option value="trade_gold">Trade Gold</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="ed-discount">Discount override % <span class="field__optional">(optional)</span></label>
+                <input id="ed-discount" name="discount_override" type="text" inputmode="decimal" placeholder="None" autocomplete="off" aria-describedby="err-discount">
+                <p class="field__error" id="err-discount" hidden></p>
+              </div>
+              <div class="field st-code">
+                <label for="ed-code">Lightspeed code</label>
+                <div class="st-code__row">
+                  <input id="ed-code" name="lightspeed_code" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-describedby="err-code h-code">
+                  <button class="btn btn--outline" type="button" id="nextCodeBtn">Use next DC code</button>
+                </div>
+                <p class="field__hint" id="h-code">Create this customer in Lightspeed with this exact code.</p>
+                <p class="field__error" id="err-code" hidden></p>
+              </div>
+              <div class="field">
+                <label for="ed-idcheck">ID check</label>
+                <select id="ed-idcheck" name="id_check">
+                  <option value="not_started">Not started</option>
+                  <option value="passed">Passed</option>
+                  <option value="failed">Failed</option>
+                  <option value="skipped">Skipped</option>
+                </select>
+              </div>
+              <div class="field st-notes">
+                <label for="ed-notes">Staff notes <span class="field__optional">(internal)</span></label>
+                <textarea id="ed-notes" name="staff_notes" rows="3"></textarea>
+              </div>
+            </div>
+            <div class="st-actions">
+              <button class="btn btn--outline" type="submit" id="saveBtn">Save</button>
+              <span class="st-saved" id="savedMsg" role="status" aria-live="polite"></span>
+            </div>
+          </form>
+
+          <div class="st-status">
+            <p class="st-status__label">Status</p>
+            <div class="st-status__buttons" id="statusButtons"></div>
+            <p class="field__error" id="statusError" hidden></p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Quick confirm before any status change -->
+  <dialog class="st-confirm" id="confirm" aria-labelledby="confirmText">
+    <form method="dialog">
+      <p class="st-confirm__text" id="confirmText"></p>
+      <div class="st-confirm__buttons">
+        <button class="btn btn--outline" value="cancel" type="submit">Cancel</button>
+        <button class="btn btn--gold" value="ok" type="submit" id="confirmOk">Confirm</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="../config.js?v=8"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js" integrity="sha384-TcHRA3zBbn+Lexh5n+Oil4guNPOS3rjNDpGRAN46u/s/mB2IZ50ceC6TYDU2yvgK" crossorigin="anonymous"></script>
+  <script src="../js/session.js?v=8"></script>
+  <script src="../js/main.js?v=8" defer></script>
+  <script src="../js/otp.js?v=8" defer></script>
+  <script src="staff-api.js?v=2" defer></script>
+  <script src="staff.js?v=2" defer></script>
+</body>
+</html>
