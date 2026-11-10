@@ -9,6 +9,9 @@
    - The protect trigger (002) stops anyone but staff changing tier, status,
      lightspeed_code and the other protected columns.
    - am_i_staff() (003) only answers for the signed-in user.
+   - Staff notes live in public.account_staff and the change history in
+     public.account_history (005); only staff can read either. The history is
+     written by the database itself, never by this page.
    Staff log in with email and password; fitters use mobile + code elsewhere.
    Only the anon key from config.js is used. */
 (function () {
@@ -19,7 +22,7 @@
 
   // Only the columns the screen shows or edits
   var COLUMNS = 'id, created_at, first_name, last_name, company_name, mobile, email, tier, discount_override, status, ' +
-    'lightspeed_code, id_check, marketing_email, marketing_sms, marketing_consent_at, approved_by, approved_at, staff_notes';
+    'lightspeed_code, id_check, marketing_email, marketing_sms, marketing_consent_at, approved_by, approved_at';
 
   function kindOf(error) {
     if (!error) return 'other';
@@ -74,35 +77,67 @@
     return wrap(db().from('accounts').select(COLUMNS).eq('id', id).single());
   }
 
-  /* Save the fields staff can edit. Only these columns are ever sent. */
-  function saveAccount(id, fields) {
-    var row = {
+  function accountRow(fields) {
+    return {
       tier: fields.tier,
       discount_override: fields.discount_override,
       lightspeed_code: fields.lightspeed_code,
-      id_check: fields.id_check,
-      staff_notes: fields.staff_notes
+      id_check: fields.id_check
     };
-    return wrap(db().from('accounts').update(row).eq('id', id).select(COLUMNS).single());
+  }
+
+  /* Staff-only notes for one account ('' when there are none yet) */
+  function getNotes(id) {
+    return wrap(db().from('account_staff').select('notes').eq('account_id', id).maybeSingle()).then(function (r) {
+      return r.error ? r : { data: (r.data && r.data.notes) || '' };
+    });
+  }
+  function saveNotes(id, notes, staffUserId) {
+    return wrap(db().from('account_staff').upsert(
+      { account_id: id, notes: notes || null, updated_by: staffUserId, updated_at: new Date().toISOString() },
+      { onConflict: 'account_id' }));
+  }
+
+  /* After the account row is saved, save the notes too, but only if they changed.
+     Gives { data: account, notes } or, if only the notes failed, { data, notesError }. */
+  function withNotes(id, fields, staffUserId) {
+    return function (r) {
+      if (r.error || !fields || fields.notes === undefined || fields.notes === fields.notesBefore) return r;
+      return saveNotes(id, fields.notes, staffUserId).then(function (n) {
+        return n.error ? { data: r.data, notesError: n.error } : { data: r.data, notes: fields.notes || '' };
+      });
+    };
+  }
+
+  /* Save the fields staff can edit. Only these columns are ever sent. */
+  function saveAccount(id, fields, staffUserId) {
+    return wrap(db().from('accounts').update(accountRow(fields)).eq('id', id).select(COLUMNS).single())
+      .then(withNotes(id, fields, staffUserId));
   }
 
   /* Change status. Approving (or reactivating, which sets it back to approved) also
      records who approved it and when. fields: the editable fields as they are on
-     screen, saved in the same request so nothing typed is lost. */
+     screen, saved at the same time so nothing typed is lost. */
   function setStatus(id, status, staffUserId, fields) {
-    var row = fields ? {
-      tier: fields.tier,
-      discount_override: fields.discount_override,
-      lightspeed_code: fields.lightspeed_code,
-      id_check: fields.id_check,
-      staff_notes: fields.staff_notes
-    } : {};
+    var row = fields ? accountRow(fields) : {};
     row.status = status;
     if (status === 'approved') {
       row.approved_by = staffUserId;
       row.approved_at = new Date().toISOString();
     }
-    return wrap(db().from('accounts').update(row).eq('id', id).select(COLUMNS).single());
+    return wrap(db().from('accounts').update(row).eq('id', id).select(COLUMNS).single())
+      .then(withNotes(id, fields, staffUserId));
+  }
+
+  /* Everything that has happened to one account, newest first */
+  function getHistory(id) {
+    return wrap(db().from('account_history').select('id, changed_at, changed_by, action, changes')
+      .eq('account_id', id).order('changed_at', { ascending: false }).order('id', { ascending: false }).limit(200));
+  }
+
+  /* Staff names, so the screen can say who did what */
+  function listStaff() {
+    return wrap(db().from('staff').select('id, name'));
   }
 
   /* The next free DC-#### code: one more than the highest DC- code in use.
@@ -130,6 +165,9 @@
     listAccounts: listAccounts,
     getAccount: getAccount,
     saveAccount: saveAccount,
+    getNotes: getNotes,
+    getHistory: getHistory,
+    listStaff: listStaff,
     setStatus: setStatus,
     nextDcCode: nextDcCode,
     currentUserId: currentUserId
