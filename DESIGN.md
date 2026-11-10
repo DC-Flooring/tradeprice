@@ -442,6 +442,12 @@ A paper slip fixed at the bottom centre, up to 440px wide, 16px radius, black In
 - **Trade card:** a full-screen sheet that slides up (420ms iOS sheet curve), closes with the Close button, Escape, or a swipe down that follows the finger, resists upward and closes on a flick. Reduced motion: a fade. The card is page black with a soft warm gradient, a 1px gold edge at 60%, and a 24px radius: logo, name in Barlow Condensed capitals, business, the account number very large in Barlow, a solid gold tier badge, then a Code 128 barcode on a `barcode-white` panel with at least 32px of white either side for the scanner's quiet zone, "Show this at the counter", and the gold ruler. The screen is kept awake while it is open where the browser allows.
 - **Home screen prompt:** a raised slip shown once, with platform-specific steps, an Add button where the browser supports it, and a 44px dismiss that is remembered.
 
+### Offers strip (app.html)
+- Below the four shortcut tiles. Heading "Offers" in Barlow Condensed capitals; the £50 voucher section below it is headed "Vouchers" so the two are not confused. Hidden completely (no heading) when no offer is live.
+- Up to 3 cards. On a phone they sit in a row that swipes sideways with scroll-snap, each card 78% wide so the next one peeks in; from 640px all three sit side by side with no scrolling.
+- Card: raised, 16px radius, the whole card is the link (it opens the price list with that range open). Photo in a fixed 4:3 box, `object-fit: cover`, centred, lazy-loaded, alt from the product name; a missing photo becomes a plain dark box. Category tag in the photo's top left (dark translucent pill). Then the name, an optional one-line hook, your normal tier price struck through with "per pack · ex VAT" (only when the offer is lower), the offer price large in gold Barlow, and "Ends Sun 15 Nov" or "Ends today". No stock tag.
+- Motion: only a gentle 0.98 press, none with reduced motion.
+
 ### Price list (pricelist.html)
 - **Job:** answer "what is my price on X, and is it in stock?" in under 10 seconds, one-handed.
 - **Head:** "Price list" in Barlow Condensed capitals, with the tier line ("Trade Plus prices · ex VAT") in gold beside or under it.

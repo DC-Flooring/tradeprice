@@ -758,7 +758,52 @@ a { color: var(--gold); text-underline-offset: 0.2em; text-decoration-thickness:
 .app-tile--gold .app-tile__line { color: var(--on-gold-2); }
 .app-tile--gold:active { background: var(--gold-press); }
 
-/* Offers strip */
+/* Offers: up to three offer cards. Swipe sideways on a phone,
+   all three side by side from 640px. Photos sit in a fixed 4:3 box. */
+.week { margin-top: 40px; }
+.week__title { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 1.75rem; line-height: 1; margin-bottom: 14px; }
+.week__row {
+  display: grid; grid-auto-flow: column; grid-auto-columns: 78%; gap: 12px;
+  margin-inline: calc(-1 * var(--gutter)); padding: 2px var(--gutter) 6px;
+  overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--gutter); scrollbar-width: none; -webkit-overflow-scrolling: touch;
+}
+.week__row::-webkit-scrollbar { display: none; }
+.offer-card-wrap { scroll-snap-align: start; min-width: 0; }
+.offer-card {
+  position: relative; /* keeps the hidden screen-reader labels inside the card, so the swipe row can't widen the page */
+  display: flex; flex-direction: column; height: 100%; overflow: hidden;
+  border-radius: var(--r-md); background: var(--raised); border: 1px solid var(--border);
+  color: var(--text); text-decoration: none;
+  transition: transform var(--press) var(--ease-out), border-color 200ms ease;
+}
+.offer-card:active { transform: scale(0.98); transition-duration: 100ms; }
+@media (hover: hover) and (pointer: fine) { .offer-card:hover { border-color: var(--gold); } }
+.offer-card__photo { position: relative; display: block; aspect-ratio: 4 / 3; background: var(--raised-2); overflow: hidden; }
+.offer-card__photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.offer-card__photo.is-missing { background: #1E1B17; }
+.offer-card__tag {
+  position: absolute; left: 10px; top: 10px; display: inline-flex; align-items: center; min-height: 26px; padding: 0 10px;
+  border-radius: 999px; background: rgba(11, 10, 9, 0.78); color: var(--text); font-size: 0.875rem; font-weight: 600;
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+}
+.offer-card__body { display: flex; flex-direction: column; gap: 6px; flex: 1; padding: 14px 14px 16px; }
+.offer-card__name { font-weight: 600; font-size: 1.0625rem; line-height: 1.3; }
+.offer-card__hook { font-size: 1rem; line-height: 1.35; color: var(--text-3); }
+.offer-card__prices { display: grid; gap: 2px; margin-top: auto; padding-top: 6px; }
+.offer-card__was { font-size: 0.9375rem; color: var(--text-2); }
+.offer-card__was s { text-decoration-thickness: 1.5px; text-decoration-color: var(--text-2); }
+.offer-card__was .num { font-size: 1rem; color: var(--text-2); }
+.offer-card__was small, .offer-card__unit { font-size: 0.875rem; color: var(--text-2); }
+.offer-card__now { font-size: 2.25rem; line-height: 1; color: var(--gold); letter-spacing: -0.01em; }
+.offer-card__ends { font-size: 0.9375rem; font-weight: 600; color: var(--text-2); }
+@media (min-width: 640px) {
+  .week__row { grid-auto-flow: row; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-columns: auto; margin-inline: 0; padding: 0; overflow: visible; }
+  .offer-card__now { font-size: 2rem; }
+}
+@media (prefers-reduced-motion: reduce) { .offer-card:active { transform: none; } }
+
+/* Vouchers strip */
 .app-offers { margin-top: 44px; }
 .app-offers__head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
 .app-offers__title { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 1.75rem; line-height: 1; }
