@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600&amp;family=Barlow+Condensed:wght@700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=6">
+  <link rel="stylesheet" href="css/styles.css?v=7">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -35,32 +35,25 @@
       <div class="narrow">
         <h1 id="apply-title" class="page-title">Two minutes. No paperwork.</h1>
         <p class="page-lede">We'll get you approved within <span class="num">2</span> working days, then text you a login.</p>
+        <p class="coming-soon" id="applyNote" hidden></p>
 
         <form class="form" id="applyForm" novalidate>
           <div class="field">
-            <label for="f-name">Your name</label>
-            <input id="f-name" name="name" type="text" autocomplete="name" autocapitalize="words" required aria-describedby="e-name">
-            <p class="field__error" id="e-name" hidden></p>
+            <label for="f-first">First name</label>
+            <input id="f-first" name="first_name" type="text" autocomplete="given-name" autocapitalize="words" required aria-describedby="e-first">
+            <p class="field__error" id="e-first" hidden></p>
           </div>
 
           <div class="field">
-            <label for="f-business">Business or trading name</label>
-            <input id="f-business" name="business" type="text" autocomplete="organization" autocapitalize="words" required aria-describedby="e-business">
-            <p class="field__error" id="e-business" hidden></p>
+            <label for="f-last">Last name</label>
+            <input id="f-last" name="last_name" type="text" autocomplete="family-name" autocapitalize="words" required aria-describedby="e-last">
+            <p class="field__error" id="e-last" hidden></p>
           </div>
 
           <div class="field">
-            <label for="f-trade">What do you do?</label>
-            <select id="f-trade" name="trade" required aria-describedby="e-trade">
-              <option value="" selected disabled>Choose one</option>
-              <option>Flooring fitter</option>
-              <option>Flooring contractor</option>
-              <option>Builder or joiner</option>
-              <option>Landlord or property maintenance</option>
-              <option>Interior designer</option>
-              <option>Something else</option>
-            </select>
-            <p class="field__error" id="e-trade" hidden></p>
+            <label for="f-company">Business or trading name <span class="field__optional">(optional)</span></label>
+            <input id="f-company" name="company_name" type="text" autocomplete="organization" autocapitalize="words" aria-describedby="e-company">
+            <p class="field__error" id="e-company" hidden></p>
           </div>
 
           <div class="field">
@@ -71,22 +64,9 @@
           </div>
 
           <div class="field">
-            <label for="f-email">Email</label>
-            <input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" required aria-describedby="e-email">
+            <label for="f-email">Email <span class="field__optional">(optional)</span></label>
+            <input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" aria-describedby="e-email">
             <p class="field__error" id="e-email" hidden></p>
-          </div>
-
-          <div class="field">
-            <label for="f-postcode">Business postcode</label>
-            <input id="f-postcode" name="postcode" type="text" autocomplete="postal-code" autocapitalize="characters" spellcheck="false" required aria-describedby="e-postcode">
-            <p class="field__error" id="e-postcode" hidden></p>
-          </div>
-
-          <div class="field">
-            <label for="f-company">Company or VAT number <span class="field__optional">(optional)</span></label>
-            <p class="field__hint" id="h-company">Sole trader? Leave it blank</p>
-            <input id="f-company" name="company" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-describedby="h-company e-company">
-            <p class="field__error" id="e-company" hidden></p>
           </div>
 
           <fieldset class="checks">
@@ -108,13 +88,36 @@
             </label>
           </fieldset>
 
-          <button class="btn btn--gold btn--lg btn--block" type="submit">Send application</button>
+          <button class="btn btn--gold btn--lg btn--block" type="submit" id="applyBtn">Send application</button>
           <p class="form__note">Why we check: trade prices are for the trade.</p>
         </form>
       </div>
     </section>
 
-    <!-- Step 2: received. Nothing is sent or stored in this demo. -->
+    <!-- Step 2: the code we text to their mobile -->
+    <section class="apply login-step" id="codeView" aria-labelledby="code-title" hidden>
+      <div class="narrow">
+        <h1 id="code-title" class="page-title" tabindex="-1">Check your texts.</h1>
+        <p class="page-lede">Code sent to <span class="num sent-to" id="sentTo">[their number]</span>. <button class="text-link text-link--button" type="button" id="wrongNumber">Wrong number?</button></p>
+
+        <form class="form" id="codeForm" novalidate>
+          <div class="field">
+            <label for="f-code">6-digit code</label>
+            <div class="otp" id="otp">
+              <input id="f-code" name="code" class="otp__input" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]*" maxlength="6" spellcheck="false" required aria-describedby="e-code">
+              <div class="otp__slots" aria-hidden="true">
+                <span class="otp__slot"></span><span class="otp__slot"></span><span class="otp__slot"></span><span class="otp__slot"></span><span class="otp__slot"></span><span class="otp__slot"></span>
+              </div>
+            </div>
+            <p class="field__error" id="e-code" hidden></p>
+          </div>
+          <p class="otp__status" id="codeStatus" role="status" aria-live="polite"></p>
+          <button class="btn btn--outline btn--block resend" type="button" id="resendBtn" disabled><span>Send a new code in <span class="num">30</span>s</span></button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Step 3: received -->
     <section class="apply received" id="receivedView" aria-labelledby="received-title" hidden>
       <div class="narrow">
         <h1 id="received-title" class="page-title" tabindex="-1">Nice one, <span id="firstName">[first name]</span>.</h1>
@@ -171,7 +174,11 @@
   </footer>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="js/main.js?v=6" defer></script>
-  <script src="js/apply.js?v=6" defer></script>
+  <script src="config.js?v=7"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js" integrity="sha384-TcHRA3zBbn+Lexh5n+Oil4guNPOS3rjNDpGRAN46u/s/mB2IZ50ceC6TYDU2yvgK" crossorigin="anonymous"></script>
+  <script src="js/session.js?v=7"></script>
+  <script src="js/main.js?v=7" defer></script>
+  <script src="js/otp.js?v=7" defer></script>
+  <script src="js/apply.js?v=7" defer></script>
 </body>
 </html>

@@ -44,11 +44,7 @@
   // Other page scripts can show a message with window.DCToast('...')
   window.DCToast = show;
 
-  // DEMO: signing out clears the demo session. SUPABASE LATER: supabase.auth.signOut()
-  document.addEventListener('click', function (event) {
-    if (!event.target.closest('[data-sign-out]')) return;
-    try { sessionStorage.removeItem('dc-signed-in'); } catch (e) { /* private mode */ }
-  });
+  // Signing out is handled by js/session.js ([data-sign-out]).
 
   // Only let the tea steam while the mug is on screen.
   var kettle = document.querySelector('.kettle');
