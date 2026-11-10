@@ -24,6 +24,7 @@ colors:
   tier-plus: "#4A3D27"
   tier-plus-deal: "#E2C58A"
   error: "#F2836F"
+  barcode-white: "#FFFFFF"
   field-edge: "#6B6459"
 typography:
   display:
@@ -430,6 +431,16 @@ A paper slip fixed at the bottom centre, up to 440px wide, 16px radius, black In
 - **Resend:** an outline button, disabled with a live "Resend code in 30s" countdown, then tappable.
 - **Text links:** gold, 600, underlined, with a 44px tall hit area ("New here? Sign up free", "Wrong number?").
 - **Demo note:** a `raised` slip with a dashed `field-edge` border, used only for demo-mode instructions.
+
+### Signed-in app (app.html and the pages behind it)
+- **Header:** the same sticky header, with the logo linking to `app.html` and a 44px initials avatar (gold ring, gold initials) on the right linking to the account page.
+- **Top:** greeting in Barlow Condensed capitals ("Morning, Craig"; Morning, Afternoon or Evening by the clock), the tier badge beside it (gold outline pill), business and account number in secondary text, then the large gold "Show trade card" button.
+- **Search:** a 60px search field on `raised` with a gold magnifier, matching name, brand, category, colours and SKU as you type. Results are hairline-ruled rows: name, brand and category (plus the colour that matched), a stock word ("In stock" in green, "Ring to check" in secondary text, never a number), and the price for the account's own tier in Barlow with its unit.
+- **Shortcut tiles:** a 2x2 grid of 184px raised tiles. Each is told apart by a figure in gold Barlow (a count, a word or a unit), then the title in Barlow Condensed capitals pushed to the bottom, then one line of secondary text. The first, most important tile is filled gold. No icon tiles.
+- **Offers:** a Barlow Condensed heading with a small solid gold "1 new" pill, then the voucher.
+- **Counter bar:** pinned to the bottom with a translucent black material (solid under reduced transparency or higher contrast), two 52px outline buttons with gold line icons: Call the counter and WhatsApp. Pages with it pad their footer so nothing hides behind it.
+- **Trade card:** a full-screen sheet that slides up (420ms iOS sheet curve), closes with the Close button, Escape, or a swipe down that follows the finger, resists upward and closes on a flick. Reduced motion: a fade. The card is page black with a soft warm gradient, a 1px gold edge at 60%, and a 24px radius: logo, name in Barlow Condensed capitals, business, the account number very large in Barlow, a solid gold tier badge, then a Code 128 barcode on a `barcode-white` panel with at least 32px of white either side for the scanner's quiet zone, "Show this at the counter", and the gold ruler. The screen is kept awake while it is open where the browser allows.
+- **Home screen prompt:** a raised slip shown once, with platform-specific steps, an Add button where the browser supports it, and a 44px dismiss that is remembered.
 
 ### Photography
 - Real photos from the trade only, supplied by the business. No stock imagery.
