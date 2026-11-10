@@ -6,13 +6,13 @@
   <meta name="robots" content="noindex">
   <meta name="theme-color" content="#0B0A09">
   <meta name="color-scheme" content="dark">
-  <title>Approvals | DC Staff</title>
+  <title>DC Staff</title>
   <link rel="icon" href="../assets/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600&amp;family=Barlow+Condensed:wght@700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/styles.css?v=8">
-  <link rel="stylesheet" href="staff.css?v=2">
+  <link rel="stylesheet" href="staff.css?v=3">
 </head>
 <body class="staff">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -21,6 +21,10 @@
     <div class="st-bar__brand">
       <img src="../assets/logo.png" alt="DC Flooring" width="659" height="183">
       <span class="st-bar__area">Staff</span>
+      <nav class="st-nav" id="stNav" aria-label="Staff sections" hidden>
+        <a class="st-nav__link" href="#home" data-route="home">Home</a>
+        <a class="st-nav__link" href="#customers" data-route="customers">Customers</a>
+      </nav>
     </div>
     <div class="st-bar__user" id="userBar" hidden>
       <span class="st-bar__who" id="whoAmI">Signed in</span>
@@ -30,7 +34,7 @@
 
   <main id="main">
 
-    <!-- 1. Staff log in: the same mobile + code flow as fitters (js/login-flow.js) -->
+    <!-- 1. Staff log in: email and password (fitters use mobile + code on login.html) -->
     <section class="st-login" id="loginView" hidden>
       <div class="narrow">
         <h1 id="login-title" class="page-title" tabindex="-1">Staff log in</h1>
@@ -79,11 +83,61 @@
       </div>
     </section>
 
-    <!-- 3. Approvals -->
+    <!-- 3. Home: the staff front screen -->
+    <section class="st-home" id="homeView" hidden aria-labelledby="home-title">
+      <div class="st-home__inner">
+        <h1 class="app-greet" id="home-title" tabindex="-1"><span id="homeGreeting">Morning</span><span id="homeName"></span></h1>
+        <p class="st-home__sub">DC Flooring trade · Staff</p>
+
+        <ul class="st-stats" aria-label="Fitter accounts">
+          <li><span class="num" id="statPending">0</span> waiting for approval</li>
+          <li><span class="num" id="statApproved">0</span> approved</li>
+          <li><span class="num" id="statOther">0</span> rejected or suspended</li>
+        </ul>
+
+        <nav aria-label="Staff areas">
+          <ul class="app-tiles st-tiles">
+            <li>
+              <a class="app-tile app-tile--gold" href="#customers" id="tileCustomers">
+                <span class="app-tile__figure"><span class="num" id="tilePending">0</span><small>waiting</small></span>
+                <span class="app-tile__title">Customers</span>
+                <span class="app-tile__line">Approve fitters, set tiers and codes</span>
+              </a>
+            </li>
+            <li>
+              <div class="app-tile st-tile--soon" aria-disabled="true">
+                <span class="app-tile__figure"><span class="num" id="tileRanges">0</span><small>ranges</small></span>
+                <span class="app-tile__title">Products</span>
+                <span class="app-tile__line">Ranges and trade prices</span>
+                <span class="st-soon">Coming soon</span>
+              </div>
+            </li>
+            <li>
+              <div class="app-tile st-tile--soon" aria-disabled="true">
+                <span class="app-tile__figure"><span class="num" id="tileOffers">0</span><small>live</small></span>
+                <span class="app-tile__title">Promotions</span>
+                <span class="app-tile__line">Offers fitters see in the app</span>
+                <span class="st-soon">Coming soon</span>
+              </div>
+            </li>
+            <li>
+              <div class="app-tile st-tile--soon" aria-disabled="true">
+                <span class="app-tile__figure app-tile__figure--word">£</span>
+                <span class="app-tile__title">Vouchers</span>
+                <span class="app-tile__line">Member vouchers and redeeming them</span>
+                <span class="st-soon">Coming soon</span>
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+
+    <!-- 4. Customers: approvals and account details -->
     <div class="st-app" id="appView" hidden>
       <aside class="st-list" aria-label="Accounts">
         <div class="st-list__head">
-          <h1 class="st-title">Approvals</h1>
+          <h1 class="st-title" id="customers-title" tabindex="-1">Customers</h1>
           <div class="st-filters" role="group" aria-label="Show">
             <button class="st-filter is-on" type="button" data-filter="pending" aria-pressed="true">Pending <span class="st-count" id="pendingCount">0</span></button>
             <button class="st-filter" type="button" data-filter="approved" aria-pressed="false">Approved</button>
@@ -152,8 +206,9 @@
                 </select>
               </div>
               <div class="field st-notes">
-                <label for="ed-notes">Staff notes <span class="field__optional">(internal)</span></label>
-                <textarea id="ed-notes" name="staff_notes" rows="3"></textarea>
+                <label for="ed-notes">Staff notes</label>
+                <textarea id="ed-notes" name="notes" rows="3" aria-describedby="h-notes"></textarea>
+                <p class="field__hint" id="h-notes">Only staff can see these. Fitters never can.</p>
               </div>
             </div>
             <div class="st-actions">
@@ -167,6 +222,16 @@
             <div class="st-status__buttons" id="statusButtons"></div>
             <p class="field__error" id="statusError" hidden></p>
           </div>
+
+          <details class="st-history" id="history">
+            <summary class="st-history__summary">
+              <span>History</span>
+              <span class="st-count" id="historyCount">0</span>
+              <span class="st-history__hint">Who changed what, and when</span>
+            </summary>
+            <p class="st-history__note" id="historyNote" role="status" aria-live="polite"></p>
+            <ol class="st-history__list" id="historyList"></ol>
+          </details>
         </div>
       </section>
     </div>
@@ -189,7 +254,7 @@
   <script src="../js/session.js?v=8"></script>
   <script src="../js/main.js?v=8" defer></script>
   <script src="../js/otp.js?v=8" defer></script>
-  <script src="staff-api.js?v=2" defer></script>
-  <script src="staff.js?v=2" defer></script>
+  <script src="staff-api.js?v=3" defer></script>
+  <script src="staff.js?v=3" defer></script>
 </body>
 </html>

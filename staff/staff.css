@@ -1,4 +1,4 @@
-/* DC Flooring trade: staff Approvals screen. An internal tool: clean, dense and
+/* DC Flooring trade: staff screens (Home and Customers). An internal tool: clean, dense and
    plain. Uses the site's tokens, buttons and fields from css/styles.css; no script
    font, no personality bits. Desktop first, still usable at 768px. */
 
@@ -27,6 +27,36 @@
 .st-bar__who { font-size: 0.9375rem; color: var(--text-2); }
 
 .st-login { padding: 40px 0 64px; }
+
+/* Top bar sections */
+.st-nav { display: flex; gap: 4px; margin-left: 12px; }
+.st-nav[hidden] { display: none; }
+.st-nav__link {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 999px;
+  color: var(--text-2); font-weight: 600; font-size: 1rem; text-decoration: none;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+.st-nav__link[aria-current="page"] { color: var(--text); background: var(--raised-2); }
+@media (hover: hover) and (pointer: fine) { .st-nav__link:not([aria-current]):hover { color: var(--text); } }
+
+/* Home: the same tiles fitters see in the app, a little wider */
+.st-home { padding: 40px 20px 64px; }
+.st-home__inner { max-width: 960px; margin: 0 auto; }
+.st-home .app-greet:focus { outline: none; }
+.st-home__sub { margin-top: 8px; color: var(--text-2); font-size: 1rem; }
+.st-stats { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 20px; padding: 14px 0; border-block: 1px solid var(--border); list-style: none; color: var(--text-2); font-size: 1rem; }
+.st-stats .num { color: var(--text); font-weight: 600; font-size: 1.125rem; }
+.st-tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.st-tiles .app-tile { min-height: 200px; }
+.st-tile--soon { position: relative; cursor: default; opacity: 0.72; }
+.st-tile--soon:active { transform: none; }
+@media (hover: hover) and (pointer: fine) { .st-tile--soon:hover { border-color: var(--border); } }
+.st-soon {
+  align-self: flex-start; margin-top: auto; padding: 2px 10px; border-radius: 999px;
+  border: 1px solid var(--field-edge); color: var(--text-2); font-size: 0.875rem; font-weight: 600;
+}
+.st-tile--soon .app-tile__line { margin-bottom: 12px; }
+@media (max-width: 900px) { .st-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .st-password { display: flex; gap: 8px; }
 .st-password input { flex: 1; min-width: 0; }
 .st-password__toggle { flex: none; min-width: 76px; min-height: 48px; }
@@ -35,6 +65,7 @@
 
 /* Two columns: the list and the selected account */
 .st-app { display: grid; grid-template-columns: 380px minmax(0, 1fr); height: calc(100dvh - 61px); }
+.st-app[hidden], .st-home[hidden] { display: none; }
 .st-list { display: flex; flex-direction: column; min-height: 0; border-right: 1px solid var(--border); }
 .st-list__head { padding: 16px 16px 10px; border-bottom: 1px solid var(--border); display: grid; gap: 12px; }
 .st-title { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 1.75rem; line-height: 1; }
@@ -115,6 +146,29 @@
 .st-status__buttons { display: flex; flex-wrap: wrap; gap: 10px; }
 .st-status__buttons .btn { min-width: 140px; }
 .st-status .field__error { margin-top: 10px; }
+
+/* History: closed until asked for */
+.st-history { margin-top: 28px; border-top: 1px solid var(--border); }
+.st-history__summary {
+  display: flex; align-items: center; gap: 10px; min-height: 56px; cursor: pointer; list-style: none;
+  font-weight: 600; font-size: 1rem;
+}
+.st-history__summary::-webkit-details-marker { display: none; }
+.st-history__summary::before {
+  content: ""; width: 8px; height: 8px; margin: 0 4px 0 2px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+  transform: rotate(-45deg); transition: transform 150ms ease;
+}
+.st-history[open] > .st-history__summary::before { transform: rotate(45deg); }
+.st-history__hint { color: var(--text-2); font-weight: 400; }
+.st-history__summary:focus-visible { outline-offset: 2px; border-radius: var(--r-sm); }
+.st-history__note { color: var(--text-2); font-size: 1rem; }
+.st-history__note:empty { display: none; }
+.st-history__list { list-style: none; margin: 4px 0 0; padding: 0; }
+.st-history__item { padding: 12px 0; border-top: 1px solid var(--border); }
+.st-history__meta { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 0.9375rem; color: var(--text-2); }
+.st-history__who { color: var(--text); font-weight: 600; }
+.st-history__changes { margin: 4px 0 0; padding: 0; list-style: none; font-size: 1rem; overflow-wrap: anywhere; }
+@media (prefers-reduced-motion: reduce) { .st-history__summary::before { transition: none; } }
 
 /* Confirm */
 .st-confirm {
