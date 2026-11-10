@@ -12,8 +12,8 @@
    NEVER put the service_role key, a secret key or the database password in this file
    or anywhere else in this site. They would be visible to anyone. */
 
-var SUPABASE_URL = 'PASTE_SUPABASE_URL_HERE';
-var SUPABASE_ANON_KEY = 'PASTE_SUPABASE_ANON_KEY_HERE';
+var SUPABASE_URL = 'https://modysflptentjxzwmzwu.supabase.co';
+var SUPABASE_ANON_KEY = 'sb_publishable_m_CCtyHnZpOqMjdcJceAvQ_9zhFVxC8';
 var SITE_URL = 'https://dc-flooring.github.io/tradeprice/';
 
 window.DC_CONFIG = {
