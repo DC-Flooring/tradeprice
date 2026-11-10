@@ -1,0 +1,25 @@
+[
+  {
+    "productId": "0c5c6ddc-83e8-4bd0-8d27-95fa4b675f0e",
+    "offerPrice": 17.99,
+    "endDate": "2026-11-15",
+    "image": "images/offers/offer-plank.jpg",
+    "hook": "7mm click plank. 2.48m² a pack.",
+    "demoNote": "DEMO OFFER: sample data for the demo, not a real offer."
+  },
+  {
+    "productId": "638f80dc-31cb-4e03-b771-447e7eeeb0f9",
+    "offerPrice": 13.99,
+    "endDate": "2026-11-15",
+    "image": "images/offers/offer-oak.jpg",
+    "demoNote": "DEMO OFFER: sample data for the demo, not a real offer."
+  },
+  {
+    "productId": "dcf6c265-04e9-4d4c-acb8-b81c7ba22bd4",
+    "offerPrice": 14.99,
+    "endDate": "2026-11-22",
+    "image": "images/offers/offer-underlay.jpg",
+    "hook": "Price per roll. Stock up while it lasts.",
+    "demoNote": "DEMO OFFER: sample data for the demo, not a real offer."
+  }
+]

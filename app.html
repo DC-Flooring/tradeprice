@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600&amp;family=Barlow+Condensed:wght@700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=5">
+  <link rel="stylesheet" href="css/styles.css?v=6">
 </head>
 <body class="has-counter-bar">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -98,9 +98,15 @@
         </ul>
       </nav>
 
+      <!-- Offers: hidden until there is at least one live offer -->
+      <section class="week" id="weekOffers" aria-labelledby="week-title" hidden>
+        <h2 class="week__title" id="week-title">Offers</h2>
+        <ul class="week__row" aria-label="Offers"></ul>
+      </section>
+
       <section class="app-offers" aria-labelledby="offers-title">
         <div class="app-offers__head">
-          <h2 class="app-offers__title" id="offers-title">Offers</h2>
+          <h2 class="app-offers__title" id="offers-title">Vouchers</h2>
           <span class="new-badge">1 new</span>
         </div>
         <div class="voucher voucher--app">
@@ -165,9 +171,10 @@
   </dialog>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="js/demo-user.js?v=5"></script>
+  <script src="js/demo-user.js?v=6"></script>
   <script src="js/vendor/JsBarcode.code128.3.11.6.min.js"></script>
-  <script src="js/main.js?v=5" defer></script>
-  <script src="js/app.js?v=5" defer></script>
+  <script src="js/main.js?v=6" defer></script>
+  <script src="js/app.js?v=6" defer></script>
+  <script src="js/offers.js?v=6" defer></script>
 </body>
 </html>
