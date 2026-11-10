@@ -430,7 +430,8 @@ A paper slip fixed at the bottom centre, up to 440px wide, 16px radius, black In
 - **Wrong code:** boxes go to the `error` border, the message appears under them, and the row gives one small shake (320ms, 6px, strong ease-out). Reduced motion: no shake, the border and message do the job.
 - **Resend:** an outline button, disabled with a live "Resend code in 30s" countdown, then tappable.
 - **Text links:** gold, 600, underlined, with a 44px tall hit area ("New here? Sign up free", "Wrong number?").
-- **Demo note:** a `raised` slip with a dashed `field-edge` border, used only for demo-mode instructions.
+- **Note slip:** a `raised` slip with a dashed `field-edge` border for short notices above a form ("Sign in isn't switched on yet", "You're signed in. Fill this in to finish signing up.").
+- **Account status screen (`account-status.html`):** for signed-in fitters who are not approved. Pending: "Nearly there, [first name]." with the 2 working days line. Rejected or suspended: "Your account isn't active." with no reason. Both: Call and WhatsApp, then Log out.
 
 ### Signed-in app (app.html and the pages behind it)
 - **Header:** the same sticky header, with the logo linking to `app.html` and a 44px initials avatar (gold ring, gold initials) on the right linking to the account page.

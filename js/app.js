@@ -75,7 +75,8 @@
   var EASE_SHEET = 'cubic-bezier(0.32, 0.72, 0, 1)';
 
   function drawBarcode() {
-    if (drawn || !window.JsBarcode) return;
+    // No account number yet (lightspeed_code is empty): no barcode, the card says it is coming soon
+    if (drawn || !window.JsBarcode || !window.DC_USER.barcodeValue) return;
     window.JsBarcode('#barcode', window.DC_USER.barcodeValue, {
       format: 'CODE128', displayValue: false, margin: 0, height: 96, width: 3, background: '#FFFFFF', lineColor: '#0B0A09'
     });

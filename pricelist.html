@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="en-GB" class="auth-wait">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600&amp;family=Barlow+Condensed:wght@700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=6">
+  <link rel="stylesheet" href="css/styles.css?v=7">
 </head>
 <body class="pricelist-page">
   <a class="skip-link" href="#plList">Skip to the price list</a>
@@ -27,7 +27,7 @@
       <a class="brand" href="app.html" aria-label="DC Flooring trade, your home screen">
         <img src="assets/logo.png" alt="DC Flooring: carpet, vinyl and more" width="659" height="183">
       </a>
-      <a class="avatar" href="account.html" data-user-initials aria-label="Your account">CW</a>
+      <a class="avatar" href="account.html" data-user-initials aria-label="Your account"></a>
     </div>
   </header>
 
@@ -36,7 +36,7 @@
       <a class="back-link" href="app.html">Home</a>
       <div class="pl-head">
         <h1 class="pl-title">Price list</h1>
-        <p class="pl-tier"><span data-user-tier>Trade Plus</span> prices · ex VAT</p>
+        <p class="pl-tier"><span data-user-tier></span> prices · ex VAT</p>
       </div>
     </div>
 
@@ -102,8 +102,11 @@
   </footer>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="js/demo-user.js?v=6"></script>
-  <script src="js/main.js?v=6" defer></script>
-  <script src="js/pricelist.js?v=6" defer></script>
+  <script src="config.js?v=7"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js" integrity="sha384-TcHRA3zBbn+Lexh5n+Oil4guNPOS3rjNDpGRAN46u/s/mB2IZ50ceC6TYDU2yvgK" crossorigin="anonymous"></script>
+  <script src="js/demo-user.js?v=7"></script>
+  <script src="js/session.js?v=7"></script>
+  <script src="js/main.js?v=7" defer></script>
+  <script src="js/pricelist.js?v=7" defer></script>
 </body>
 </html>

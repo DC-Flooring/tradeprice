@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="en-GB" class="auth-wait">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600&amp;family=Barlow+Condensed:wght@700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=6">
+  <link rel="stylesheet" href="css/styles.css?v=7">
 </head>
 <body class="has-counter-bar">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -28,7 +28,7 @@
       <a class="brand" href="app.html" aria-label="DC Flooring trade, your home screen">
         <img src="assets/logo.png" alt="DC Flooring: carpet, vinyl and more" width="659" height="183">
       </a>
-      <a class="avatar" href="account.html" data-user-initials aria-label="Your account">CW</a>
+      <a class="avatar" href="account.html" data-user-initials aria-label="Your account"></a>
     </div>
   </header>
 
@@ -37,10 +37,10 @@
 
       <section class="app-top" aria-labelledby="greeting">
         <div class="app-top__row">
-          <h1 class="app-greet" id="greeting"><span data-greeting>Morning</span>, <span data-user-first>Craig</span></h1>
-          <span class="tier-badge" data-user-tier>Trade Plus</span>
+          <h1 class="app-greet" id="greeting"><span data-greeting>Morning</span>, <span data-user-first></span></h1>
+          <span class="tier-badge" data-user-tier></span>
         </div>
-        <p class="app-top__who"><span data-user-business>Wilson Flooring</span> · <span class="num" data-user-account>DC-1042</span></p>
+        <p class="app-top__who"><span data-user-business></span> · <span class="num" data-user-account></span></p>
         <button class="btn btn--gold btn--lg btn--block" type="button" id="showCard" aria-haspopup="dialog" aria-controls="tradeCard">Show trade card</button>
       </section>
 
@@ -119,6 +119,10 @@
         </div>
         <p class="fine">Example offer. Offers change.</p>
       </section>
+
+      <div class="app-logout">
+        <button class="btn btn--outline btn--lg btn--block" type="button" data-sign-out>Log out</button>
+      </div>
     </div>
   </main>
 
@@ -153,16 +157,16 @@
       <div class="tcard">
         <img class="tcard__logo" src="assets/logo.png" alt="DC Flooring" width="659" height="183">
         <div class="tcard__who">
-          <p class="tcard__name" id="card-name" data-user-fullname>Craig Wilson</p>
-          <p class="tcard__business" data-user-business>Wilson Flooring</p>
+          <p class="tcard__name" id="card-name" data-user-fullname></p>
+          <p class="tcard__business" data-user-business></p>
         </div>
         <div class="tcard__account">
           <p class="tcard__label">Account</p>
-          <p class="tcard__number num" data-user-account>DC-1042</p>
-          <span class="tier-badge tier-badge--solid" data-user-tier>Trade Plus</span>
+          <p class="tcard__number num" data-user-account></p>
+          <span class="tier-badge tier-badge--solid" data-user-tier></span>
         </div>
-        <figure class="tcard__barcode">
-          <div class="tcard__bars"><svg id="barcode" role="img" aria-label="Barcode for account DC-1042"></svg></div>
+        <figure class="tcard__barcode" data-user-has-account>
+          <div class="tcard__bars"><svg id="barcode" role="img" aria-label="Barcode for your account number"></svg></div>
           <figcaption>Show this at the counter</figcaption>
         </figure>
         <div class="ruler tcard__ruler" aria-hidden="true"></div>
@@ -171,10 +175,13 @@
   </dialog>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="js/demo-user.js?v=6"></script>
+  <script src="config.js?v=7"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js" integrity="sha384-TcHRA3zBbn+Lexh5n+Oil4guNPOS3rjNDpGRAN46u/s/mB2IZ50ceC6TYDU2yvgK" crossorigin="anonymous"></script>
+  <script src="js/demo-user.js?v=7"></script>
+  <script src="js/session.js?v=7"></script>
   <script src="js/vendor/JsBarcode.code128.3.11.6.min.js"></script>
-  <script src="js/main.js?v=6" defer></script>
-  <script src="js/app.js?v=6" defer></script>
-  <script src="js/offers.js?v=6" defer></script>
+  <script src="js/main.js?v=7" defer></script>
+  <script src="js/app.js?v=7" defer></script>
+  <script src="js/offers.js?v=7" defer></script>
 </body>
 </html>
