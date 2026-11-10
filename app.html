@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0B0A09">
+  <meta name="color-scheme" content="dark">
+  <title>DC Trade</title>
+  <meta name="description" content="Your DC Flooring trade account.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/logo.png">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="DC Trade">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600&amp;family=Barlow+Condensed:wght@700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css?v=4">
+</head>
+<body class="has-counter-bar">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap site-header__row">
+      <a class="brand" href="app.html" aria-label="DC Flooring trade, your home screen">
+        <img src="assets/logo.png" alt="DC Flooring: carpet, vinyl and more" width="659" height="183">
+      </a>
+      <a class="avatar" href="account.html" data-user-initials aria-label="Your account">CW</a>
+    </div>
+  </header>
+
+  <main id="main" class="app">
+    <div class="narrow">
+
+      <section class="app-top" aria-labelledby="greeting">
+        <div class="app-top__row">
+          <h1 class="app-greet" id="greeting"><span data-greeting>Morning</span>, <span data-user-first>Craig</span></h1>
+          <span class="tier-badge" data-user-tier>Trade Plus</span>
+        </div>
+        <p class="app-top__who"><span data-user-business>Wilson Flooring</span> · <span class="num" data-user-account>DC-1042</span></p>
+        <button class="btn btn--gold btn--lg btn--block" type="button" id="showCard" aria-haspopup="dialog" aria-controls="tradeCard">Show trade card</button>
+      </section>
+
+      <aside class="a2hs" id="a2hs" aria-label="Save to home screen" hidden>
+        <div class="a2hs__text">
+          <p class="a2hs__title">Add DC Trade to your home screen</p>
+          <p class="a2hs__how" id="a2hsHow">Open it like an app, full screen.</p>
+        </div>
+        <button class="btn btn--gold btn--sm a2hs__add" type="button" id="a2hsAdd" hidden>Add</button>
+        <button class="a2hs__close" type="button" id="a2hsClose" aria-label="Dismiss">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </aside>
+
+      <section class="app-search" aria-label="Search products">
+        <form role="search" class="search" id="searchForm" novalidate>
+          <label class="sr-only" for="q">Search products, colours or codes</label>
+          <svg class="search__icon" aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+          <input class="search__input" id="q" name="q" type="search" placeholder="Search products, colours or codes" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" aria-describedby="searchCount" aria-controls="results">
+        </form>
+        <p class="search__count" id="searchCount" role="status" aria-live="polite"></p>
+        <ul class="results" id="results"></ul>
+      </section>
+
+      <nav class="tiles-nav" aria-label="Shortcuts">
+        <ul class="app-tiles">
+          <li>
+            <a class="app-tile app-tile--gold" href="pricelist.html">
+              <span class="app-tile__figure"><span class="num" data-range-count>47</span><small>ranges</small></span>
+              <span class="app-tile__title">Price list</span>
+              <span class="app-tile__line">Your price on every range</span>
+            </a>
+          </li>
+          <li>
+            <a class="app-tile" href="order.html">
+              <span class="app-tile__figure app-tile__figure--word">Cut</span>
+              <span class="app-tile__title">Order to collect</span>
+              <span class="app-tile__line">Send it ahead, we'll have it ready</span>
+            </a>
+          </li>
+          <li>
+            <a class="app-tile" href="buy-again.html">
+              <span class="app-tile__figure"><span class="num" data-fav-count>3</span><small>saved</small></span>
+              <span class="app-tile__title">Buy again</span>
+              <span class="app-tile__line">Your regular bits in one tap</span>
+            </a>
+          </li>
+          <li>
+            <a class="app-tile" href="calculator.html">
+              <span class="app-tile__figure"><span class="num">m²</span></span>
+              <span class="app-tile__title">Room calculator</span>
+              <span class="app-tile__line">Room sizes in, shopping list out</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <section class="app-offers" aria-labelledby="offers-title">
+        <div class="app-offers__head">
+          <h2 class="app-offers__title" id="offers-title">Offers</h2>
+          <span class="new-badge">1 new</span>
+        </div>
+        <div class="voucher voucher--app">
+          <div class="voucher__body">
+            <h3 class="voucher__title">£50 off when you spend £500</h3>
+            <p class="voucher__text">Vouchers land in your app. Just show it at the counter.</p>
+            <p class="voucher__label">Member offers</p>
+          </div>
+          <div class="voucher__stub" aria-hidden="true"><span class="script">£50</span></div>
+        </div>
+        <p class="fine">Example offer. Offers change.</p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="ruler" aria-hidden="true"></div>
+      <div class="site-footer__row">
+        <img class="site-footer__logo" src="assets/logo.png" alt="DC Flooring: carpet, vinyl and more" width="659" height="183" loading="lazy">
+        <div class="site-footer__legal">
+          <p>DC Flooring Ltd · [Company no.] · [VAT no.]</p>
+          <p>Prices shown ex VAT. Trade accounts subject to approval.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Pinned to the bottom: get hold of the counter -->
+  <nav class="counter-bar" aria-label="Contact the counter">
+    <a class="counter-bar__btn" href="tel:[Phone]">
+      <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>Call the counter</a>
+    <a class="counter-bar__btn" href="https://wa.me/[WhatsApp]">
+      <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 20l1.3-3.9A9 9 0 1 1 7.9 19.7L3 20"/></svg>WhatsApp</a>
+  </nav>
+
+  <!-- The trade card: a full-screen sheet -->
+  <dialog class="sheet" id="tradeCard" aria-labelledby="card-name">
+    <div class="sheet__panel" id="sheetPanel">
+      <div class="sheet__bar">
+        <span class="sheet__grabber" aria-hidden="true"></span>
+        <button class="sheet__close" type="button" id="closeCard">Close</button>
+      </div>
+      <div class="tcard">
+        <img class="tcard__logo" src="assets/logo.png" alt="DC Flooring" width="659" height="183">
+        <div class="tcard__who">
+          <p class="tcard__name" id="card-name" data-user-fullname>Craig Wilson</p>
+          <p class="tcard__business" data-user-business>Wilson Flooring</p>
+        </div>
+        <div class="tcard__account">
+          <p class="tcard__label">Account</p>
+          <p class="tcard__number num" data-user-account>DC-1042</p>
+          <span class="tier-badge tier-badge--solid" data-user-tier>Trade Plus</span>
+        </div>
+        <figure class="tcard__barcode">
+          <div class="tcard__bars"><svg id="barcode" role="img" aria-label="Barcode for account DC-1042"></svg></div>
+          <figcaption>Show this at the counter</figcaption>
+        </figure>
+        <div class="ruler tcard__ruler" aria-hidden="true"></div>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="js/demo-user.js?v=4"></script>
+  <script src="js/vendor/JsBarcode.code128.3.11.6.min.js"></script>
+  <script src="js/main.js?v=4" defer></script>
+  <script src="js/app.js?v=4" defer></script>
+</body>
+</html>

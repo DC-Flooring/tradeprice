@@ -184,7 +184,7 @@
         stopResendTimer();
         // DEMO: remember the session so the price list can greet them
         try { sessionStorage.setItem('dc-signed-in', phone); } catch (e) { /* private mode */ }
-        setTimeout(function () { window.location.href = 'pricelist.html'; }, reduceMotion.matches ? 150 : 450);
+        setTimeout(function () { window.location.href = 'app.html'; }, reduceMotion.matches ? 150 : 450);
         return;
       }
       codeStatus.textContent = '';

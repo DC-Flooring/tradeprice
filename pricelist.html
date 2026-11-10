@@ -6,32 +6,38 @@
   <meta name="robots" content="noindex">
   <meta name="theme-color" content="#0B0A09">
   <meta name="color-scheme" content="dark">
-  <title>Your price list | DC Flooring Trade</title>
-  <meta name="description" content="Your DC Flooring trade price list.">
+  <title>Your price list | DC Trade</title>
+  <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="assets/logo.png">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="DC Trade">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@600&amp;family=Barlow+Condensed:wght@700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css?v=3">
+  <link rel="stylesheet" href="css/styles.css?v=4">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
     <div class="wrap site-header__row">
-      <a class="brand" href="index.html" aria-label="DC Flooring trade, home">
+      <a class="brand" href="app.html" aria-label="DC Flooring trade, your home screen">
         <img src="assets/logo.png" alt="DC Flooring: carpet, vinyl and more" width="659" height="183">
       </a>
-      <a class="btn btn--outline btn--sm" href="index.html" data-sign-out>Sign out</a>
+      <a class="avatar" href="account.html" data-user-initials aria-label="Your account">CW</a>
     </div>
   </header>
 
-  <!-- Placeholder: the real price list is the next page to build. -->
+  <!-- Placeholder page: the real price list is the next page to build -->
   <main id="main" class="apply">
     <div class="narrow">
-      <h1 class="page-title">You're in.</h1>
-      <p class="page-lede">Your price list is coming next.</p>
-      <p class="placeholder-back"><a class="text-link" href="index.html">Back to the home page</a></p>
+      <a class="back-link" href="app.html">Home</a>
+      <h1 class="page-title">Price list</h1>
+      <p class="page-lede">Your <span data-user-tier>Trade Plus</span> price on every range is coming next.</p>
+      <p class="coming-soon">For now, search from the home screen to see your price on any range.</p>
     </div>
   </main>
 
@@ -49,6 +55,7 @@
   </footer>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="js/main.js?v=3" defer></script>
+  <script src="js/demo-user.js?v=4"></script>
+  <script src="js/main.js?v=4" defer></script>
 </body>
 </html>
