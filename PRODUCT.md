@@ -44,7 +44,7 @@ The design reference sums this up as "Trade prices. In your pocket." and "Measur
 - **Sign up:** takes about 2 minutes (`apply.html`). Accounts are approved within 2 working days, then the customer is texted a login. Staff phone the applicant to check they are in the trade before prices unlock.
 - **ID check (planned):** applicants can verify photo ID and a selfie with Didit to be approved quicker, or bring photo ID to the counter instead. In the demo the Didit step is a placeholder.
 - **Consent:** the trade account terms are required; email offers and text offers are separate opt-ins, unticked by default.
-- **Login:** customers sign in with a code sent by text message. There are no passwords.
+- **Login:** customers sign in with a code sent by text message (`login.html`). There are no passwords. Numbers that are not approved accounts are told so and pointed to sign up. In the demo nothing is sent: any UK mobile moves on and code 123456 signs in; all demo logic sits in `demoAuth()` in `js/login.js`, ready to swap for Supabase phone login. `pricelist.html` is a placeholder until the price list is built.
 - **Fonts:** Auttera is a Fontspring demo font and needs a web licence before launch. Barlow, Barlow Condensed and Inter come from Google Fonts.
 - **Tap targets** are at least 44px, and there is no horizontal scroll at 390px. The v1 demo's `tests/journey.js` enforced both; the rebuild needs its own checks.
 

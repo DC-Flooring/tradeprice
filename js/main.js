@@ -41,6 +41,15 @@
   // Tap the toast to dismiss it straight away.
   if (toast) toast.addEventListener('click', hide);
 
+  // Other page scripts can show a message with window.DCToast('...')
+  window.DCToast = show;
+
+  // DEMO: signing out clears the demo session. SUPABASE LATER: supabase.auth.signOut()
+  document.addEventListener('click', function (event) {
+    if (!event.target.closest('[data-sign-out]')) return;
+    try { sessionStorage.removeItem('dc-signed-in'); } catch (e) { /* private mode */ }
+  });
+
   // Only let the tea steam while the mug is on screen.
   var kettle = document.querySelector('.kettle');
   if (kettle && 'IntersectionObserver' in window) {

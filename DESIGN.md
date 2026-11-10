@@ -305,7 +305,7 @@ A warm near-black palette with one metal accent and a warm paper for things you 
 - **Numeral** (Barlow 600, 3.5rem rising to 4.75rem, 0.9, gold): step numbers.
 - **Price** (Barlow 600, 1.5rem, -0.01em, tabular lining): prices. Short facts like "2 minutes" set their figure in Barlow 600 too.
 - **Lede** (Inter 400, 1.1875rem, 1.5, max 30ch to 34ch): the hero lede; the closer lede is weight 500.
-- **Body** (Inter 400, 1rem, 1.55, tabular figures on): all running text. Section ledes 1.0625rem, max 40ch.
+- **Body** (Inter 400, 1rem, 1.55, default figures): all running text. Tabular figures are switched on only for `.num` and prices, because in Inter they also widen hyphens. Section ledes 1.0625rem, max 40ch.
 - **Body Strong** (Inter 600, 1.0625rem, 1.3): product names. Step headings are Inter 600 at 1.25rem rising to 1.5rem; "why" headings Inter 700 at 1.125rem.
 - **Label** (Inter 600, 0.9375rem): the price screen's bar, unit lines, the voucher label.
 - **Button** (Inter 600, 1rem, line-height 1): buttons; large buttons are 700 at 1.125rem.
@@ -422,6 +422,14 @@ A paper slip fixed at the bottom centre, up to 440px wide, 16px radius, black In
 - **Checkboxes:** 26px box with a 6px radius and a `field-edge` border, gold with a black tick when checked; the whole row is the 48px target. Consent boxes are always separate and unticked by default.
 - **Submit:** the large gold button, full width, with a short note under it in secondary text.
 - **Received screen:** swaps in on the same page (fade and 10px rise over 280ms; fade only with reduced motion), focus moves to its heading. A three-step tracker (32px dots joined by a 2px line, gold and ticked when done) shows where the application is. Placeholder panels for services not built yet are `paper` slips that open straight down from their button.
+
+### Sign in (code by text)
+- **Two steps on one page:** mobile number, then the code. Each step swaps in like the received screen and moves focus (to the heading, or straight into the code entry so the keyboard and the code suggestion appear).
+- **Code entry:** one real input (`autocomplete="one-time-code"`, `inputmode="numeric"`, max 6) laid over six 64px boxes in Barlow 600. The active box gets the gold ring; a correct code turns the boxes gold. Paste and phone autofill both work, digits are pulled out of a pasted text message, and it checks itself on the 6th digit.
+- **Wrong code:** boxes go to the `error` border, the message appears under them, and the row gives one small shake (320ms, 6px, strong ease-out). Reduced motion: no shake, the border and message do the job.
+- **Resend:** an outline button, disabled with a live "Resend code in 30s" countdown, then tappable.
+- **Text links:** gold, 600, underlined, with a 44px tall hit area ("New here? Sign up free", "Wrong number?").
+- **Demo note:** a `raised` slip with a dashed `field-edge` border, used only for demo-mode instructions.
 
 ### Photography
 - Real photos from the trade only, supplied by the business. No stock imagery.
