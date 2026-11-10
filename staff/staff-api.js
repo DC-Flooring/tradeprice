@@ -9,6 +9,7 @@
    - The protect trigger (002) stops anyone but staff changing tier, status,
      lightspeed_code and the other protected columns.
    - am_i_staff() (003) only answers for the signed-in user.
+   Staff log in with email and password; fitters use mobile + code elsewhere.
    Only the anon key from config.js is used. */
 (function () {
   'use strict';
@@ -36,6 +37,25 @@
       if (r.error) return { error: kindOf(r.error) };
       return { data: r.data };
     }, function (e) { return { error: kindOf(e) }; });
+  }
+
+  /* Staff log in with email and password (created by hand in Supabase).
+     Returns { data: user } or { error: 'bad-login' | 'rate' | 'network' | 'other' }. */
+  function signIn(email, password) {
+    return Promise.resolve(db().auth.signInWithPassword({ email: email, password: password })).then(function (r) {
+      if (!r.error && r.data && r.data.user) return { data: r.data.user };
+      return { error: authKind(r.error) };
+    }, function (e) { return { error: authKind(e) }; });
+  }
+  function authKind(error) {
+    if (!error) return 'other';
+    var status = typeof error.status === 'number' ? error.status : 0;
+    var code = String(error.code || '').toLowerCase();
+    var msg = String(error.message || '').toLowerCase();
+    if (status === 429 || /rate_limit|too_many/.test(code) || /rate limit|too many/.test(msg)) return 'rate';
+    if (/invalid_credentials|email_not_confirmed|user_not_found/.test(code) || /invalid login|not confirmed/.test(msg) || status === 400) return 'bad-login';
+    if (/fetch|network|failed to/.test(msg) || !status) return 'network';
+    return 'other';
   }
 
   /* Is the signed-in user DC staff? Asks the database, never the page. */
@@ -105,6 +125,7 @@
   }
 
   window.StaffAPI = {
+    signIn: signIn,
     amIStaff: amIStaff,
     listAccounts: listAccounts,
     getAccount: getAccount,

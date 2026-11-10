@@ -27,6 +27,11 @@
 .st-bar__who { font-size: 0.9375rem; color: var(--text-2); }
 
 .st-login { padding: 40px 0 64px; }
+.st-password { display: flex; gap: 8px; }
+.st-password input { flex: 1; min-width: 0; }
+.st-password__toggle { flex: none; min-width: 76px; min-height: 48px; }
+.st-login__help { margin-top: 16px; color: var(--text-2); font-size: 1rem; }
+#e-login { margin: 0 0 12px; }
 
 /* Two columns: the list and the selected account */
 .st-app { display: grid; grid-template-columns: 380px minmax(0, 1fr); height: calc(100dvh - 61px); }

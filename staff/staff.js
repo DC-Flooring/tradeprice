@@ -2,7 +2,7 @@
    in staff-api.js. Log in is the same mobile + code flow as fitters
    (js/login-flow.js). After log in we ask the database am_i_staff(); anyone
    else sees "This area is for DC staff" and no account data is loaded.
-   Never logs phone numbers, codes or tokens. */
+   Never logs phone numbers, codes, passwords or tokens. */
 (function () {
   'use strict';
 
@@ -17,6 +17,8 @@
     'not-allowed': 'You don’t have permission to do that.',
     'not-allowed-value': 'One of those values isn’t allowed. Check and try again.',
     'not-found': 'That account couldn’t be found. It may have been removed.',
+    'bad-login': 'That email or password isn’t right.',
+    'rate': 'Too many tries. Wait a minute, then try again.',
     'code-taken': 'That Lightspeed code is already on another account.',
     'duplicate': 'That value is already used on another account.',
     'other': 'Something went wrong. Try again.'
@@ -42,18 +44,72 @@
     return API.amIStaff().then(function (r) {
       if (r.error) { $('errorText').textContent = message(r.error); show('errorView'); return; }
       if (!r.data) { show('notStaffView'); return; }   // not staff: load nothing
-      $('whoAmI').textContent = 'Signed in as staff';
+      $('whoAmI').textContent = user.email ? 'Signed in as ' + user.email : 'Signed in as staff';
       show('appView');
       loadList();
     });
   }
 
-  show('loginView');
-  window.DCLoginFlow.mount({
-    onSignedIn: afterSignIn,
-    unknownNumberHtml: ' Ask the office to add you.',
-    notConfiguredText: 'Sign in isn’t switched on yet.'
+  /* ---------- log in: email + password ---------- */
+  var loginForm = $('loginForm'), loginBtn = $('loginBtn');
+  var emailInput = $('f-email'), passwordInput = $('f-password');
+
+  function loginFieldError(input, el, text) {
+    el.textContent = text;
+    el.hidden = !text;
+    if (text) input.setAttribute('aria-invalid', 'true'); else input.removeAttribute('aria-invalid');
+  }
+  function loginError(text) { $('e-login').textContent = text; $('e-login').hidden = !text; }
+  function clearLoginErrors() {
+    loginFieldError(emailInput, $('e-email'), '');
+    loginFieldError(passwordInput, $('e-password'), '');
+    loginError('');
+  }
+  [emailInput, passwordInput].forEach(function (input) {
+    input.addEventListener('input', function () {
+      if (input.getAttribute('aria-invalid') === 'true') loginFieldError(input, $(input === emailInput ? 'e-email' : 'e-password'), '');
+      loginError('');
+    });
   });
+
+  $('showPassword').addEventListener('click', function () {
+    var showing = passwordInput.type === 'text';
+    passwordInput.type = showing ? 'password' : 'text';
+    this.textContent = showing ? 'Show' : 'Hide';
+    this.setAttribute('aria-pressed', String(!showing));
+    this.setAttribute('aria-label', showing ? 'Show password' : 'Hide password');
+  });
+
+  loginForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (loginBtn.disabled) return;
+    clearLoginErrors();
+    var email = emailInput.value.trim();
+    var password = passwordInput.value;
+    if (!email) { loginFieldError(emailInput, $('e-email'), 'Enter your email'); emailInput.focus(); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { loginFieldError(emailInput, $('e-email'), 'That doesn’t look like an email address'); emailInput.focus(); return; }
+    if (!password) { loginFieldError(passwordInput, $('e-password'), 'Enter your password'); passwordInput.focus(); return; }
+    setBusy(loginBtn, true, 'Logging in');
+    API.signIn(email, password).then(function (r) {
+      if (r.error) {
+        setBusy(loginBtn, false);
+        loginError(message(r.error));
+        if (r.error === 'bad-login') { passwordInput.value = ''; passwordInput.focus(); }
+        return;
+      }
+      passwordInput.value = '';
+      return afterSignIn(r.data).then(function () { setBusy(loginBtn, false); });
+    });
+  });
+
+  show('loginView');
+  if (!S.configured()) {
+    $('loginNote').textContent = 'Sign in isn’t switched on yet.';
+    $('loginNote').hidden = false;
+    loginBtn.disabled = true;
+  } else {
+    S.currentUser().then(function (user) { if (user) return afterSignIn(user); }).catch(function () {});
+  }
 
   /* ---------- helpers ---------- */
   function esc(s) {

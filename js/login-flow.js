@@ -1,5 +1,5 @@
-/* DC Flooring trade: the mobile + 6-digit code log in, shared by the fitter
-   log in page (login.html) and the staff page.
+/* DC Flooring trade: the fitter mobile + 6-digit code log in (login.html).
+   Staff log in with email and password on their own page instead.
    Step 1: mobile -> Supabase sends a code (only to numbers that already have a login).
    Step 2: the code -> Supabase checks it and signs them in.
    What happens after that is up to the page: DCLoginFlow.mount({ onSignedIn(user) }).
