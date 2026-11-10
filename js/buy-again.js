@@ -13,7 +13,7 @@
       return '<li><a class="result" href="pricelist.html?range=' + encodeURIComponent(p.handle) + '">' +
         '<span class="result__main"><span class="result__name">' + esc(p.name) + '</span>' +
         '<span class="result__meta">' + esc([p.brand, p.category].filter(Boolean).join(' · ')) + '</span>' +
-        '<span class="result__stock' + (p.stock_status === 'in_stock' ? ' is-in' : '') + '">' + A.stockLabel(p.stock_status) + '</span></span>' +
+        '<span class="result__stock' + (A.inStock(p) ? ' is-in' : '') + '">' + A.stockLabel(p) + '</span></span>' +
         '<span class="result__price"><span class="num">' + (p.price_from ? '<small>from </small>' : '') + A.money(A.priceOf(p)) + '</span>' +
         '<span class="result__unit">' + esc(A.unitLabel(p.unit)) + ' · ' + esc(A.tier().label) + '</span></span></a></li>';
     }).join('');

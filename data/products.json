@@ -1147,7 +1147,8 @@
     "price_trade_gold": 68.93,
     "stock_trade_counter": -84.0,
     "stock_status": "ring_to_check",
-    "show_online": true
+    "show_online": true,
+    "specSheetUrl": "assets/spec-sheets/sample-spec-sheet.pdf"
   },
   {
     "id": "028e03af-7c5c-4266-8d1d-17254a604c11",
@@ -1538,7 +1539,8 @@
     "price_trade_gold": 17.23,
     "stock_trade_counter": -1467.0,
     "stock_status": "ring_to_check",
-    "show_online": true
+    "show_online": true,
+    "specSheetUrl": "assets/spec-sheets/sample-spec-sheet.pdf"
   },
   {
     "id": "ffe59d00-5a66-47d1-845a-e249b7856b81",
